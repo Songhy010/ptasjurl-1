@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Ptas Jurl</string>
+    <string name="information">Information</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="version">Version</string>
+
+
+    <string name="home">Home</string>
+    <string name="room">Room</string>
+    <string name="house">House</string>
+    <string name="map">Map</string>
+    <string name="add_house">Add</string>
+    <string name="location">Location</string>
+    <string name="price">Price ($/month)</string>
+    <string name="electric">Electric ($/month)</string>
+    <string name="water">Water ($/month)</string>
+    <string name="motorcycle">Motorcycle ($/month)</string>
+    <string name="free">Free</string>
+    <string name="desc">Description</string>
+    <string name="address">Address</string>
+    <string name="room_pic">Room Picture</string>
+    <string name="post_by">Post By</string>
+    <string name="home_owner">Home Owner</string>
+    <string name="other">Other</string>
+    <string name="home_owner_phone">Home Owner Phone</string>
+    <string name="home_owner_name">Home Owner Name</string>
+    <string name="bed_room">Bed Room</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="upload">Upload</string>
+
+
+    <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
+</resources>

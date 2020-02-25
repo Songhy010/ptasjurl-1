@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/iv_height_45"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:tint="@color/white"
+            android:padding="@dimen/iv_height_13"
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/iv_height_45"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_normal" />
+        <ImageView
+            android:padding="@dimen/iv_height_13"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/iv_height_45"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:tint="@color/white" />
+    </RelativeLayout>
+
+    <View
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iv_height_1"
+        android:background="@color/grey" />
+
+</LinearLayout>

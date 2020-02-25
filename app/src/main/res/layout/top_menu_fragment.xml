@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/iv_height_75"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:tint="@color/white"
+            android:layout_marginTop="@dimen/iv_height_15"
+            android:padding="@dimen/iv_height_13"
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/iv_height_45"
+            android:layout_height="@dimen/iv_height_45"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/iv_height_10"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
+        <ImageView
+            android:layout_marginTop="@dimen/iv_height_20"
+            android:padding="@dimen/iv_height_13"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/iv_height_45"
+            android:layout_height="@dimen/iv_height_45"
+            android:tint="@color/white" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iv_height_1"
+        android:background="@color/grey_4" />
+
+</LinearLayout>
