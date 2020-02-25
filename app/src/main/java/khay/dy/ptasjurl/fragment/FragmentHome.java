@@ -57,6 +57,7 @@ public class FragmentHome extends Fragment {
         if (root_view == null) {
             root_view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
         }
+        Log.e(TAG,"Test");
         return root_view;
     }
 
