@@ -710,6 +710,8 @@ public class MyFunction {
         return Uri.parse(path);
     }
 
+
+
     public String getRealPathFromURI(Context context, Uri contentURI) {
         String result;
         Cursor cursor = context.getContentResolver().query(contentURI, null, null, null, null);

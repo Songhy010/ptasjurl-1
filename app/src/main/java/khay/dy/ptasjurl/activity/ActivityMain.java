@@ -19,6 +19,7 @@ public class ActivityMain extends ActivityController {
             @Override
             public void run() {
                 MyFunction.getInstance().openActivity(ActivityMain.this,ActivityHome.class);
+                MyFunction.getInstance().finishActivity(ActivityMain.this);
             }
         }, 3000);
     }

@@ -143,8 +143,6 @@ public class FragmentHome extends Fragment {
 
                 }
             });
-
-
             startAutoSlider(adapter.getCount());
         } catch (Exception e) {
             Log.e("Err ", e.getMessage() + "");

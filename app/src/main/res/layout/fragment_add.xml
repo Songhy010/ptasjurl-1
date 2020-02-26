@@ -133,6 +133,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_height_10"
@@ -251,6 +252,7 @@
                     app:cardUseCompatPadding="false">
 
                     <ImageView
+                        android:id="@+id/iv_thum"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -274,6 +276,25 @@
                         app:cardUseCompatPadding="true">
 
                         <ImageView
+                            android:scaleType="centerCrop"
+                            android:id="@+id/iv_bed"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/img_sample" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/iv_height_80"
+                        android:layout_below="@+id/tv_room"
+                        android:layout_marginTop="@dimen/iv_height_5"
+                        android:layout_weight="1"
+                        app:cardMaxElevation="@dimen/iv_height_5"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="true">
+
+                        <ImageView
+                            android:id="@+id/iv_bath"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -291,23 +312,7 @@
                         app:cardUseCompatPadding="true">
 
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_sample" />
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/iv_height_80"
-                        android:layout_below="@+id/tv_room"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:layout_weight="1"
-                        app:cardMaxElevation="@dimen/iv_height_5"
-                        app:cardPreventCornerOverlap="false"
-                        app:cardUseCompatPadding="true">
-
-                        <ImageView
+                            android:id="@+id/iv_kit"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
@@ -323,6 +328,7 @@
                 android:layout_height="match_parent" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_upload"
                 android:layout_marginTop="@dimen/iv_height_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
