@@ -45,6 +45,7 @@ import khay.dy.ptasjurl.model.model_latlg;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
+import khay.dy.ptasjurl.util.PathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -217,18 +218,15 @@ public class FragmentAdd extends Fragment {
         try{
             final Uri imageUri = data.getData();
 
-            String realPath = getRealPathFromURI(imageUri);
+            String realPath = PathUtil.getPath(root_view.getContext(),imageUri);
 
             Log.e("Uri",realPath);
+
             final InputStream imageStream =getActivity().getContentResolver().openInputStream(imageUri);
             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
             Bitmap bitImg = Bitmap.createScaledBitmap(selectedImage, (int)(selectedImage.getWidth()*0.5),(int)(selectedImage.getHeight()*0.5), true);
-            String imgString = Base64.encodeToString(MyFunction.getInstance().getBytesFromBitmap(bitImg),
-                    Base64.NO_WRAP);
-            Log.e("size",selectedImage.getByteCount()+"");
-            Log.e("size",imgString+"");
             iv.setImageBitmap(bitImg);
-            return  imgString;
+            return  "";
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
@@ -284,18 +282,18 @@ public class FragmentAdd extends Fragment {
 
                multipartBody.addFormDataPart("avatar","img1.png",
                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/photo-1508784411316-02b8cd4d3a3a.jpeg")));
+                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
                multipartBody.addFormDataPart("avatar","img2.png",
                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/white-flower-edward-myers.jpg")));
+                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
                multipartBody.addFormDataPart("avatar","img3.png",
                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/flower-purple-lical-blosso.jpg")));
+                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
 
                RequestBody body = multipartBody.build();
 
                Request request = new Request.Builder()
-                       .url("http://192.168.0.60:3000/api/client/upload")
+                       .url("http://192.168.1.6:3000/api/client/upload")
                        .method("POST", body)
                        .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
                        .build();
