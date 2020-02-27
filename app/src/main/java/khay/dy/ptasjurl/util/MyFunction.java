@@ -808,7 +808,6 @@ public class MyFunction {
                     params.put("Authorization", auth);
                     return params;
                 }
-
                 @Override
                 protected Response<String> parseNetworkResponse(NetworkResponse response) {
                     try {

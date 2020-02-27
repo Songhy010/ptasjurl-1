@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.models.model_latlng;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 
@@ -104,7 +105,7 @@ public class ActivitySelectMap extends ActivityController {
                         if (map != null) {
                             mMap = map;
                             //initialize map
-                            LatLng latLng = new LatLng(lat, lng);
+                            final LatLng latLng = new LatLng(lat, lng);
 
                             BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
                             Bitmap b = bitmapdraw.getBitmap();
@@ -119,8 +120,8 @@ public class ActivitySelectMap extends ActivityController {
                             mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
                                 @Override
                                 public void onCameraMove() {
-                                    LatLng lt = mMap.getCameraPosition().target;
-                                    Toast.makeText(ActivitySelectMap.this, lt.latitude + " " + lt.longitude + " ", Toast.LENGTH_SHORT).show();
+                                    LatLng latlng = mMap.getCameraPosition().target;
+                                    model_latlng.getInstance().setLatLng(latlng);
                                 }
                             });
                         }
@@ -129,8 +130,6 @@ public class ActivitySelectMap extends ActivityController {
             } else {
                 //new DialogAlertCustom(context, null, getString(R.string.error_occured)).show();
             }
-
-
         } catch (Exception e) {
             Log.e("Map ", e.getMessage() + "");
         }
