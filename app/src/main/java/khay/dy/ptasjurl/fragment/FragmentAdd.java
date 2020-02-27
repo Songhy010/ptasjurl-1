@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask;
@@ -30,11 +32,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
+import khay.dy.ptasjurl.model.model_latlg;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -48,6 +55,7 @@ import okhttp3.Response;
 public class FragmentAdd extends Fragment {
 
     private ImageView iv_thum,iv_bed,iv_bath,iv_kit;
+    private TextView tv_address;
 
     private final String TAG = "FragmentAdd";
     private View root_view;
@@ -81,10 +89,19 @@ public class FragmentAdd extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        checkLocationPermission();
         initView();
 
         /* TODO set font with current language */
         MyFont.getInstance().setFont(root_view.getContext(), root_view, 2);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (model_latlg.getInstance().getLatlng() !=null)
+            tv_address.setText(getAddress(model_latlg.getInstance().getLatlng()));
+
     }
 
     private void findView() {
@@ -92,11 +109,29 @@ public class FragmentAdd extends Fragment {
         iv_bed = root_view.findViewById(R.id.iv_bed);
         iv_bath = root_view.findViewById(R.id.iv_bath);
         iv_kit = root_view.findViewById(R.id.iv_kit);
-        checkLocationPermission();
+        tv_address = root_view.findViewById(R.id.tv_address);
 
-        File file = new File("/storage/emulated/0/Download/photo-1508784411316-02b8cd4d3a3a.jpeg");
-        Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-        iv_thum.setImageBitmap(myBitmap);
+    }
+
+    private String getAddress(LatLng latLng){
+        try {
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(root_view.getContext(), Locale.getDefault());
+
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName();
+            return  address;
+        }catch (Exception e){
+            Log.e("Errr",e.getMessage());
+        }
+        return "";
     }
 
     private void initView() {
