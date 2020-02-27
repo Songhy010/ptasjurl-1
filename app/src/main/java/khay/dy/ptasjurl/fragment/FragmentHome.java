@@ -1,6 +1,5 @@
 package khay.dy.ptasjurl.fragment;
 
-import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,10 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,23 +16,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
-
-import org.myjson.JSONArray;
-import org.myjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import khay.dy.ptasjurl.R;
-import khay.dy.ptasjurl.activity.ActivityHome;
-import khay.dy.ptasjurl.activity.ActivityMain;
-import khay.dy.ptasjurl.adapter.BannerAdapter;
-import khay.dy.ptasjurl.adapter.HomeAdapter;
-import khay.dy.ptasjurl.adapter.ViewPagerAdapter;
+import khay.dy.ptasjurl.adapter.AdapterBanner;
+import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
 
@@ -46,7 +36,7 @@ public class FragmentHome extends Fragment {
     private View root_view;
     private RecyclerView recycler;
     private LinearLayoutManager manager;
-    private BannerAdapter adapter;
+    private AdapterBanner adapter;
     private Runnable runnable = null;
     private Handler handler = new Handler();
     private ViewPager viewPager;
@@ -123,7 +113,7 @@ public class FragmentHome extends Fragment {
         app_bar_layout.getLayoutParams().height = height;
         List<String> listImage = new ArrayList<>();
         try {
-            adapter = new BannerAdapter(root_view.getContext(), listImage);
+            adapter = new AdapterBanner(root_view.getContext(), listImage);
             viewPager = root_view.findViewById(R.id.pager);
             viewPager.setAdapter(adapter);
 //            addBottomDots(layout_dots, adapter.getCount(), 0);
@@ -152,6 +142,6 @@ public class FragmentHome extends Fragment {
     private void initRecyclerView() {
         manager = new LinearLayoutManager(root_view.getContext(), RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new HomeAdapter(null, root_view.getContext(), R.layout.item_home));
+        recycler.setAdapter(new AdapterHome(null, root_view.getContext(), R.layout.item_home));
     }
 }

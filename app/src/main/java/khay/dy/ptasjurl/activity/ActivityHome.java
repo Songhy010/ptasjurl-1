@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import khay.dy.ptasjurl.R;
-import khay.dy.ptasjurl.adapter.ViewPagerAdapter;
+import khay.dy.ptasjurl.adapter.AdapterViewPager;
 import khay.dy.ptasjurl.fragment.FragmentAdd;
 import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentHome;
@@ -35,7 +35,7 @@ public class ActivityHome extends ActivityController {
     };
     private final TextView tv_custom_tab[] = new TextView[TAB_COUNT];
 
-    private ViewPagerAdapter adapter;
+    private AdapterViewPager adapter;
     private ColorFilter filter;
     private ColorFilter filter_origin;
 
@@ -56,7 +56,7 @@ public class ActivityHome extends ActivityController {
     }
     private void initViewPager(){
         view_pager.setOffscreenPageLimit(0);
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFrag(new FragmentHome());
         adapter.addFrag(new FragmentRoom());
         adapter.addFrag(new FragmentHouse());

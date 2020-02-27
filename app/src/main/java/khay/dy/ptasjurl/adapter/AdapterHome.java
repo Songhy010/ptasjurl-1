@@ -10,18 +10,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.util.MyFunction;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ItemHolder> {
+public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
 
     private JSONArray array;
     private Context context;
     private int layout;
 
-    public HomeAdapter(JSONArray array, Context context, int layout) {
+    public AdapterHome(JSONArray array, Context context, int layout) {
         this.array = array;
         this.context = context;
         this.layout = layout;

@@ -14,13 +14,13 @@ import java.util.List;
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.util.MyFont;
 
-public class BannerAdapter extends PagerAdapter {
+public class AdapterBanner extends PagerAdapter {
 
     ViewGroup view;
     private Context mContext;
     private List<String> mListImage;
 
-    public BannerAdapter(Context mContext, List<String> mListImage) {
+    public AdapterBanner(Context mContext, List<String> mListImage) {
         this.mContext = mContext;
         this.mListImage = mListImage;
     }

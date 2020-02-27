@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import khay.dy.ptasjurl.R;
-import khay.dy.ptasjurl.adapter.HomeAdapter;
+import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.util.MyFont;
 
 public class FragmentRoom extends Fragment {
@@ -58,6 +58,6 @@ public class FragmentRoom extends Fragment {
     private void initRecycler() {
         manager = new LinearLayoutManager(root_view.getContext(),RecyclerView.VERTICAL,false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new HomeAdapter(null,root_view.getContext(),R.layout.item_home));
+        recycler.setAdapter(new AdapterHome(null,root_view.getContext(),R.layout.item_home));
     }
 }

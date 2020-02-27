@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,9 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import khay.dy.ptasjurl.R;
-import khay.dy.ptasjurl.adapter.HomeAdapter;
 import khay.dy.ptasjurl.util.Global;
-import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
 
 public class FragmentMap extends Fragment {
