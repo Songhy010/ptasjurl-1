@@ -2,13 +2,18 @@ package khay.dy.ptasjurl.fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -233,7 +238,7 @@ public class FragmentAdd extends Fragment {
         }).start();
     }
 
-   public class uploadImage extends AsyncTask<Void, Integer, String>{
+   public class uploadImage extends AsyncTask<Void, Integer, String> {
 
        @Override
        protected String doInBackground(Void... voids) {
