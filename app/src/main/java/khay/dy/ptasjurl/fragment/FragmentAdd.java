@@ -2,10 +2,7 @@ package khay.dy.ptasjurl.fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,11 +10,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +49,7 @@ import okhttp3.Response;
 
 public class FragmentAdd extends Fragment {
 
-    private ImageView iv_thum,iv_bed,iv_bath,iv_kit;
+    private ImageView iv_thum, iv_bed, iv_bath, iv_kit;
     private TextView tv_address;
 
     private final String TAG = "FragmentAdd";
@@ -64,10 +58,10 @@ public class FragmentAdd extends Fragment {
     private final int PICK_BED = 2;
     private final int PICK_BATH = 3;
     private final int PICK_KIT = 4;
-    private String imgStringThum;
-    private String imgStringBed;
-    private String imgStringBath;
-    private String imgStringKit;
+    private byte[] pathThum;
+    private byte[] pathBed;
+    private byte[] pathBath;
+    private byte[] pathKit;
     private uploadImage asyncUpload;
 
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
@@ -100,7 +94,7 @@ public class FragmentAdd extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (model_latlg.getInstance().getLatlng() !=null)
+        if (model_latlg.getInstance().getLatlng() != null)
             tv_address.setText(getAddress(model_latlg.getInstance().getLatlng()));
 
     }
@@ -114,7 +108,7 @@ public class FragmentAdd extends Fragment {
 
     }
 
-    private String getAddress(LatLng latLng){
+    private String getAddress(LatLng latLng) {
         try {
             Geocoder geocoder;
             List<Address> addresses;
@@ -128,9 +122,9 @@ public class FragmentAdd extends Fragment {
             String country = addresses.get(0).getCountryName();
             String postalCode = addresses.get(0).getPostalCode();
             String knownName = addresses.get(0).getFeatureName();
-            return  address;
-        }catch (Exception e){
-            Log.e("Errr",e.getMessage());
+            return address;
+        } catch (Exception e) {
+            Log.e("Errr", e.getMessage());
         }
         return "";
     }
@@ -214,41 +208,48 @@ public class FragmentAdd extends Fragment {
         return filePath;
     }
 
-    private String strFromPick(Intent data,ImageView iv){
-        try{
+    private byte[] strFromPick(Intent data, ImageView iv) {
+        try {
             final Uri imageUri = data.getData();
+            Bitmap bitImg = null;
+            String realPath = PathUtil.getPath(root_view.getContext(), imageUri);
 
-            String realPath = PathUtil.getPath(root_view.getContext(),imageUri);
+            final File file = new File(realPath);
+            Log.e("Uri", file.toString());
 
-            Log.e("Uri",realPath);
-
-            final InputStream imageStream =getActivity().getContentResolver().openInputStream(imageUri);
+            final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-            Bitmap bitImg = Bitmap.createScaledBitmap(selectedImage, (int)(selectedImage.getWidth()*0.5),(int)(selectedImage.getHeight()*0.5), true);
+            if(selectedImage.getWidth() > 3500)
+                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.3), (int) (selectedImage.getHeight() * 0.3), true);
+            else if (selectedImage.getWidth() > 2000 && selectedImage.getWidth() < 3500)
+                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.5), (int) (selectedImage.getHeight() * 0.5), true);
+            else
+                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.8), (int) (selectedImage.getHeight() * 0.8), true);
             iv.setImageBitmap(bitImg);
-            return  "";
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+
+            return MyFunction.getInstance().getBytesFromBitmap(bitImg);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
-        return "";
+        return null;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            switch (requestCode){
+            switch (requestCode) {
                 case PICK_THUM:
-                    imgStringThum = strFromPick(data,iv_thum);
+                    pathThum = strFromPick(data, iv_thum);
                     break;
                 case PICK_BED:
-                    imgStringBed = strFromPick(data,iv_bed);
+                    pathBed = strFromPick(data, iv_bed);
                     break;
                 case PICK_BATH:
-                    imgStringBath = strFromPick(data,iv_bath);
+                    pathBath = strFromPick(data, iv_bath);
                     break;
                 case PICK_KIT:
-                    imgStringKit = strFromPick(data,iv_kit);
+                    pathKit = strFromPick(data, iv_kit);
                     break;
             }
         } catch (Exception e) {
@@ -271,53 +272,56 @@ public class FragmentAdd extends Fragment {
         }).start();
     }
 
-   public class uploadImage extends AsyncTask<Void, Integer, String> {
+    public class uploadImage extends AsyncTask<Void, Integer, String> {
 
-       @Override
-       protected String doInBackground(Void... voids) {
-           try{
-               OkHttpClient client = new OkHttpClient().newBuilder()
-                       .build();
-               MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                OkHttpClient client = new OkHttpClient().newBuilder()
+                        .build();
+                MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-               multipartBody.addFormDataPart("avatar","img1.png",
-                       RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
-               multipartBody.addFormDataPart("avatar","img2.png",
-                       RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
-               multipartBody.addFormDataPart("avatar","img3.png",
-                       RequestBody.create(MediaType.parse("application/octet-stream"),
-                               new File("/storage/emulated/0/Download/imge-mint-green-leaves-texture-background-80172775.jpg")));
+                multipartBody.addFormDataPart("avatar", "img1.png",
+                        RequestBody.create(MediaType.parse("application/octet-stream"),
+                                pathThum));
+                multipartBody.addFormDataPart("avatar", "img2.png",
+                        RequestBody.create(MediaType.parse("application/octet-stream"),
+                                pathBed));
+                multipartBody.addFormDataPart("avatar", "img3.png",
+                        RequestBody.create(MediaType.parse("application/octet-stream"),
+                                pathBath));
+                multipartBody.addFormDataPart("avatar", "img4.png",
+                        RequestBody.create(MediaType.parse("application/octet-stream"),
+                                pathKit));
+                RequestBody body = multipartBody.build();
 
-               RequestBody body = multipartBody.build();
+                Request request = new Request.Builder()
+                        .url("http://192.168.1.6:3000/api/client/upload")
+                        .method("POST", body)
+                        .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
+                        .build();
+                Response response = client.newCall(request).execute();
+                Log.e("Response", response.toString());
+            } catch (Exception e) {
+                Log.e("Err", e.getMessage());
+            }
+            return "";
+        }
 
-               Request request = new Request.Builder()
-                       .url("http://192.168.1.6:3000/api/client/upload")
-                       .method("POST", body)
-                       .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
-                       .build();
-               Response response = client.newCall(request).execute();
-               Log.e("Response",response.toString());
-           }catch (Exception e){
-               Log.e("Err",e.getMessage());
-           }
-           return "";
-       }
-       @Override
-       protected void onProgressUpdate(Integer... values) {
+        @Override
+        protected void onProgressUpdate(Integer... values) {
 
-           super.onProgressUpdate(values);
-       }
+            super.onProgressUpdate(values);
+        }
 
-       @Override
-       protected void onPreExecute() {
-           super.onPreExecute();
-       }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-       @Override
-       protected void onPostExecute(String s) {
-           super.onPostExecute(s);
-       }
-   }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 }
