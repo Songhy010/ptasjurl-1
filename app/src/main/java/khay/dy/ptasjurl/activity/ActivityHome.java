@@ -22,6 +22,7 @@ import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentHome;
 import khay.dy.ptasjurl.fragment.FragmentMap;
 import khay.dy.ptasjurl.fragment.FragmentRoom;
+import khay.dy.ptasjurl.util.Tools;
 
 public class ActivityHome extends ActivityController {
     private TabLayout tab_layout;

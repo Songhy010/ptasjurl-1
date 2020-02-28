@@ -2,6 +2,7 @@ package khay.dy.ptasjurl.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -36,6 +40,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -52,6 +57,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.maps.model.LatLng;
 
 
 import org.myjson.JSONArray;
@@ -82,6 +88,7 @@ import java.util.TimeZone;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.listener.AlertListenner;
+import khay.dy.ptasjurl.listener.DialogCallBack;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 
 public class MyFunction {
@@ -1023,7 +1030,64 @@ public class MyFunction {
         }
     }
 
+    public String getAddress(Context context,LatLng latLng) {
+        try {
+            Geocoder geocoder;
+            List<Address> addresses;
+            geocoder = new Geocoder(context, Locale.getDefault());
+
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName();
+            return address;
+        } catch (Exception e) {
+            Log.e("Errr", e.getMessage());
+        }
+        return "";
+    }
+
     public String getStringImageFacebook(String fid){
         return "https://graph.facebook.com/" + fid + "/picture?type=large";
+    }
+
+
+    public void pickImage(Activity activity, final int requestCode) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activity.startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode);
+    }
+
+    public Bitmap createScaledBit(Bitmap oldBitmap){
+        try{
+            Bitmap newBitmap;
+            final int avgDimen = (oldBitmap.getHeight() + oldBitmap.getWidth()) / 2;
+            if (avgDimen > 4000) // 4k scaled 70%
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.3), (int) (oldBitmap.getHeight() * 0.3), true);
+            else if (avgDimen > 1920 && avgDimen < 4000) // 2k scaled 50%
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.5), (int) (oldBitmap.getHeight() * 0.5), true);
+            else // FHD scaled 20%
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.8), (int) (oldBitmap.getHeight() * 0.8), true);
+            return newBitmap;
+        }catch (Exception e){
+            Log.e("Err",e.getMessage());
+        }
+        return null;
+    }
+
+    public void showDialog(final Context context, final int layout, DialogCallBack dialogCallBack) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(layout);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCancelable(true);
+
+        dialogCallBack.listener(dialog);
+        dialog.show();
     }
 }

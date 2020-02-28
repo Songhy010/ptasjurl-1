@@ -229,8 +229,9 @@
                 android:textSize="@dimen/text_size_normal" />
 
             <RelativeLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_height_10"
                 android:orientation="vertical">
 
@@ -267,6 +268,7 @@
                     android:layout_height="wrap_content">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_bed"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/iv_height_80"
                         android:layout_below="@+id/tv_room"
@@ -285,6 +287,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_bath"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/iv_height_80"
                         android:layout_below="@+id/tv_room"
@@ -303,6 +306,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_kit"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/iv_height_80"
                         android:layout_below="@+id/tv_room"

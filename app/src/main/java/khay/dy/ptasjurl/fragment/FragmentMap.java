@@ -70,12 +70,7 @@ public class FragmentMap extends Fragment {
 
     private void initView(){
         findView();
-        initToolBar();
         initLocation();
-    }
-    private void initToolBar() {
-        final TextView tv_title = root_view.findViewById(R.id.tv_title);
-        tv_title.setText(getString(R.string.map));
     }
     private void initLocation(){
         try{

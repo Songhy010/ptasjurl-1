@@ -3,35 +3,26 @@ package khay.dy.ptasjurl.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 
-import com.google.android.gms.maps.model.LatLng;
-
-import java.io.File;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Locale;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
@@ -48,6 +39,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class FragmentAdd extends Fragment {
+
+    private CardView card,card_bed,card_bath,card_kit;
 
     private ImageView iv_thum, iv_bed, iv_bath, iv_kit;
     private TextView tv_address;
@@ -66,11 +59,6 @@ public class FragmentAdd extends Fragment {
 
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
 
-    private void checkLocationPermission() {
-        if (!MyFunction.getInstance().hasPermissions(root_view.getContext(), PERMISSIONS)) {
-            ActivityCompat.requestPermissions((Activity) root_view.getContext(), PERMISSIONS, Global.PERMISSION_ALL);
-        }
-    }
 
     @Nullable
     @Override
@@ -95,38 +83,32 @@ public class FragmentAdd extends Fragment {
     public void onResume() {
         super.onResume();
         if (model_latlg.getInstance().getLatlng() != null)
-            tv_address.setText(getAddress(model_latlg.getInstance().getLatlng()));
+            tv_address.setText(MyFunction.getInstance().getAddress(root_view.getContext(), model_latlg.getInstance().getLatlng()));
 
     }
 
-    private void findView() {
-        iv_thum = root_view.findViewById(R.id.iv_thum);
-        iv_bed = root_view.findViewById(R.id.iv_bed);
-        iv_bath = root_view.findViewById(R.id.iv_bath);
-        iv_kit = root_view.findViewById(R.id.iv_kit);
-        tv_address = root_view.findViewById(R.id.tv_address);
-
-    }
-
-    private String getAddress(LatLng latLng) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         try {
-            Geocoder geocoder;
-            List<Address> addresses;
-            geocoder = new Geocoder(root_view.getContext(), Locale.getDefault());
 
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-            String knownName = addresses.get(0).getFeatureName();
-            return address;
+            switch (requestCode) {
+                case PICK_THUM:
+                    pathThum = byteFromPick(data, iv_thum);
+                    break;
+                case PICK_BED:
+                    pathBed = byteFromPick(data, iv_bed);
+                    break;
+                case PICK_BATH:
+                    pathBath = byteFromPick(data, iv_bath);
+                    break;
+                case PICK_KIT:
+                    pathKit = byteFromPick(data, iv_kit);
+                    break;
+            }
         } catch (Exception e) {
-            Log.e("Errr", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
-        return "";
     }
 
     private void initView() {
@@ -137,10 +119,47 @@ public class FragmentAdd extends Fragment {
         initUpload();
     }
 
+    private void findView() {
+        card = root_view.findViewById(R.id.card);
+        card_bed = root_view.findViewById(R.id.card_bed);
+        card_bath = root_view.findViewById(R.id.card_bath);
+        card_kit = root_view.findViewById(R.id.card_kit);
+        iv_thum = root_view.findViewById(R.id.iv_thum);
+
+        final int height = MyFunction.getInstance().getBannerHeight(root_view.getContext());
+        card.getLayoutParams().height = height-200;
+        card_bed.getLayoutParams().height = (int)(height*0.4);
+        card_bath.getLayoutParams().height = (int)(height*0.4);
+        card_kit.getLayoutParams().height = (int)(height*0.4);
+
+        iv_bed = root_view.findViewById(R.id.iv_bed);
+        iv_bath = root_view.findViewById(R.id.iv_bath);
+        iv_kit = root_view.findViewById(R.id.iv_kit);
+        tv_address = root_view.findViewById(R.id.tv_address);
+
+
+    }
+
+    private void initToolBar() {
+        final TextView tv_title = root_view.findViewById(R.id.tv_title);
+        tv_title.setText(getString(R.string.add_house));
+    }
+
+    private void checkLocationPermission() {
+        if (!MyFunction.getInstance().hasPermissions(root_view.getContext(), PERMISSIONS)) {
+            ActivityCompat.requestPermissions((Activity) root_view.getContext(), PERMISSIONS, Global.PERMISSION_ALL);
+        }
+    }
+
     private void initUpload() {
         root_view.findViewById(R.id.btn_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_sample);
+                pathThum = pathThum == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathThum;
+                pathBed = pathBed == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathBed;
+                pathBath = pathBath == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathBed;
+                pathKit = pathKit == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathKit;
                 uploadFileServer();
             }
         });
@@ -150,34 +169,27 @@ public class FragmentAdd extends Fragment {
         iv_thum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initPickImage(PICK_THUM);
+                pickImage(PICK_THUM);
             }
         });
         iv_bed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initPickImage(PICK_BED);
+                pickImage(PICK_BED);
             }
         });
         iv_bath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initPickImage(PICK_BATH);
+                pickImage(PICK_BATH);
             }
         });
         iv_kit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initPickImage(PICK_KIT);
+                pickImage(PICK_KIT);
             }
         });
-    }
-
-    private void initPickImage(final int requestCode) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode);
     }
 
     private void initPinMap() {
@@ -189,73 +201,28 @@ public class FragmentAdd extends Fragment {
         });
     }
 
-    private void initToolBar() {
-        final TextView tv_title = root_view.findViewById(R.id.tv_title);
-        tv_title.setText(getString(R.string.add_house));
-    }
-
-    private String getRealPathFromURI(Uri contentURI) {
-        String filePath;
-        Cursor cursor = getActivity().getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) {
-            filePath = contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            filePath = cursor.getString(idx);
-            cursor.close();
-        }
-        return filePath;
-    }
-
-    private byte[] strFromPick(Intent data, ImageView iv) {
+    private byte[] byteFromPick(Intent data, ImageView iv) {
         try {
             final Uri imageUri = data.getData();
-            Bitmap bitImg = null;
             String realPath = PathUtil.getPath(root_view.getContext(), imageUri);
-
-            final File file = new File(realPath);
-            Log.e("Uri", file.toString());
-
+            Log.e(TAG, realPath);
             final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-            if(selectedImage.getWidth() > 3500)
-                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.3), (int) (selectedImage.getHeight() * 0.3), true);
-            else if (selectedImage.getWidth() > 2000 && selectedImage.getWidth() < 3500)
-                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.5), (int) (selectedImage.getHeight() * 0.5), true);
-            else
-                bitImg = Bitmap.createScaledBitmap(selectedImage, (int) (selectedImage.getWidth() * 0.8), (int) (selectedImage.getHeight() * 0.8), true);
-            iv.setImageBitmap(bitImg);
-
-            return MyFunction.getInstance().getBytesFromBitmap(bitImg);
+            final Bitmap newBitmap = MyFunction.getInstance().createScaledBit(selectedImage);
+            iv.setImageBitmap(newBitmap);
+            return MyFunction.getInstance().getBytesFromBitmap(newBitmap);
         } catch (Exception e) {
+            iv.setImageDrawable(getResources().getDrawable(R.drawable.img_sample));
             Log.e(TAG, e.getMessage());
         }
         return null;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            switch (requestCode) {
-                case PICK_THUM:
-                    pathThum = strFromPick(data, iv_thum);
-                    break;
-                case PICK_BED:
-                    pathBed = strFromPick(data, iv_bed);
-                    break;
-                case PICK_BATH:
-                    pathBath = strFromPick(data, iv_bath);
-                    break;
-                case PICK_KIT:
-                    pathKit = strFromPick(data, iv_kit);
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(root_view.getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
-        }
+    private void pickImage(final int requestCode) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode);
     }
 
     // Upload to server
@@ -296,21 +263,20 @@ public class FragmentAdd extends Fragment {
                 RequestBody body = multipartBody.build();
 
                 Request request = new Request.Builder()
-                        .url("http://192.168.1.6:3000/api/client/upload")
+                        .url("http://192.168.0.60:3000/api/client/upload")
                         .method("POST", body)
                         .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
                         .build();
                 Response response = client.newCall(request).execute();
                 Log.e("Response", response.toString());
             } catch (Exception e) {
-                Log.e("Err", e.getMessage());
+                Log.e(TAG, e.getMessage());
             }
             return "";
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-
             super.onProgressUpdate(values);
         }
 

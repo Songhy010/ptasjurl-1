@@ -18,7 +18,7 @@ import khay.dy.ptasjurl.util.MyFont;
 
 public class FragmentHouse extends Fragment {
 
-    private final String TAG = "Fr Home";
+    private final String TAG = "FragmentHouse";
     private View root_view;
     private RecyclerView recycler;
     private LinearLayoutManager manager;
