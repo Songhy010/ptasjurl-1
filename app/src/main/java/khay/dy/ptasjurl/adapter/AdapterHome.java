@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityRoomDetail;
 import khay.dy.ptasjurl.util.MyFunction;
 
 public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
@@ -35,7 +36,12 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFunction.getInstance().openActivity(context, ActivityRoomDetail.class);
+            }
+        });
     }
 
     @Override

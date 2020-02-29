@@ -28,6 +28,7 @@
     <string name="bed_room">Bed Room</string>
     <string name="kitchen">Kitchen</string>
     <string name="upload">Upload</string>
+    <string name="room_detail">Room Detail</string>
 
 
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
