@@ -19,31 +19,14 @@
             android:orientation="vertical"
             android:padding="@dimen/iv_height_10">
 
-            <RelativeLayout
-                android:id="@+id/relative_address"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_40"
-                android:layout_marginTop="@dimen/iv_height_10">
 
-                <TextView
-                    android:id="@+id/tv_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:background="@drawable/drawable_round"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/iv_height_10"
-                    android:paddingRight="@dimen/iv_height_10"
-                    android:text="@string/location"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-
-                <ImageView
-                    android:layout_width="@dimen/iv_height_40"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_arrow_drop"
-                    android:tint="@color/grey" />
-            </RelativeLayout>
+            <TextView
+                android:textColor="@color/grey"
+                android:textStyle="normal"
+                android:textSize="@dimen/text_size_normal"
+                android:text="Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -64,6 +47,7 @@
             </RadioGroup>
 
             <EditText
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_height_10"
@@ -73,65 +57,7 @@
                 android:textColor="@color/grey"
                 android:textSize="@dimen/text_size_normal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/iv_height_5"
-                    android:layout_weight="1"
-
-                    android:background="@drawable/drawable_round"
-                    android:hint="@string/electric"
-                    android:padding="@dimen/iv_height_8"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/iv_height_5"
-                    android:layout_weight="1"
-
-                    android:background="@drawable/drawable_round"
-                    android:hint="@string/water"
-                    android:padding="@dimen/iv_height_8"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/iv_height_5"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_round"
-                    android:hint="@string/motorcycle"
-                    android:padding="@dimen/iv_height_8"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/iv_height_5"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_round"
-                    android:hint="@string/free"
-                    android:padding="@dimen/iv_height_8"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/layout_pin"
@@ -183,6 +109,7 @@
                 android:layout_marginTop="@dimen/iv_height_10">
 
                 <TextView
+                    android:textColor="@color/grey"
                     android:textStyle="normal"
                     android:textSize="@dimen/text_size_normal"
                     android:id="@+id/tv_post"
@@ -231,6 +158,16 @@
                 android:textColor="@color/grey"
                 android:textSize="@dimen/text_size_normal" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/home_owner_phone"
+                android:padding="@dimen/iv_height_8"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
             <RelativeLayout
 
                 android:layout_width="match_parent"
@@ -263,71 +200,16 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_sample" />
                 </androidx.cardview.widget.CardView>
-                <LinearLayout
-                    android:layout_marginTop="@dimen/iv_height_5"
-                    android:layout_below="@+id/card"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card_bed"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/iv_height_80"
-                        android:layout_below="@+id/tv_room"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:layout_weight="1"
-                        app:cardMaxElevation="@dimen/iv_height_5"
-                        app:cardPreventCornerOverlap="false"
-                        app:cardUseCompatPadding="true">
-
-                        <ImageView
-                            android:scaleType="centerCrop"
-                            android:id="@+id/iv_bed"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/img_sample" />
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card_bath"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/iv_height_80"
-                        android:layout_below="@+id/tv_room"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:layout_weight="1"
-                        app:cardMaxElevation="@dimen/iv_height_5"
-                        app:cardPreventCornerOverlap="false"
-                        app:cardUseCompatPadding="true">
-
-                        <ImageView
-                            android:id="@+id/iv_bath"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_sample" />
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card_kit"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/iv_height_80"
-                        android:layout_below="@+id/tv_room"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:layout_weight="1"
-                        app:cardMaxElevation="@dimen/iv_height_5"
-                        app:cardPreventCornerOverlap="false"
-                        app:cardUseCompatPadding="true">
-
-                        <ImageView
-                            android:id="@+id/iv_kit"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_sample" />
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
             </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_more_desc"
+                android:layout_marginTop="@dimen/iv_height_15"
+                android:layout_gravity="end"
+                android:text="@string/setup_more"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <CheckBox
                 android:textSize="@dimen/text_size_small"
@@ -358,5 +240,4 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>

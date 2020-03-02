@@ -12,10 +12,10 @@
     <string name="map">Map</string>
     <string name="add_house">Add</string>
     <string name="location">Location</string>
-    <string name="price">Price ($/month)</string>
+    <string name="price">Rental Price ($/month)</string>
     <string name="electric">Electric (៛/kwm)</string>
     <string name="water">Water (៛/m3)</string>
-    <string name="motorcycle">Motorcycle (៛/month)</string>
+    <string name="parking">Parking (៛/month)</string>
     <string name="free">Free</string>
     <string name="desc">Description</string>
     <string name="address">Address</string>
@@ -30,8 +30,16 @@
     <string name="upload">Upload</string>
     <string name="room_detail">Room Detail</string>
     <string name="related_item">Related Item</string>
-    <string name="search">Search Locations</string>
-
-
+    <string name="search">Search Locations</string>Setup more description
+    <string name="setup_more">Setup more description</string>
+    <string name="side">Side (WxH)</string>
+    <string name="Floor">Floor</string>
+    <string name="available">Available</string>Trash
+    <string name="amount_people">Amount People</string>
+    <string name="trash">Trash</string>Other
+    <string name="other_p">Other ($)</string>
+    <string name="time">Time Close</string>
+    <string name="check">Check List</string>
+    <string name="more_desc">More Description</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

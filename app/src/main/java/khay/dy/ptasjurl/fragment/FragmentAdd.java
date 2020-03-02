@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import java.io.InputStream;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
 import khay.dy.ptasjurl.model.model_latlg;
 import khay.dy.ptasjurl.util.Global;
@@ -40,21 +41,15 @@ import okhttp3.Response;
 
 public class FragmentAdd extends Fragment {
 
-    private CardView card,card_bed,card_bath,card_kit;
+    private CardView card;
 
-    private ImageView iv_thum, iv_bed, iv_bath, iv_kit;
-    private TextView tv_address;
+    private ImageView iv_thum;
+    private TextView tv_address,tv_more_desc;
 
     private final String TAG = "FragmentAdd";
     private View root_view;
     private final int PICK_THUM = 1;
-    private final int PICK_BED = 2;
-    private final int PICK_BATH = 3;
-    private final int PICK_KIT = 4;
     private byte[] pathThum;
-    private byte[] pathBed;
-    private byte[] pathBath;
-    private byte[] pathKit;
     private uploadImage asyncUpload;
 
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
@@ -96,15 +91,6 @@ public class FragmentAdd extends Fragment {
                 case PICK_THUM:
                     pathThum = byteFromPick(data, iv_thum);
                     break;
-                case PICK_BED:
-                    pathBed = byteFromPick(data, iv_bed);
-                    break;
-                case PICK_BATH:
-                    pathBath = byteFromPick(data, iv_bath);
-                    break;
-                case PICK_KIT:
-                    pathKit = byteFromPick(data, iv_kit);
-                    break;
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -117,27 +103,16 @@ public class FragmentAdd extends Fragment {
         initPinMap();
         initPickImage();
         initUpload();
+        initMoreDesc();
     }
 
     private void findView() {
         card = root_view.findViewById(R.id.card);
-        card_bed = root_view.findViewById(R.id.card_bed);
-        card_bath = root_view.findViewById(R.id.card_bath);
-        card_kit = root_view.findViewById(R.id.card_kit);
         iv_thum = root_view.findViewById(R.id.iv_thum);
-
+        tv_more_desc = root_view.findViewById(R.id.tv_more_desc);
         final int height = MyFunction.getInstance().getBannerHeight(root_view.getContext());
         card.getLayoutParams().height = height-200;
-        card_bed.getLayoutParams().height = (int)(height*0.4);
-        card_bath.getLayoutParams().height = (int)(height*0.4);
-        card_kit.getLayoutParams().height = (int)(height*0.4);
-
-        iv_bed = root_view.findViewById(R.id.iv_bed);
-        iv_bath = root_view.findViewById(R.id.iv_bath);
-        iv_kit = root_view.findViewById(R.id.iv_kit);
         tv_address = root_view.findViewById(R.id.tv_address);
-
-
     }
 
     private void initToolBar() {
@@ -157,9 +132,6 @@ public class FragmentAdd extends Fragment {
             public void onClick(View view) {
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_sample);
                 pathThum = pathThum == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathThum;
-                pathBed = pathBed == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathBed;
-                pathBath = pathBath == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathBed;
-                pathKit = pathKit == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathKit;
                 uploadFileServer();
             }
         });
@@ -172,22 +144,12 @@ public class FragmentAdd extends Fragment {
                 pickImage(PICK_THUM);
             }
         });
-        iv_bed.setOnClickListener(new View.OnClickListener() {
+    }
+    private void initMoreDesc(){
+        tv_more_desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickImage(PICK_BED);
-            }
-        });
-        iv_bath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickImage(PICK_BATH);
-            }
-        });
-        iv_kit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickImage(PICK_KIT);
+                MyFunction.getInstance().openActivity(root_view.getContext(), ActivityMoreDesc.class);
             }
         });
     }
@@ -251,7 +213,7 @@ public class FragmentAdd extends Fragment {
                 multipartBody.addFormDataPart("avatar", "img1.png",
                         RequestBody.create(MediaType.parse("application/octet-stream"),
                                 pathThum));
-                multipartBody.addFormDataPart("avatar", "img2.png",
+/*                multipartBody.addFormDataPart("avatar", "img2.png",
                         RequestBody.create(MediaType.parse("application/octet-stream"),
                                 pathBed));
                 multipartBody.addFormDataPart("avatar", "img3.png",
@@ -259,11 +221,11 @@ public class FragmentAdd extends Fragment {
                                 pathBath));
                 multipartBody.addFormDataPart("avatar", "img4.png",
                         RequestBody.create(MediaType.parse("application/octet-stream"),
-                                pathKit));
+                                pathKit));*/
                 RequestBody body = multipartBody.build();
 
                 Request request = new Request.Builder()
-                        .url("http://192.168.0.60:3000/api/client/upload")
+                        .url("http://192.168.1.3:3000/api/client/upload")
                         .method("POST", body)
                         .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
                         .build();
