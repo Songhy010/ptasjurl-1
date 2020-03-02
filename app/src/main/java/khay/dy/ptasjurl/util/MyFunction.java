@@ -959,7 +959,7 @@ public class MyFunction {
     public int getBannerHeight(final Context ct) {
         try {
             int org_width = 720;
-            int org_height = 420;
+            int org_height = 450;
             int req_width = getScreenWidth(0, ct);
             return getHeightNew(org_height, req_width, org_width);
         } catch (Exception e) {

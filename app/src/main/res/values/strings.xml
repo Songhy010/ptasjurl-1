@@ -13,9 +13,9 @@
     <string name="add_house">Add</string>
     <string name="location">Location</string>
     <string name="price">Price ($/month)</string>
-    <string name="electric">Electric ($/month)</string>
-    <string name="water">Water ($/month)</string>
-    <string name="motorcycle">Motorcycle ($/month)</string>
+    <string name="electric">Electric (៛/kwm)</string>
+    <string name="water">Water (៛/m3)</string>
+    <string name="motorcycle">Motorcycle (៛/month)</string>
     <string name="free">Free</string>
     <string name="desc">Description</string>
     <string name="address">Address</string>
@@ -29,6 +29,8 @@
     <string name="kitchen">Kitchen</string>
     <string name="upload">Upload</string>
     <string name="room_detail">Room Detail</string>
+    <string name="related_item">Related Item</string>
+    <string name="search">Search Locations</string>
 
 
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>

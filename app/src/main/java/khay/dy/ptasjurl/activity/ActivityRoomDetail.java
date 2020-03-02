@@ -1,8 +1,9 @@
 package khay.dy.ptasjurl.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
@@ -29,11 +30,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
+import khay.dy.ptasjurl.adapter.AdapterDetail;
+import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.model.model_latlg;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -45,6 +51,7 @@ public class ActivityRoomDetail extends ActivityController {
     private AdapterBanner adapter;
     private Runnable runnable = null;
     private Handler handler = new Handler();
+    private RecyclerView recycler;
 
     private String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
     private boolean gps_enabled, googleservice_installed, network_enabled, isCheckGps;
@@ -67,6 +74,7 @@ public class ActivityRoomDetail extends ActivityController {
     private void initView() {
         findView();
         initToolBar();
+        loadDetail();
         initPagerBanner();
         initLocation();
     }
@@ -85,6 +93,7 @@ public class ActivityRoomDetail extends ActivityController {
 
     private void findView() {
         viewPager = findViewById(R.id.pager);
+        recycler = findViewById(R.id.recycler);
 
     }
 
@@ -179,7 +188,7 @@ public class ActivityRoomDetail extends ActivityController {
         mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view));
         final int height = MyFunction.getInstance().getBannerHeight(this);
         ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
-        params.height = height;
+        params.height = height-200;
         mapFragment.getView().setLayoutParams(params);
         try {
             if (mapFragment != null) {
@@ -221,6 +230,31 @@ public class ActivityRoomDetail extends ActivityController {
         } catch (Exception e) {
             Log.e("Map ", e.getMessage() + "");
         }
+    }
+    private void initRelated(JSONArray array){
+        final RecyclerView recyclerView = findViewById(R.id.recycler_relate);
+        final LinearLayoutManager manager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(new AdapterHome(null,this,R.layout.item_room));
+    }
+
+    private void initRecycler(JSONArray array){
+        final LinearLayoutManager manager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        recycler.setLayoutManager(manager);
+        recycler.setAdapter(new AdapterDetail(this,array));
+    }
+
+    private void loadDetail(){
+        try{
+            JSONObject data =new JSONObject(MyFunction.getInstance().readFileAsset(this, "detail.json"));
+            JSONArray array = data.getJSONArray("detail");
+            initRecycler(array);
+            initRelated(null);
+        }catch (Exception e){
+            Log.e("Err",e.getMessage());
+        }
+
+
     }
 
 }

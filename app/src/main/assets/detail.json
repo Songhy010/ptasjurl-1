@@ -1,0 +1,79 @@
+{
+    "detail":[
+        {
+            "title":"House Infomation",
+            "item":[
+                {
+                    "icon":"",
+                    "title":"Location",
+                    "value":"Phnom Penh"
+                },{
+                    "icon":"",
+                    "title":"Type",
+                    "value":"Room"
+                },{
+                    "icon":"",
+                    "title":"Rent Price",
+                    "value":"150"
+                },{
+                    "icon":"",
+                    "title":"Electric Price",
+                    "value":"2500"
+                },{
+                    "icon":"",
+                    "title":"Water Price",
+                    "value":"1500"
+                },{
+                    "icon":"",
+                    "title":"Floor",
+                    "value":"3th"
+                },{
+                    "icon":"",
+                    "title":"Close Time",
+                    "value":"09:00"
+                },{
+                    "icon":"",
+                    "title":"Address",
+                    "value":"11.12123345,102.12353411"
+                },{
+                    "icon":"",
+                    "title":"Description",
+                    "value":"ខ្ញុំមានបន្ទប់សំរាប់ជួលក្នុងតំលៃធូថ្លៃដែលមានភិនភាគដូចខាងក្រោម\nទំហំ ៤ X ៤\nមានបន្ទប់ទឹកក្នុង\nមានឥដ្ឋការ៉ូ\nផ្លូវចេញ ចូលងាយស្រួល\nទីតាំងនៅជិតផ្សាស្ទឹងជ័យ អ្នកជួលភាគច្រើនជាអ្នកធើ្វកា និង និសិត្ស"
+                }
+            ]
+        },{
+            "title":"Owner Infomation",
+            "item":[
+                {
+                    "icon":"",
+                    "title":"Owner Name",
+                    "value":"Sem Songhy"
+                },{
+                    "icon":"",
+                    "title":"Owner Phone",
+                    "value":"0713248888"
+                },{
+                    "icon":"",
+                    "title":"Owner Address",
+                    "value":"Phnom Penh"
+                }
+            ]
+        }
+    ],
+    "related_item":[
+        {
+            "id":"001",
+            "thum":"image.jpg",
+            "desc":"Room 6A"
+        },
+        {
+            "id":"002",
+            "thum":"image.jpg",
+            "desc":"Room 5A"
+        },{
+            "id":"003",
+            "thum":"image.jpg",
+            "desc":"Room 4A"
+        }
+    ]
+}

@@ -103,11 +103,10 @@
                         android:layout_height="@dimen/iv_height_35"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="Search Locations"
+                        android:text="@string/search"
                         android:imeOptions="actionSearch"
                         android:maxLines="1"
                         android:singleLine="true">
-                        <requestFocus />
                     </TextView>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

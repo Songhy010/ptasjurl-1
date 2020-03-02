@@ -9,6 +9,7 @@
     <include layout="@layout/top_menu_fragment"/>
 
     <androidx.core.widget.NestedScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -182,6 +183,8 @@
                 android:layout_marginTop="@dimen/iv_height_10">
 
                 <TextView
+                    android:textStyle="normal"
+                    android:textSize="@dimen/text_size_normal"
                     android:id="@+id/tv_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -327,6 +330,7 @@
             </RelativeLayout>
 
             <CheckBox
+                android:textSize="@dimen/text_size_small"
                 android:text="I have read and agree with term"
                 android:layout_marginTop="@dimen/iv_height_10"
                 android:layout_width="wrap_content"

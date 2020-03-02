@@ -58,6 +58,6 @@ public class FragmentRoom extends Fragment {
     private void initRecycler() {
         manager = new LinearLayoutManager(root_view.getContext(),RecyclerView.VERTICAL,false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(null,root_view.getContext(),R.layout.item_home));
+        recycler.setAdapter(new AdapterHome(null,root_view.getContext(),R.layout.item_room));
     }
 }

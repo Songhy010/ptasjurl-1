@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,6 +142,6 @@ public class FragmentHome extends Fragment {
     private void initRecyclerView() {
         manager = new LinearLayoutManager(root_view.getContext(), RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(null, root_view.getContext(), R.layout.item_home));
+        recycler.setAdapter(new AdapterHome(null, root_view.getContext(), R.layout.item_room));
     }
 }

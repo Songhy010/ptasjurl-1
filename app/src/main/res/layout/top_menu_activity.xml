@@ -12,7 +12,7 @@
 
         <ImageView
             android:tint="@color/white"
-            android:padding="@dimen/iv_height_10"
+            android:padding="@dimen/iv_height_5"
             android:id="@+id/iv_back"
             android:layout_width="@dimen/iv_height_45"
             android:layout_height="wrap_content"
