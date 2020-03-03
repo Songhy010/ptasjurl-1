@@ -189,7 +189,6 @@ public class FragmentAdd extends Fragment {
 
     // Upload to server
     private void uploadFileServer() {
-
         new Thread(new Runnable() {
             public void run() {
                 if (asyncUpload != null) {

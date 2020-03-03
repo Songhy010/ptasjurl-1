@@ -203,15 +203,17 @@
                 android:textStyle="normal" />
 
             <ImageView
+                android:id="@+id/iv_pick"
                 android:layout_marginTop="@dimen/iv_height_8"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_sample"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_height_200" />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_145"/>
+                android:layout_height="wrap_content"/>
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_upload"
                 android:layout_marginTop="@dimen/iv_height_10"
