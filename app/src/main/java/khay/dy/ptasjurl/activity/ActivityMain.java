@@ -18,7 +18,7 @@ public class ActivityMain extends ActivityController {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                MyFunction.getInstance().openActivity(ActivityMain.this,ActivityHome.class);
+                MyFunction.getInstance().openActivity(ActivityMain.this,ActivityLogin.class);
                 MyFunction.getInstance().finishActivity(ActivityMain.this);
             }
         }, 3000);

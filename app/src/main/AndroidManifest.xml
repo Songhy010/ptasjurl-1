@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ActivityMoreDesc"></activity>
+        <activity android:name=".activity.ActivityLogin"></activity>
+        <activity android:name=".activity.ActivityNotification" />
+        <activity android:name=".activity.ActivityMoreDesc" />
         <activity android:name=".activity.ActivityRoomDetail" />
         <activity
             android:name=".activity.ActivityHome"

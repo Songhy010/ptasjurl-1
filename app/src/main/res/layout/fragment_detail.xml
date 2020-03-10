@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <fragment
-        android:id="@+id/map_view"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingRight="@dimen/iv_height_5"
+        android:paddingLeft="@dimen/iv_height_5"
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -41,5 +41,6 @@
     <string name="time">Time Close</string>
     <string name="check">Check List</string>
     <string name="more_desc">More Description</string>
+    <string name="notification">Notification</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

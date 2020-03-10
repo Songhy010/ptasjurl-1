@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityNotification;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.util.MyFont;
@@ -40,6 +42,7 @@ public class FragmentHome extends Fragment {
     private Runnable runnable = null;
     private Handler handler = new Handler();
     private ViewPager viewPager;
+    private ImageView iv_noti;
 
     @Nullable
     @Override
@@ -68,6 +71,16 @@ public class FragmentHome extends Fragment {
         findView();
         initRecyclerView();
         initPagerBanner();
+        onClick();
+    }
+
+    public void onClick(){
+       root_view.findViewById(R.id.iv_noti).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               MyFunction.getInstance().openActivity(root_view.getContext(),ActivityNotification.class);
+           }
+       });
     }
 
     private void addBottomDots(LinearLayout layout_dots, int size, int current) {
