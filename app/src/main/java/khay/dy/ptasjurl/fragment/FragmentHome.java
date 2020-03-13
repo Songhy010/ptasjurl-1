@@ -19,7 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.google.android.material.appbar.AppBarLayout;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,8 @@ import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityNotification;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
+import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
 
@@ -68,10 +75,36 @@ public class FragmentHome extends Fragment {
     }
 
     private void initView() {
-        findView();
-        initRecyclerView();
-        initPagerBanner();
-        onClick();
+        try{
+            findView();
+            loadHome();
+            onClick();
+        }catch (Exception e){
+            Log.e(TAG,e.getMessage());
+        }
+    }
+
+    private void loadHome() {
+        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    final JSONObject object = new JSONObject(response);
+                    final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
+                    final JSONArray arrBanner = object.getJSONArray(Global.arData[12]);
+                    initPagerBanner(arrBanner);
+                    initRecyclerView(arrHome);
+                }catch (Exception e){
+                    Log.e(TAG,e.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Log.e(TAG,e.getMessage()+"");
+            }
+        });
     }
 
     public void onClick(){
@@ -120,13 +153,13 @@ public class FragmentHome extends Fragment {
 
     }
 
-    private void initPagerBanner() {
+    private void initPagerBanner(JSONArray array) {
         app_bar_layout = root_view.findViewById(R.id.app_bar_layout);
         final int height = MyFunction.getInstance().getBannerHeight(root_view.getContext());
         app_bar_layout.getLayoutParams().height = height;
         List<String> listImage = new ArrayList<>();
         try {
-            adapter = new AdapterBanner(root_view.getContext(), listImage);
+            adapter = new AdapterBanner(root_view.getContext(), listImage,array);
             viewPager = root_view.findViewById(R.id.pager);
             viewPager.setAdapter(adapter);
 //            addBottomDots(layout_dots, adapter.getCount(), 0);
@@ -152,9 +185,9 @@ public class FragmentHome extends Fragment {
         }
     }
 
-    private void initRecyclerView() {
+    private void initRecyclerView(JSONArray array) {
         manager = new LinearLayoutManager(root_view.getContext(), RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(null, root_view.getContext(), R.layout.item_room));
+        recycler.setAdapter(new AdapterHome(array, root_view.getContext(), R.layout.item_room));
     }
 }

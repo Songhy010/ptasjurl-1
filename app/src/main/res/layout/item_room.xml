@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/iv_thum"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -28,13 +29,14 @@
             android:layout_weight="3">
             <TextView
                 android:textStyle="bold"
-                android:id="@+id/tv_location"
+                android:id="@+id/tv_title"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:text="@string/location"
                 android:textSize="@dimen/text_size_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tv_price"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:layout_alignParentRight="true"
@@ -44,8 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tv_desc"
                 android:layout_marginTop="@dimen/iv_height_5"
-                android:layout_below="@id/tv_location"
+                android:layout_below="@id/tv_title"
                 android:text="@string/desc"
                 android:textSize="@dimen/text_size_small"
                 android:layout_width="wrap_content"

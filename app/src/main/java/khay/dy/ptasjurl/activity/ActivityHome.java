@@ -1,4 +1,5 @@
 package khay.dy.ptasjurl.activity;
+
 import android.graphics.Bitmap;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -18,25 +19,23 @@ import com.google.android.material.tabs.TabLayout;
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterViewPager;
 import khay.dy.ptasjurl.fragment.FragmentAdd;
-import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentHome;
+import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentMap;
 import khay.dy.ptasjurl.fragment.FragmentRoom;
-import khay.dy.ptasjurl.util.Tools;
 
 public class ActivityHome extends ActivityController {
     private TabLayout tab_layout;
     private ViewPager view_pager;
     private final int TAB_COUNT = 5;
-    private final Drawable drawables[] = new Drawable[TAB_COUNT];
-    private final Bitmap bitmap[] = new Bitmap[TAB_COUNT];
+    private final Drawable[] drawables = new Drawable[TAB_COUNT];
+    private final Bitmap[] bitmap = new Bitmap[TAB_COUNT];
     private final int[] icons = {
             R.drawable.ic_home,R.drawable.ic_room,R.drawable.ic_house,
             R.drawable.ic_map, R.drawable.ic_add
     };
-    private final TextView tv_custom_tab[] = new TextView[TAB_COUNT];
+    private final TextView[] tv_custom_tab = new TextView[TAB_COUNT];
 
-    private AdapterViewPager adapter;
     private ColorFilter filter;
     private ColorFilter filter_origin;
 
@@ -57,7 +56,7 @@ public class ActivityHome extends ActivityController {
     }
     private void initViewPager(){
         view_pager.setOffscreenPageLimit(0);
-        adapter = new AdapterViewPager(getSupportFragmentManager());
+        AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFrag(new FragmentHome());
         adapter.addFrag(new FragmentRoom());
         adapter.addFrag(new FragmentHouse());
@@ -144,10 +143,11 @@ public class ActivityHome extends ActivityController {
         try {
             final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final int width = getResources().getDimensionPixelSize(R.dimen.iv_height_20);
-            final String titles[] = {getString(R.string.home),getString(R.string.room),getString(R.string.house),getString(R.string.map),getString(R.string.add_house)};
+            final String[] titles = {getString(R.string.home),getString(R.string.room),getString(R.string.house),getString(R.string.map),getString(R.string.add_house)};
 
             /*default selected */
             drawables[0] = ContextCompat.getDrawable(ActivityHome.this, icons[0]);
+            assert drawables[0] != null;
             bitmap[0] = ((BitmapDrawable) drawables[0]).getBitmap();
             drawables[0] = new BitmapDrawable(this.getResources(), Bitmap.createScaledBitmap(bitmap[0], width, width, true));
             drawables[0].setColorFilter(filter);
@@ -163,6 +163,7 @@ public class ActivityHome extends ActivityController {
             /* other tab  */
             for (int i = 1; i < TAB_COUNT; i++) {
                 drawables[i] = ContextCompat.getDrawable(ActivityHome.this, icons[i]);
+                assert drawables[i] != null;
                 bitmap[i] = ((BitmapDrawable) drawables[i]).getBitmap();
                 drawables[i] = new BitmapDrawable(this.getResources(), Bitmap.createScaledBitmap(bitmap[i], width, width, true));
                 drawables[i].setColorFilter(filter_origin);

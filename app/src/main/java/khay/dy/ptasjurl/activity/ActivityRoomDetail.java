@@ -141,7 +141,7 @@ public class ActivityRoomDetail extends ActivityController {
         viewPager.getLayoutParams().height = height;
         List<String> listImage = new ArrayList<>();
         try {
-            adapter = new AdapterBanner(this, listImage);
+            adapter = new AdapterBanner(this, listImage,null);
             viewPager.setAdapter(adapter);
             addBottomDots(layout_dots, adapter.getCount(), 0);
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

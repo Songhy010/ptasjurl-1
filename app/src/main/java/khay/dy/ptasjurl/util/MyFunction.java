@@ -810,7 +810,7 @@ public class MyFunction {
                 @Override
                 public Map<String, String> getHeaders() {
                     final Map<String, String> params = new HashMap<>();
-                    final String cred = String.format("%s:%s", Global.arData[14], Global.arData[15]);
+                    final String cred = String.format("%s:%s", Global.arData[3], Global.arData[4]);
                     final String auth = "Basic " + Base64.encodeToString(cred.getBytes(), Base64.DEFAULT);
                     params.put("Authorization", auth);
                     return params;

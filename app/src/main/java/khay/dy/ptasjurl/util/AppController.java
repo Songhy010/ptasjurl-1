@@ -30,26 +30,27 @@ public class AppController extends com.android.volley.my.AppController {
 
        /* final String global = MyFunction.getInstance().getDecrypted(this, MyFunction.getInstance().readFileAsset(this, getFilename()));
         Global.arData = global.split(";");*/
-
+//http://sokhay.tcode.biz/wp-api/auth.php?api_id=home&type=pull
         Global.arData = new String[100];
-        Global.arData[0] = "https://admin.khmersmartlibrary.org/";
-        Global.arData[1] = "wp-api/auth?";
+        Global.arData[0] = "http://sokhay.tcode.biz/";
+        Global.arData[1] = "wp-api/auth.php?";
         Global.arData[2] = "api_id=%s&type=%s";
-        Global.arData[3] = "user";
-        Global.arData[4] = "push";
-        Global.arData[5] = "check";
-        Global.arData[6] = "pull";
-        Global.arData[7] = "first_name";
-        Global.arData[8] = "last_name";
+        Global.arData[3] = "home";
+        Global.arData[4] = "s0khay_rady";
+        Global.arData[5] = "pull";
 
-        Global.arData[9] = "language";
-        Global.arData[10] = "en";
-        Global.arData[11] = "km";
-        Global.arData[12] = "cn";
+        Global.arData[6] = "real_estate";
+        Global.arData[7] = "type";
+        Global.arData[8] = "title";
+        Global.arData[9] = "desc";
+        Global.arData[10] = "price";
+        Global.arData[11] = "thumbnail";
+        Global.arData[12] = "branner";
+        Global.arData[13] = "banner";
 
-        Global.arData[13] = "gender";
-        Global.arData[14] = "biz";
-        Global.arData[15] = "Khm3rL!br@ry";
+
+        Global.arData[14] = "room";
+        Global.arData[15] = "flat";
         Global.arData[16] = "fid";
         Global.arData[17] = "ftoken";
         Global.arData[18] = "avatar";

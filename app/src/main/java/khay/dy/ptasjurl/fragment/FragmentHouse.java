@@ -1,6 +1,7 @@
 package khay.dy.ptasjurl.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterHome;
+import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
+import khay.dy.ptasjurl.util.MyFunction;
 
 public class FragmentHouse extends Fragment {
 
@@ -48,7 +58,8 @@ public class FragmentHouse extends Fragment {
     private void initView(){
         findView();
         initToolBar();
-        initRecycler();
+//        initRecycler();
+        loadFlat();
     }
 
     private void initToolBar() {
@@ -56,9 +67,31 @@ public class FragmentHouse extends Fragment {
         tv_title.setText(getString(R.string.house));
     }
 
-    private void initRecycler() {
+    private void loadFlat(){
+
+        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[15], Global.arData[5]);
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    final JSONObject object = new JSONObject(response);
+                    final JSONArray arrFlat = object.getJSONArray(Global.arData[15]);
+                    initRecycler(arrFlat);
+                }catch (Exception e){
+                    Log.e(TAG,e.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError e) {
+//                Log.e(TAG,e.getMessage());
+            }
+        });
+    }
+
+    private void initRecycler(JSONArray array) {
         manager = new LinearLayoutManager(root_view.getContext(),RecyclerView.VERTICAL,false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(null,root_view.getContext(),R.layout.item_house));
+        recycler.setAdapter(new AdapterHome(array,root_view.getContext(),R.layout.item_house));
     }
 }
