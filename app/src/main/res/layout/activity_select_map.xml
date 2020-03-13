@@ -13,7 +13,7 @@
         android:layout_height="match_parent"/>
 
     <ImageView
-        android:padding="@dimen/iv_height_5"
+        android:padding="@dimen/iv_height_10"
         android:src="@drawable/img_pin"
         android:layout_width="@dimen/iv_height_45"
         android:layout_height="@dimen/iv_height_45"
@@ -23,9 +23,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:tint="@color/black"
         android:id="@+id/iv_back"
         android:src="@drawable/img_arrow"
-        android:padding="@dimen/iv_height_5"
+        android:padding="@dimen/iv_height_13"
         android:layout_marginLeft="@dimen/iv_height_5"
         android:layout_marginTop="@dimen/iv_height_25"
         android:layout_width="@dimen/iv_height_45"
