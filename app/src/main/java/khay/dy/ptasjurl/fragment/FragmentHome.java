@@ -31,6 +31,7 @@ import java.util.List;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityNotification;
+import khay.dy.ptasjurl.activity.ActivityProfile;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.listener.VolleyCallback;
@@ -57,7 +58,6 @@ public class FragmentHome extends Fragment {
         if (root_view == null) {
             root_view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
         }
-        Log.e(TAG,"Test");
         return root_view;
     }
 
@@ -103,6 +103,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onErrorResponse(VolleyError e) {
                 Log.e(TAG,e.getMessage()+"");
+                loadHome();
             }
         });
     }
@@ -112,6 +113,12 @@ public class FragmentHome extends Fragment {
            @Override
            public void onClick(View view) {
                MyFunction.getInstance().openActivity(root_view.getContext(),ActivityNotification.class);
+           }
+       });
+       root_view.findViewById(R.id.iv_profile).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               MyFunction.getInstance().openActivity(root_view.getContext(), ActivityProfile.class);
            }
        });
     }

@@ -22,6 +22,7 @@ public class ActivityLogin extends AppCompatActivity {
     private void initView() {
         findView();
         initLogin();
+        initCreate();
     }
 
     private void initLogin() {
@@ -35,5 +36,13 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private void findView() {
+    }
+    private void initCreate(){
+        findViewById(R.id.tv_create).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFunction.getInstance().openActivity(ActivityLogin.this,ActivityDonate.class);
+            }
+        });
     }
 }

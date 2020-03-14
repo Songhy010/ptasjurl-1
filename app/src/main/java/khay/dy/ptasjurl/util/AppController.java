@@ -47,16 +47,15 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[11] = "thumbnail";
         Global.arData[12] = "branner";
         Global.arData[13] = "banner";
-
-
         Global.arData[14] = "room";
         Global.arData[15] = "flat";
-        Global.arData[16] = "fid";
-        Global.arData[17] = "ftoken";
-        Global.arData[18] = "avatar";
-        Global.arData[19] = "servey";
-        Global.arData[20] = "location";
-        Global.arData[21] = "position";
+        Global.arData[16] = "term_condition";
+        Global.arData[17] = "donate";
+        Global.arData[18] = "donate_desc";
+        Global.arData[19] = "account_deac";
+        Global.arData[20] = "account";
+        Global.arData[21] = "number";
+
         Global.arData[22] = "answer";
         Global.arData[23] = "library";
         Global.arData[24] = "home";

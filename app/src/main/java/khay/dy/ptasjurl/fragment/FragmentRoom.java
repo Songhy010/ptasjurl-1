@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -31,6 +32,7 @@ public class FragmentRoom extends Fragment {
     private final String TAG = "Fr Home";
     private View root_view;
     private RecyclerView recycler;
+    private SwipeRefreshLayout swipe;
     private LinearLayoutManager manager;
 
     @Nullable
@@ -52,6 +54,7 @@ public class FragmentRoom extends Fragment {
     }
 
     private void findView(){
+        swipe = root_view.findViewById(R.id.swipe);
         recycler  = root_view.findViewById(R.id.recycler);
     }
 
@@ -60,8 +63,9 @@ public class FragmentRoom extends Fragment {
             findView();
             initToolBar();
             loadRoom();
+            initSwipe();
         }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG,""+e.getMessage());
         }
     }
     private void initToolBar() {
@@ -69,7 +73,17 @@ public class FragmentRoom extends Fragment {
         tv_title.setText(getString(R.string.room));
     }
 
+    private void initSwipe(){
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadRoom();
+            }
+        });
+    }
+
     private void loadRoom(){
+        swipe.setRefreshing(true);
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[14], Global.arData[5]);
         MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
             @Override
@@ -81,11 +95,14 @@ public class FragmentRoom extends Fragment {
                 }catch (Exception e){
                     Log.e(TAG,e.getMessage());
                 }
+                swipe.setRefreshing(false);
             }
 
             @Override
             public void onErrorResponse(VolleyError e) {
                 Log.e(TAG,e.getMessage()+"");
+                swipe.setRefreshing(false);
+                loadRoom();
             }
         });
 

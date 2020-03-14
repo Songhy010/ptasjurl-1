@@ -4,10 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/top_menu_fragment"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:paddingRight="@dimen/iv_height_5"
-        android:paddingLeft="@dimen/iv_height_5"
-        android:id="@+id/recycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingRight="@dimen/iv_height_5"
+            android:paddingLeft="@dimen/iv_height_5"
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

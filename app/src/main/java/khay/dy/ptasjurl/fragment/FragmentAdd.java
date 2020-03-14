@@ -27,6 +27,7 @@ import java.io.InputStream;
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
+import khay.dy.ptasjurl.activity.ActivityTermAndCondition;
 import khay.dy.ptasjurl.model.model_latlg;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
@@ -104,6 +105,16 @@ public class FragmentAdd extends Fragment {
         initPickImage();
         initUpload();
         initMoreDesc();
+        initTerm();
+    }
+
+    private void initTerm() {
+        root_view.findViewById(R.id.tv_term).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFunction.getInstance().openActivity(root_view.getContext(), ActivityTermAndCondition.class);
+            }
+        });
     }
 
     private void findView() {

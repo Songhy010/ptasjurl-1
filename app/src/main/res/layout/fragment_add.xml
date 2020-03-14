@@ -211,12 +211,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <CheckBox
-                android:textSize="@dimen/text_size_small"
-                android:text="I have read and agree with term"
+            <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/iv_height_10"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+                <CheckBox
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="normal"
+                    android:text="@string/accept_term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_term"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/iv_height_3"
+                    android:text="@string/term_condition"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_upload"
