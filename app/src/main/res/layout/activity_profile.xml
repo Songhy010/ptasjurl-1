@@ -2,56 +2,91 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ActivityProfile">
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            tools:ignore="UselessParent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:gravity="center"
-                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_250">
+                android:layout_height="@dimen/iv_height_250"
+                android:background="@color/colorPrimary"
+                android:gravity="center">
+
                 <ImageView
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/iv_height_45"
+                    android:layout_height="@dimen/iv_height_45"
                     android:padding="@dimen/iv_height_13"
                     android:src="@drawable/img_arrow"
-                    android:layout_width="@dimen/iv_height_45"
-                    android:layout_height="@dimen/iv_height_45"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_profile"
-                    android:src="@drawable/img_profile"
-                    android:padding="@dimen/iv_height_10"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_width="@dimen/iv_height_120"
-                    android:layout_height="@dimen/iv_height_120"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/iv_height_10"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_profile"
-                    android:textStyle="bold"
+                    android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_normal"
-                    android:text="@string/app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="@dimen/iv_height_120"
+                    android:layout_height="@dimen/iv_height_120"
+                    android:padding="@dimen/iv_height_10"
+                    android:src="@drawable/img_profile"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:padding="@dimen/iv_height_10"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_marginTop="@dimen/iv_height_55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/img_fb"
+                    android:layout_marginRight="@dimen/iv_height_30"
+                    android:layout_marginLeft="@dimen/iv_height_30"
+                    android:id="@+id/iv_fb"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/iv_height_30"
+                    android:layout_height="@dimen/iv_height_30"/>
+                <ImageView
+                    android:src="@drawable/img_tg"
+                    android:layout_toRightOf="@+id/iv_fb"
+                    android:layout_width="@dimen/iv_height_30"
+                    android:layout_height="@dimen/iv_height_30"/>
+                <ImageView
+                    android:src="@drawable/img_ig"
+                    android:layout_toLeftOf="@+id/iv_fb"
+                    android:layout_width="@dimen/iv_height_30"
+                    android:layout_height="@dimen/iv_height_30"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,13 +1,15 @@
 package khay.dy.ptasjurl.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import android.os.Build;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -34,16 +36,11 @@ public class ActivityDonate extends ActivityController {
     }
 
     private void initView() {
-        findView();
         initBack();
         loadDonate();
     }
 
-    private void findView() {
-
-    }
-
-    private void initBack(){
+    private void initBack() {
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,10 +62,20 @@ public class ActivityDonate extends ActivityController {
                         final TextView tv_desc = findViewById(R.id.tv_desc);
                         tv_desc.setText(object.getString(Global.arData[18]));
                         final JSONArray array = object.getJSONArray(Global.arData[20]);
-                        final TextView[] tv = {findViewById(R.id.tv_wing),findViewById(R.id.tv_aba)};
-                        for (int i = 0; i < array.length(); i++){
+                        final TextView tv_account = findViewById(R.id.tv_acc);
+                        tv_account.setText(object.getString(Global.arData[19]));
+                        final TextView[] tv = {findViewById(R.id.tv_wing), findViewById(R.id.tv_aba)};
+                        final CardView[] card = {findViewById(R.id.card_wing), findViewById(R.id.card_aba)};
+                        for (int i = 0; i < array.length(); i++) {
                             final JSONObject obj = array.getJSONObject(i);
                             tv[i].setText(obj.getString(Global.arData[21]));
+                            final int finalI = i;
+                            card[i].setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    CopyText(tv[finalI]);
+                                }
+                            });
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
@@ -85,6 +92,17 @@ public class ActivityDonate extends ActivityController {
         } catch (Exception e) {
             hideDialog();
             Log.e(TAG, "" + e.getMessage());
+        }
+    }
+
+    public void CopyText(TextView view) {
+        String text = view.getText().toString();
+        if (!text.isEmpty()) {
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clipData = ClipData.newPlainText("key", text);
+            assert clipboardManager != null;
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(getApplicationContext(), getString(R.string.copied), Toast.LENGTH_SHORT).show();
         }
     }
 }
