@@ -57,5 +57,6 @@
     <string name="setting">Setting</string>
     <string name="contact">Contact Us</string>
     <string name="donating">Donation</string>
+    <string name="no_content">No Content</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

@@ -34,6 +34,8 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:singleLine="true"
+                    android:maxLines="1"
                     android:id="@+id/edt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,6 +59,8 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
                     android:inputType="textPassword"
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"

@@ -110,6 +110,6 @@ public class FragmentRoom extends Fragment {
     private void initRecycler(JSONArray array) {
         manager = new LinearLayoutManager(root_view.getContext(),RecyclerView.VERTICAL,false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(array,root_view.getContext(),R.layout.item_room));
+        recycler.setAdapter(new AdapterHome(array,root_view.getContext()));
     }
 }

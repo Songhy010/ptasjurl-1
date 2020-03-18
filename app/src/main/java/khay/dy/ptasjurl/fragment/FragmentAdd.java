@@ -28,7 +28,7 @@ import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
 import khay.dy.ptasjurl.activity.ActivityTermAndCondition;
-import khay.dy.ptasjurl.model.model_latlg;
+import khay.dy.ptasjurl.model.ModelLatLng;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -78,8 +78,8 @@ public class FragmentAdd extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (model_latlg.getInstance().getLatlng() != null)
-            tv_address.setText(MyFunction.getInstance().getAddress(root_view.getContext(), model_latlg.getInstance().getLatlng()));
+        if (ModelLatLng.getInstance().getLatlng() != null)
+            tv_address.setText(MyFunction.getInstance().getAddress(root_view.getContext(), ModelLatLng.getInstance().getLatlng()));
 
     }
 

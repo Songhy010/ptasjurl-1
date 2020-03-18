@@ -67,6 +67,9 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[29] = "password";
         Global.arData[30] = "first_name";
         Global.arData[31] = "last_name";
+        Global.arData[32] = "owner_house";
+        Global.arData[33] = "uid";
+        Global.arData[34] = "notification";
 
 
 

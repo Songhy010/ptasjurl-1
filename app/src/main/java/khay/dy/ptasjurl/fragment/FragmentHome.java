@@ -35,6 +35,7 @@ import khay.dy.ptasjurl.activity.ActivityProfile;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.model.ModelHome;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -85,27 +86,15 @@ public class FragmentHome extends Fragment {
     }
 
     private void loadHome() {
-        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
-        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
-            @Override
-            public void onResponse(String response) {
-                try{
-                    final JSONObject object = new JSONObject(response);
-                    final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
-                    final JSONArray arrBanner = object.getJSONArray(Global.arData[12]);
-                    initPagerBanner(arrBanner);
-                    initRecyclerView(arrHome);
-                }catch (Exception e){
-                    Log.e(TAG,e.getMessage());
-                }
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError e) {
-                Log.e(TAG,e.getMessage()+"");
-                loadHome();
-            }
-        });
+        try{
+            final JSONObject object = ModelHome.getInstance().getObjHome();
+            final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
+            final JSONArray arrBanner = object.getJSONArray(Global.arData[12]);
+            initPagerBanner(arrBanner);
+            initRecyclerView(arrHome);
+        }catch (Exception e){
+            Log.e(TAG,e.getMessage()+"");
+        }
     }
 
     public void onClick(){
@@ -195,6 +184,6 @@ public class FragmentHome extends Fragment {
     private void initRecyclerView(JSONArray array) {
         manager = new LinearLayoutManager(root_view.getContext(), RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(array, root_view.getContext(), R.layout.item_room));
+        recycler.setAdapter(new AdapterHome(array, root_view.getContext()));
     }
 }

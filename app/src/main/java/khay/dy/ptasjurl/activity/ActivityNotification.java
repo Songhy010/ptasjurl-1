@@ -5,17 +5,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterNotification;
+import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.Global;
+import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
 
 public class ActivityNotification extends ActivityController {
 
-    private RecyclerView recycler;
+    private final String TAG = "Ac Noti";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +36,9 @@ public class ActivityNotification extends ActivityController {
         initView();
     }
 
-    private void findView() {
-        recycler = findViewById(R.id.recycler);
-    }
-
     private void initView() {
-        findView();
         initToolBar();
-        initRecycler();
+        loadNotification();
     }
 
     private void initToolBar() {
@@ -47,9 +53,43 @@ public class ActivityNotification extends ActivityController {
             }
         });
     }
-    private void initRecycler(){
+
+    private void loadNotification(){
+        try {
+            showDialog();
+            final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[34], Global.arData[5]);
+            MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        Log.e(TAG, response);
+                        if(MyFunction.getInstance().isValidJSON(response)){
+                            initRecycler(null);
+                        }
+
+                    } catch (Exception e) {
+                        Log.e(TAG, "" + e.getMessage());
+                    }
+                    hideDialog();
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError e) {
+                    loadNotification();
+                    Log.e("Err", e.getMessage() + "");
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage() + "");
+        }
+    }
+    private void initRecycler(final JSONArray array){
         final LinearLayoutManager manager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        final RecyclerView recycler = findViewById(R.id.recycler);
+        final TextView tv_no_content = findViewById(R.id.tv_no_content);
+        tv_no_content.setVisibility(View.GONE);
+        recycler.setVisibility(View.VISIBLE);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterNotification(this,null));
+        recycler.setAdapter(new AdapterNotification(this,array));
     }
 }

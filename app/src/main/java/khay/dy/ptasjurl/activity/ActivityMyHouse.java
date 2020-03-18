@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterHome;
@@ -40,7 +43,7 @@ public class ActivityMyHouse extends ActivityController {
 
     private void initView() {
         initToolbar();
-        initRecycler();
+        loadMyHouse();
     }
 
     private void initToolbar() {
@@ -55,25 +58,28 @@ public class ActivityMyHouse extends ActivityController {
         });
     }
 
-    private void initRecycler() {
+    private void initRecycler(JSONArray array) {
         final RecyclerView recycler = findViewById(R.id.recycler);
         final LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(null, this, R.layout.item_room));
+        recycler.setAdapter(new AdapterHome(array, this));
     }
 
     private void loadMyHouse() {
         try {
             showDialog();
-            final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[22], Global.arData[5]);
-            MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            final JSONObject object = new JSONObject(MyFunction.getInstance().getText(this,Global.INFO_FILE));
+            final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[32], Global.arData[5]);
+            final HashMap<String,String> param = new HashMap<>();
+            param.put(Global.arData[33],object.getString("id"));
+            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         Log.e(TAG, response);
                         final JSONObject object = new JSONObject(response);
-                        final TextView tv_about = findViewById(R.id.tv_about);
-                        MyFunction.getInstance().displayHtmlInText(tv_about, object.getString(Global.arData[9]));
+                        final JSONArray array = object.getJSONArray(Global.arData[6]);
+                        initRecycler(array);
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }

@@ -27,18 +27,16 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
 
     private JSONArray array;
     private Context context;
-    private int layout;
 
-    public AdapterHome(JSONArray array, Context context, int layout) {
+    public AdapterHome(JSONArray array, Context context) {
         this.array = array;
         this.context = context;
-        this.layout = layout;
     }
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(context).inflate(layout, parent, false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.item_room, parent, false);
         return new ItemHolder(view);
     }
 
@@ -49,15 +47,21 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
             final JSONObject object = array.getJSONObject(position);
             if (!object.isNull(Global.arData[7]))
                 type = Integer.parseInt(object.getString(Global.arData[7]));
-            if (type != 3) {
+            if (type == 2) {
+                holder.layout.setVisibility(View.VISIBLE);
+                holder.layout1.setVisibility(View.GONE);
                 holder.tv_title.setText(object.getString(Global.arData[8]));
                 MyFunction.getInstance().displayHtmlInText(holder.tv_desc,object.getString(Global.arData[9]));
                 holder.tv_price.setText(object.getString(Global.arData[10]));
+            }else if(type ==1){
+                holder.layout.setVisibility(View.GONE);
+                holder.layout1.setVisibility(View.VISIBLE);
+                holder.tv_title1.setText(object.getString(Global.arData[8]));
+                MyFunction.getInstance().displayHtmlInText(holder.tv_desc1,object.getString(Global.arData[9]));
+                holder.tv_price1.setText(object.getString(Global.arData[10]));
             } else {
                 holder.layout.setVisibility(View.GONE);
-                holder.tv_title.setText("Promotion");
-                holder.tv_desc.setText("Promotion");
-                holder.tv_price.setText("Promotion");
+                holder.layout1.setVisibility(View.GONE);
             }
             MyImageLoader.getInstance().setImage(holder.iv_thum, object.getString(Global.arData[11]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
 
@@ -83,6 +87,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
         private TextView tv_title, tv_price, tv_desc;
         private RelativeLayout layout;
 
+        private TextView tv_title1, tv_price1, tv_desc1;
+        private RelativeLayout layout1;
+
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.card);
@@ -93,6 +100,11 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
             tv_price = itemView.findViewById(R.id.tv_price);
             iv_thum = itemView.findViewById(R.id.iv_thum);
             layout = itemView.findViewById(R.id.layout);
+
+            tv_desc1 = itemView.findViewById(R.id.tv_desc1);
+            tv_title1 = itemView.findViewById(R.id.tv_title1);
+            tv_price1 = itemView.findViewById(R.id.tv_price1);
+            layout1 = itemView.findViewById(R.id.layout1);
         }
     }
 }

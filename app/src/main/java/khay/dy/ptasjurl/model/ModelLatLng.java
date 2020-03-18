@@ -2,14 +2,14 @@ package khay.dy.ptasjurl.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class model_latlg {
-    private static final model_latlg ourInstance = new model_latlg();
+public class ModelLatLng {
+    private static final ModelLatLng ourInstance = new ModelLatLng();
 
-    public static model_latlg getInstance() {
+    public static ModelLatLng getInstance() {
         return ourInstance;
     }
 
-    private model_latlg() {
+    private ModelLatLng() {
     }
 
     private LatLng latlng;

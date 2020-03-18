@@ -42,7 +42,7 @@ import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.adapter.AdapterPagerDetail;
 import khay.dy.ptasjurl.fragment.FragmentDetail;
-import khay.dy.ptasjurl.model.model_latlg;
+import khay.dy.ptasjurl.model.ModelLatLng;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
@@ -218,7 +218,7 @@ public class ActivityRoomDetail extends ActivityController {
                                 @Override
                                 public void onCameraMove() {
                                     LatLng latlng = mMap.getCameraPosition().target;
-                                    model_latlg.getInstance().setLatlng(latlng);
+                                    ModelLatLng.getInstance().setLatlng(latlng);
                                 }
                             });
                         }
@@ -237,7 +237,7 @@ public class ActivityRoomDetail extends ActivityController {
         final RecyclerView recyclerView = findViewById(R.id.recycler_relate);
         final LinearLayoutManager manager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(new AdapterHome(null,this,R.layout.item_room));
+        recyclerView.setAdapter(new AdapterHome(null,this));
     }
 
     private void loadDetail(){

@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:gravity=""
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ActivityNotification">
-    <include layout="@layout/top_menu_activity"/>
+    <include android:id="@+id/toolbar" layout="@layout/top_menu_activity"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/toolbar"
+        android:visibility="gone"
         android:paddingLeft="@dimen/iv_height_5"
         android:paddingRight="@dimen/iv_height_5"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_no_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/grey"
+        android:textStyle="normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

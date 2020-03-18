@@ -67,7 +67,6 @@ public class FragmentHouse extends Fragment {
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
-
     }
 
     private void initSwipe(){
@@ -112,6 +111,6 @@ public class FragmentHouse extends Fragment {
     private void initRecycler(JSONArray array) {
         manager = new LinearLayoutManager(root_view.getContext(),RecyclerView.VERTICAL,false);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(new AdapterHome(array,root_view.getContext(),R.layout.item_house));
+        recycler.setAdapter(new AdapterHome(array,root_view.getContext()));
     }
 }
