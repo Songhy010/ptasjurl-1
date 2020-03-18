@@ -1,19 +1,16 @@
 package khay.dy.ptasjurl.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -27,6 +24,7 @@ import khay.dy.ptasjurl.util.Tools;
 public class ActivityLogin extends ActivityController {
 
     private final String TAG = "Ac Login";
+    private EditText edt_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +37,13 @@ public class ActivityLogin extends ActivityController {
     private void initView() {
         initLogin();
         initCreate();
+        initHidePassword();
+    }
+
+    private void initHidePassword() {
+        edt_password = findViewById(R.id.edt_password);
+        final ImageView iv_eye = findViewById(R.id.iv_eye);
+        MyFunction.getInstance().showHidePassword(this,iv_eye,edt_password);
     }
 
     private void initLogin() {
@@ -53,8 +58,8 @@ public class ActivityLogin extends ActivityController {
     private void login() {
         try {
             showDialog();
+            final TextView tv_incorrect = findViewById(R.id.tv_incorrect);
             final EditText edt_username = findViewById(R.id.edt_username);
-            final EditText edt_password = findViewById(R.id.edt_password);
             final HashMap<String,String> param = new HashMap<>();
             param.put(Global.arData[28],edt_username.getText().toString());
             param.put(Global.arData[29], EasyAES.encryptString(edt_password.getText().toString()));
@@ -64,14 +69,14 @@ public class ActivityLogin extends ActivityController {
                 public void onResponse(String response) {
                     try {
                         Log.e(TAG, response);
-                        if(MyFunction.getInstance().isValidEmail(response)){
+                        if(MyFunction.getInstance().isValidJSON(response)){
+                            tv_incorrect.setVisibility(View.GONE);
                             MyFunction.getInstance().saveText(ActivityLogin.this,Global.INFO_FILE,response);
                             MyFunction.getInstance().openActivity(ActivityLogin.this, ActivityHome.class);
                             MyFunction.getInstance().finishActivity(ActivityLogin.this);
                         }else{
-                            Toast.makeText(ActivityLogin.this, "Incorrect Username or Password", Toast.LENGTH_SHORT).show();
+                            tv_incorrect.setVisibility(View.VISIBLE);
                         }
-                        
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }

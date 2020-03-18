@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,8 @@ public class ActivityDonate extends ActivityController {
                                 }
                             });
                         }
+                        final RelativeLayout relative = findViewById(R.id.relative);
+                        relative.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }

@@ -6,6 +6,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -62,14 +63,13 @@ public class ActivityTermAndCondition extends ActivityController {
                         Log.e(TAG, response);
                         final JSONObject object = new JSONObject(response);
                         tv_desc.setText(object.getString(Global.arData[9]));
-
-
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             tv_desc.setText(Html.fromHtml(object.getString(Global.arData[9]), Html.FROM_HTML_MODE_COMPACT));
                         } else {
                             tv_desc.setText(Html.fromHtml(object.getString(Global.arData[9])));
                         }
-
+                        final ScrollView scroll = findViewById(R.id.scroll);
+                        scroll.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -75,11 +76,13 @@ public class ActivityContactUs extends ActivityController {
                             final JSONObject obj = array.getJSONObject(i);
                             final View view = LayoutInflater.from(ActivityContactUs.this).inflate(R.layout.custom_tab,null,false);
                             final TextView tv_phone = view.findViewById(R.id.tab);
+                            tv_phone.setTextColor(getResources().getColor(R.color.light_blue_50));
                             tv_phone.setTextSize(12);
                             tv_phone.setText("  "+obj.getString(Global.arData[21]));
                             flex.addView(view);
                         }
-
+                        final LinearLayout linear = findViewById(R.id.linear);
+                        linear.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }

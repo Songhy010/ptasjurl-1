@@ -78,11 +78,13 @@
                     android:layout_width="@dimen/iv_height_30"
                     android:layout_height="@dimen/iv_height_30"/>
                 <ImageView
+                    android:id="@+id/iv_tg"
                     android:src="@drawable/img_tg"
                     android:layout_toRightOf="@+id/iv_fb"
                     android:layout_width="@dimen/iv_height_30"
                     android:layout_height="@dimen/iv_height_30"/>
                 <ImageView
+                    android:id="@+id/iv_ig"
                     android:src="@drawable/img_ig"
                     android:layout_toLeftOf="@+id/iv_fb"
                     android:layout_width="@dimen/iv_height_30"

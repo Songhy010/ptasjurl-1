@@ -8,7 +8,7 @@
     tools:context=".activity.ActivitySetting">
     <include layout="@layout/top_menu_activity"/>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="@dimen/iv_height_30"
+        android:padding="@dimen/iv_height_20"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
@@ -36,12 +36,13 @@
                 android:layout_centerVertical="true"
                 app:cardCornerRadius="@dimen/iv_height_10"
                 android:layout_alignParentRight="true"
-                android:layout_width="@dimen/iv_height_90"
+                android:layout_width="@dimen/iv_height_100"
                 android:layout_height="@dimen/iv_height_20">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <LinearLayout
+                        android:id="@+id/linear_km"
                         android:gravity="center"
                         android:background="@color/colorPrimary"
                         android:layout_weight="1"
@@ -56,6 +57,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/linear_en"
                         android:background="@color/grey"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -96,7 +98,8 @@
                 android:text="@string/notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_notification"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -112,6 +115,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notification"/>
         <RelativeLayout
+            android:id="@+id/relative_logout"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/iv_height_30"
             app:layout_constraintBottom_toBottomOf="@id/logout"

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -50,6 +51,8 @@ public class ActivityAboutUs extends ActivityController {
                         final JSONObject object = new JSONObject(response);
                         final TextView tv_about = findViewById(R.id.tv_about);
                         MyFunction.getInstance().displayHtmlInText(tv_about, object.getString(Global.arData[9]));
+                        final RelativeLayout relative = findViewById(R.id.relative);
+                        relative.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Log.e(TAG, "" + e.getMessage());
                     }
@@ -60,7 +63,6 @@ public class ActivityAboutUs extends ActivityController {
                 public void onErrorResponse(VolleyError e) {
                     loadAboutUs();
                     Log.e("Err", e.getMessage() + "");
-                    hideDialog();
                 }
             });
         } catch (Exception e) {
