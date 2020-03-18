@@ -114,7 +114,7 @@ public class EasyAES {
     }
 
     public static String encryptString(String content) {
-        EasyAES ea = new EasyAES("123!#@abc*&$(kh)", 128, "123!#@abc*&$(kh)");
+        EasyAES ea = new EasyAES("abcdefghijklmnopqrstuvwxyz123456", 128, "abcdefghijklmnopqrstuvwxyz123456");
         return ea.encrypt(content);
     }
 

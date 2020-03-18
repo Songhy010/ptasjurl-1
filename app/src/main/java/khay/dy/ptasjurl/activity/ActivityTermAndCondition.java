@@ -39,9 +39,6 @@ public class ActivityTermAndCondition extends ActivityController {
 
     private void initToolBar() {
         final ImageView iv_back = findViewById(R.id.iv_back);
-        final TextView tv_title = findViewById(R.id.tv_title);
-        tv_title.setText(getString(R.string.term_condition));
-        iv_back.setImageDrawable(getResources().getDrawable(R.drawable.img_arrow));
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +84,7 @@ public class ActivityTermAndCondition extends ActivityController {
             });
         } catch (Exception e) {
             hideDialog();
+            loadTerm();
             Log.e(TAG, "" + e.getMessage());
         }
     }

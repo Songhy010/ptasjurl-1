@@ -46,5 +46,12 @@
     <string name="accept_term">I have red and accept with this, </string>
     <string name="tap">Tap to copy text</string>
     <string name="copied">Copied</string>
+    <string name="profile">Profile</string>
+    <string name="my_house">My House</string>
+    <string name="about">About Us</string>
+    <string name="language">Language</string>
+    <string name="km">ខ្មែរ</string>
+    <string name="en">English</string>
+    <string name="logout">Logout</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

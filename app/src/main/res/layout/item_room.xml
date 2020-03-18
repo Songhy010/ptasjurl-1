@@ -22,6 +22,7 @@
             android:src="@drawable/img_sample" />
 
         <RelativeLayout
+            android:id="@+id/layout"
             android:paddingLeft="@dimen/iv_height_5"
             android:paddingRight="@dimen/iv_height_5"
             android:layout_width="match_parent"

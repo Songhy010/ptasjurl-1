@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,9 +51,10 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
                 type = Integer.parseInt(object.getString(Global.arData[7]));
             if (type != 3) {
                 holder.tv_title.setText(object.getString(Global.arData[8]));
-                holder.tv_desc.setText(object.getString(Global.arData[9]));
+                MyFunction.getInstance().displayHtmlInText(holder.tv_desc,object.getString(Global.arData[9]));
                 holder.tv_price.setText(object.getString(Global.arData[10]));
             } else {
+                holder.layout.setVisibility(View.GONE);
                 holder.tv_title.setText("Promotion");
                 holder.tv_desc.setText("Promotion");
                 holder.tv_price.setText("Promotion");
@@ -68,7 +70,6 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
         } catch (Exception e) {
             Log.e("Err", e.getMessage());
         }
-
     }
 
     @Override
@@ -80,18 +81,18 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
         private CardView card;
         private ImageView iv_thum;
         private TextView tv_title, tv_price, tv_desc;
+        private RelativeLayout layout;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.card);
             final int height = MyFunction.getInstance().getBannerHeight(context);
             card.getLayoutParams().height = height;
-
             tv_desc = itemView.findViewById(R.id.tv_desc);
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_price = itemView.findViewById(R.id.tv_price);
-
             iv_thum = itemView.findViewById(R.id.iv_thum);
+            layout = itemView.findViewById(R.id.layout);
         }
     }
 }

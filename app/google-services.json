@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "213942351143",
+    "firebase_url": "https://ptasjurl.firebaseio.com",
+    "project_id": "ptasjurl",
+    "storage_bucket": "ptasjurl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213942351143:android:6272758fe850ef2fb06502",
+        "android_client_info": {
+          "package_name": "khay.dy.ptasjurl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213942351143-r5lg4blqglourh0mpvc8rmkctj72hk2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQuLUJmMa_cyumI_BIP2ISIyWrjjaODRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213942351143-r5lg4blqglourh0mpvc8rmkctj72hk2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

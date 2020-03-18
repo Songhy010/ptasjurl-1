@@ -60,11 +60,11 @@ public class AdapterProfile extends RecyclerView.Adapter<AdapterProfile.ItemHold
         return menu.length;
     }
 
-    public class ItemHolder extends RecyclerView.ViewHolder {
+    static class ItemHolder extends RecyclerView.ViewHolder {
         private TextView tv_menu;
         private LinearLayout linear;
 
-        public ItemHolder(@NonNull View itemView) {
+        ItemHolder(@NonNull View itemView) {
             super(itemView);
             linear = itemView.findViewById(R.id.linear);
             tv_menu = itemView.findViewById(R.id.tv_menu);

@@ -60,7 +60,8 @@ public class ActivityDonate extends ActivityController {
                         Log.e(TAG, response);
                         final JSONObject object = new JSONObject(response);
                         final TextView tv_desc = findViewById(R.id.tv_desc);
-                        tv_desc.setText(object.getString(Global.arData[18]));
+                        //tv_desc.setText(object.getString(Global.arData[18]));
+                        MyFunction.getInstance().displayHtmlInText(tv_desc,object.getString(Global.arData[18]));
                         final JSONArray array = object.getJSONArray(Global.arData[20]);
                         final TextView tv_account = findViewById(R.id.tv_acc);
                         tv_account.setText(object.getString(Global.arData[19]));
@@ -86,6 +87,7 @@ public class ActivityDonate extends ActivityController {
                 @Override
                 public void onErrorResponse(VolleyError e) {
                     Log.e("Err", e.getMessage() + "");
+                    loadDonate();
                     hideDialog();
                 }
             });

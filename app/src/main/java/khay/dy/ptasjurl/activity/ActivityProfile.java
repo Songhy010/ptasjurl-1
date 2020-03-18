@@ -4,16 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterProfile;
+import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
 
 public class ActivityProfile extends AppCompatActivity {
 
+    private final String TAG = "Ac Profile";
     private String[] menu = {"Profile","My House","Donation","About Us","Contact Us","Term Condition","Setting"};
     private RecyclerView recycler;
     @Override
@@ -32,6 +39,18 @@ public class ActivityProfile extends AppCompatActivity {
         findView();
         initBack();
         initMenu(menu);
+        initProfile();
+    }
+
+    private void initProfile(){
+        try{
+            final JSONObject object = new JSONObject(MyFunction.getInstance().getText(this, Global.INFO_FILE));
+            final TextView tv_name = findViewById(R.id.tv_name);
+            tv_name.setText(object.getString(Global.arData[30])+" "+object.getString(Global.arData[31]));
+
+        }catch (Exception e){
+            Log.e(TAG,e.getMessage()+"");
+        }
     }
 
     private void initBack() {

@@ -30,6 +30,7 @@ import android.os.StatFs;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -1089,5 +1090,13 @@ public class MyFunction {
 
         dialogCallBack.listener(dialog);
         dialog.show();
+    }
+
+    public void displayHtmlInText(TextView textView, String strHTML) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            textView.setText(Html.fromHtml(strHTML, Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            textView.setText(Html.fromHtml(strHTML));
+        }
     }
 }

@@ -1,9 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ActivitySetting">
+    <include layout="@layout/top_menu_activity"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/iv_height_30"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:padding="@dimen/iv_height_3"
+            android:id="@+id/language"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/iv_height_30"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/iv_height_30"
+            app:layout_constraintTop_toTopOf="@id/language"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/language">
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_language"
+                android:text="@string/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <androidx.cardview.widget.CardView
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="@dimen/iv_height_10"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/iv_height_90"
+                android:layout_height="@dimen/iv_height_20">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textStyle="normal"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@string/km"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="@color/grey"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textStyle="normal"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_small"
+                            android:text="@string/en"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/iv_height_10"
+            android:padding="@dimen/iv_height_3"
+            android:id="@+id/notification"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/language"/>
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            app:layout_constraintBottom_toBottomOf="@id/notification"
+            app:layout_constraintTop_toTopOf="@id/notification"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/language"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+            <TextView
+                android:text="@string/notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Switch
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/iv_height_10"
+            android:padding="@dimen/iv_height_3"
+            android:id="@+id/logout"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notification"/>
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            app:layout_constraintBottom_toBottomOf="@id/logout"
+            app:layout_constraintTop_toTopOf="@id/logout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/language"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+            <TextView
+                android:text="@string/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

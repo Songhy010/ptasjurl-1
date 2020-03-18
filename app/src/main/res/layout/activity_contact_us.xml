@@ -1,9 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.ActivityContactUs">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:padding="@dimen/iv_height_13"
+        android:tint="@color/black"
+        android:src="@drawable/img_arrow"
+        android:layout_width="@dimen/iv_height_45"
+        android:layout_height="@dimen/iv_height_45"/>
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_contact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iv_height_250"/>
+    
+    <TextView
+        android:layout_marginTop="@dimen/iv_height_30"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textStyle="normal"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/text_size_small"
+        android:id="@+id/tv_desc"
+        android:text="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/iv_height_15"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="@dimen/iv_height_3"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"/>
+        <TextView
+            android:layout_marginLeft="@dimen/iv_height_15"
+            android:textStyle="normal"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_small"
+            android:id="@+id/tv_email"
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_marginTop="@dimen/iv_height_10"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="@dimen/iv_height_3"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"/>
+        <TextView
+            android:layout_marginLeft="@dimen/iv_height_15"
+            android:textStyle="normal"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_size_small"
+            android:id="@+id/tv_facebook"
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/iv_height_10"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="@dimen/iv_height_3"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"/>
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flex"
+            android:layout_marginLeft="@dimen/iv_height_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:flexWrap="wrap"/>
+    </LinearLayout>
+    
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

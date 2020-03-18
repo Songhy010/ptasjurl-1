@@ -22,6 +22,7 @@
             android:src="@drawable/img_test" />
 
         <RelativeLayout
+            android:id="@+id/layout"
             android:background="@drawable/black_alpha_back"
             android:layout_alignParentBottom="true"
             android:paddingLeft="@dimen/iv_height_5"
