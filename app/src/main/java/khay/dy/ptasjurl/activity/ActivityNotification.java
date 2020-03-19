@@ -63,8 +63,9 @@ public class ActivityNotification extends ActivityController {
                 public void onResponse(String response) {
                     try {
                         Log.e(TAG, response);
+                        final JSONArray array = new JSONArray(response);
                         if(MyFunction.getInstance().isValidJSON(response)){
-                            initRecycler(null);
+                            initRecycler(array);
                         }
 
                     } catch (Exception e) {

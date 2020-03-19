@@ -2,25 +2,29 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/iv_height_145"
+    android:layout_height="wrap_content"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/iv_height_15">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notification"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="normal" />
 
         <TextView
+
+            android:id="@+id/tv_desc"
+            android:layout_marginTop="@dimen/iv_height_10"
+            android:layout_below="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -29,11 +33,12 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tv_date"
+            android:layout_marginTop="@dimen/iv_height_10"
+            android:layout_below="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
             android:text="Notification"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
