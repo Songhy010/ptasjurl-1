@@ -3,6 +3,7 @@ package khay.dy.ptasjurl.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.model.ModelHome;
@@ -32,13 +35,27 @@ public class ActivityMain extends ActivityController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+
+    }
+
+    private void initView(){
+       initData();
+       registerNotification();
+       initLocalize();
+
+    }
+
+    private void initData(){
         if (MyFunction.getInstance().isHistory(ActivityMain.this)) {
             loadHome();
         } else {
             MyFunction.getInstance().openActivity(ActivityMain.this, ActivityLogin.class);
             MyFunction.getInstance().finishActivity(ActivityMain.this);
         }
+    }
 
+    private void registerNotification(){
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -52,6 +69,16 @@ public class ActivityMain extends ActivityController {
                         Log.e("Token", token);*/
                     }
                 });
+    }
+
+    private void initLocalize() {
+       final String lang = MyFunction.getInstance().getText(ActivityMain.this, Global.LANGUAGE);
+        //lang = MyFunction.getInstance().getText(ActivityMain.this, AirConConstant.LANG);
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
     }
 
     private void loadHome() {

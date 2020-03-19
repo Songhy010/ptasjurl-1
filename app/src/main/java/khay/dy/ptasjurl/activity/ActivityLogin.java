@@ -86,12 +86,12 @@ public class ActivityLogin extends ActivityController {
                 @Override
                 public void onErrorResponse(VolleyError e) {
                     Log.e(TAG, e.getMessage() + "");
+                    login();
                     hideDialog();
                 }
             });
         } catch (Exception e) {
             hideDialog();
-            login();
             Log.e(TAG, "" + e.getMessage());
         }
     }
@@ -100,7 +100,7 @@ public class ActivityLogin extends ActivityController {
         findViewById(R.id.tv_create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MyFunction.getInstance().openActivity(ActivityLogin.this,ActivityDonate.class);
+                MyFunction.getInstance().openActivity(ActivityLogin.this,ActivityRegister.class);
             }
         });
     }

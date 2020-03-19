@@ -73,6 +73,7 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[35] = "map";
         Global.arData[36] = "push_date";
         Global.arData[37] = "message";
+        Global.arData[38] = "register";
 
 
 

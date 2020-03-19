@@ -43,20 +43,31 @@
     <string name="more_desc">More Description</string>
     <string name="notification">Notification</string>
     <string name="term_condition">Term and Condition</string>
-    <string name="accept_term">I have red and accept with this, </string>
+    <string name="accept_term">"I have read and accept with this, "</string>
     <string name="tap">Tap to copy text</string>
     <string name="copied">Copied</string>
     <string name="profile">Profile</string>
     <string name="my_house">My House</string>
     <string name="about">About Us</string>
     <string name="language">Language</string>
-    <string name="km">ខ្មែរ</string>
-    <string name="en">English</string>
+    <string name="km" translatable="false">ខ្មែរ</string>
+    <string name="en" translatable="false">English</string>
     <string name="logout">Logout</string>
     <string name="incorrect_pass">Incorrect Username or Password</string>
     <string name="setting">Setting</string>
     <string name="contact">Contact Us</string>
     <string name="donating">Donation</string>
     <string name="no_content">No Content</string>
+    <string name="login">LOGIN</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgot Password</string>
+    <string name="not_now">Not Now?</string>
+    <string name="create_one">Create one</string>
+    <string name="phone">Phone</string>
+    <string name="register">REGISTER</string>
+    <string name="six_char">Password must be more then 5 character</string>
+    <string name="register_success">Successful</string>
+    <string name="user_existed">User Existed</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

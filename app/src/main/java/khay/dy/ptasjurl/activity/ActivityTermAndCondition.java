@@ -79,12 +79,11 @@ public class ActivityTermAndCondition extends ActivityController {
                 @Override
                 public void onErrorResponse(VolleyError e) {
                     Log.e("Err", e.getMessage() + "");
-                    hideDialog();
+                    loadTerm();
                 }
             });
         } catch (Exception e) {
             hideDialog();
-            loadTerm();
             Log.e(TAG, "" + e.getMessage());
         }
     }
