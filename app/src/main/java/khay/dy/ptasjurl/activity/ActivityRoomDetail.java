@@ -20,8 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import khay.dy.ptasjurl.R;
@@ -42,10 +47,12 @@ import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.adapter.AdapterPagerDetail;
 import khay.dy.ptasjurl.fragment.FragmentDetail;
-import khay.dy.ptasjurl.model.ModelLatLng;
+import khay.dy.ptasjurl.fragment.FragmentOwnerDetail;
+import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
+import khay.dy.ptasjurl.util.WrapContentViewPager;
 
 public class ActivityRoomDetail extends ActivityController {
 
@@ -53,6 +60,7 @@ public class ActivityRoomDetail extends ActivityController {
     private AdapterBanner adapter;
     private Runnable runnable = null;
     private Handler handler = new Handler();
+    private final String TAG = "Ac Detail";
 
 
     private AdapterPagerDetail adapterPager;
@@ -71,7 +79,7 @@ public class ActivityRoomDetail extends ActivityController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_detail);
-        Tools.setSystemBarColor(this,R.color.colorPrimaryDark);
+        Tools.setSystemBarColor(this, R.color.colorPrimaryDark);
         initView();
     }
 
@@ -79,9 +87,8 @@ public class ActivityRoomDetail extends ActivityController {
         findView();
         initToolBar();
         loadDetail();
-        initPagerBanner();
-        initLocation();
     }
+
     private void initToolBar() {
         final ImageView iv_back = findViewById(R.id.iv_back);
         final TextView tv_title = findViewById(R.id.tv_title);
@@ -135,13 +142,14 @@ public class ActivityRoomDetail extends ActivityController {
             dots[current].setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
         }
     }
-    private void initPagerBanner() {
+
+    private void initPagerBanner(JSONArray arr) {
         final LinearLayout layout_dots = findViewById(R.id.layout_dots);
         final int height = MyFunction.getInstance().getBannerHeight(this);
         viewPager.getLayoutParams().height = height;
         List<String> listImage = new ArrayList<>();
         try {
-            adapter = new AdapterBanner(this, listImage,null);
+            adapter = new AdapterBanner(this, listImage, arr);
             viewPager.setAdapter(adapter);
             addBottomDots(layout_dots, adapter.getCount(), 0);
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -166,7 +174,7 @@ public class ActivityRoomDetail extends ActivityController {
         }
     }
 
-    private void initLocation() {
+    private void initLocation(LatLng latLng,int type) {
         try {
             if (locationManager == null)
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -178,19 +186,20 @@ public class ActivityRoomDetail extends ActivityController {
 
             if (!MyFunction.getInstance().hasPermissions(ActivityRoomDetail.this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions((Activity) ActivityRoomDetail.this, PERMISSIONS, Global.PERMISSION_ALL);
-                initMap();
+                initMap(latLng,type);
             } else {
-                initMap();
+                initMap(latLng,type);
             }
         } catch (Exception e) {
             Log.e("Err", e.getMessage());
         }
     }
-    private void initMap() {
+
+    private void initMap(final LatLng latLng, final int type) {
         mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view));
         final int height = MyFunction.getInstance().getBannerHeight(this);
         ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
-        params.height = height-200;
+        params.height = height - 200;
         mapFragment.getView().setLayoutParams(params);
         try {
             if (mapFragment != null) {
@@ -202,25 +211,24 @@ public class ActivityRoomDetail extends ActivityController {
                         if (map != null) {
                             mMap = map;
                             //initialize map
-                            final LatLng latLng = new LatLng(lat, lng);
+                            if(type == 1) {
+                                BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
+                                Bitmap b = bitmapdraw.getBitmap();
+                                Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+                                MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                                mMap.addMarker(marker);
+                            }else {
+                                BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin1);
+                                Bitmap b = bitmapdraw.getBitmap();
+                                Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+                                MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                                mMap.addMarker(marker);
+                            }
 
-                            BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
-                            Bitmap b = bitmapdraw.getBitmap();
-                            Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
-
-                            MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-
-                            mMap.addMarker(marker);
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM), CAMERA_ANIMATE, null);
-                            mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-                                @Override
-                                public void onCameraMove() {
-                                    LatLng latlng = mMap.getCameraPosition().target;
-                                    ModelLatLng.getInstance().setLatlng(latlng);
-                                }
-                            });
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+                            mMap.animateCamera(cameraUpdate);
                         }
                     }
                 });
@@ -233,40 +241,92 @@ public class ActivityRoomDetail extends ActivityController {
             Log.e("Map ", e.getMessage() + "");
         }
     }
-    private void initRelated(JSONArray array){
+
+    private void initRelated(JSONArray array) {
         final RecyclerView recyclerView = findViewById(R.id.recycler_relate);
-        final LinearLayoutManager manager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        final LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(new AdapterHome(null,this));
+        recyclerView.setAdapter(new AdapterHome(array, this));
     }
 
-    private void loadDetail(){
-        try{
-            JSONObject data =new JSONObject(MyFunction.getInstance().readFileAsset(this, "detail.json"));
-            JSONArray array = data.getJSONArray("detail");
-            initMenu(array);
-            initRelated(null);
-        }catch (Exception e){
-            Log.e("Err",e.getMessage());
+    private void loadDetail() {
+        try {
+            final HashMap<String, String> map = MyFunction.getInstance().getIntentHashMap(getIntent());
+            final String t = map.get(Global.arData[7]);
+            final String id = map.get(Global.arData[44]);
+            final int type = Integer.parseInt(t);
+            String url = "";
+            if (type == 2) {
+                url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[14], Global.arData[51]);
+            } else {
+                url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[15], Global.arData[51]);
+            }
+            final HashMap<String, String> param = new HashMap<>();
+            param.put(Global.arData[44], id);
+            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        if (MyFunction.getInstance().isValidJSON(response)) {
+                            Log.e("Success", response);
+                            //final JSONObject object = new JSONObject(MyFunction.getInstance().readFileAsset(ActivityRoomDetail.this, "detail.json"));
+                            final JSONObject object = new JSONObject(response);
+                            initMenu(object);
+                            try {
+                                final JSONArray arr = object.getJSONArray(Global.arData[64]);
+                                initPagerBanner(arr);
+                            }catch (Exception e){
+                                Log.e(TAG,e.getMessage()+"");
+                            }
+                            try{
+                                final JSONObject obj = object.getJSONObject(Global.arData[51]);
+                                final double lat = Double.parseDouble(obj.getString("latitude"));
+                                final double lng = Double.parseDouble(obj.getString("longitude"));
+                                initLocation(new LatLng(lat, lng),type);
+                            }catch (Exception e){
+                                Log.e(TAG,e.getMessage()+"");
+                            }
+
+                            final JSONArray arrRelate = object.getJSONArray("related");
+                            initRelated(arrRelate);
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError e) {
+                    Log.e(TAG, e.getMessage() + "");
+                    loadDetail();
+                }
+            });
+
+        } catch (Exception e) {
+            Log.e("Err", e.getMessage());
         }
     }
-    private void initMenu(JSONArray array) {
+
+    private void initMenu(JSONObject obj) {
         try {
-            final String[] titles = {"Detail","Owner"};
-            adapterPager = new AdapterPagerDetail(getSupportFragmentManager(),titles);
-            adapterPager.addFrag(FragmentDetail.newInstance(array));
-            adapterPager.addFrag(new FragmentDetail());
-            final ViewPager view_pager = findViewById(R.id.view_pager);
+            final String[] titles = {"Detail", "Owner"};
+            adapterPager = new AdapterPagerDetail(getSupportFragmentManager(), titles);
+            adapterPager.addFrag(FragmentDetail.newInstance(obj.getJSONObject(Global.arData[51])));
+            adapterPager.addFrag(FragmentOwnerDetail.newInstance(/*obj.getJSONObject(Global.arData[52])*/null));
+            final WrapContentViewPager view_pager = findViewById(R.id.view_pager);
             view_pager.setOffscreenPageLimit(2);
             view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
                 }
+
                 @Override
                 public void onPageSelected(int position) {
-
+                    // view_pager.reMeasureCurrentPage();
+                    view_pager.reMeasureCurrentPage(view_pager.getCurrentItem());
                 }
+
                 @Override
                 public void onPageScrollStateChanged(int state) {
 

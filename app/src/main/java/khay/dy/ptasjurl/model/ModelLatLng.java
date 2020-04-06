@@ -12,7 +12,7 @@ public class ModelLatLng {
     private ModelLatLng() {
     }
 
-    private LatLng latlng;
+    private LatLng latlng = new LatLng(11.5564,104.9282);
 
     public LatLng getLatlng() {
         return latlng;

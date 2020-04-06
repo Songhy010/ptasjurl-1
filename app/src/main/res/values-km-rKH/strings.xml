@@ -10,10 +10,10 @@
     <string name="house">ផ្ទះ</string>
     <string name="map">ផែនទី</string>
     <string name="location">ទីតាំង</string>
-    <string name="price">តម្លៃជួល (ដុល្លារ / ខែ)</string>
-    <string name="electric">អគ្គិសនី (៛ / អែម)</string>
-    <string name="water">ទឹក (៛ / ម ៣)</string>
-    <string name="parking">កន្លែងចតរថយន្ត (៛ / ខែ)</string>
+    <string name="price">តម្លៃជួល (ដុល្លារ / ខែ) *</string>
+    <string name="electric">អគ្គិសនី (៛ / អែម) *</string>
+    <string name="water">ទឹក (៛ / ម ៣) *</string>
+    <string name="parking">កន្លែងចតរថយន្ត (៛ / ខែ) *</string>
     <string name="free">ឥតគិតថ្លៃ</string>
     <string name="desc">ការពិពណ៌នា</string>
     <string name="address">អាសយដ្ឋាន</string>
@@ -21,8 +21,8 @@
     <string name="post_by">ប្រកាសតាម</string>
     <string name="home_owner">ម្ចាស់ផ្ទះ</string>
     <string name="other">ផ្សេងទៀត</string>
-    <string name="home_owner_phone">ទូរស័ព្ទម្ចាស់ផ្ទះ</string>
-    <string name="home_owner_name">ទូរស័ព្ទម្ចាស់ផ្ទះ</string>
+    <string name="home_owner_phone">ទូរស័ព្ទម្ចាស់ផ្ទះ *</string>
+    <string name="home_owner_name">ទូរស័ព្ទម្ចាស់ផ្ទះ *</string>
     <string name="bed_room">បន្ទប់គេង</string>
     <string name="kitchen">ផ្ទះបាយ</string>
     <string name="upload">ផ្ទុកឡើង</string>
@@ -30,8 +30,8 @@
     <string name="related_item">ធាតុដែលទាក់ទង</string>
     <string name="search">ស្វែងរកទីតាំង</string>
     <string name="setup_more">រៀបចំការពិពណ៌នាបន្ថែម</string>
-    <string name="side">ចំហៀង (បxទ)</string>
-    <string name="available">ទំនេរ</string>
+    <string name="side">ចំហៀង (បxទ) *</string>
+    <string name="available">ទំនេរ *</string>
     <string name="Floor">ជាន់</string>
     <string name="amount_people">ចំនួនមនុស្ស</string>
     <string name="trash">សំរាម</string>
@@ -66,4 +66,42 @@
     <string name="register_success">ជោគជ័យ</string>
     <string name="user_existed">អ្នកប្រើប្រាស់មាន</string>
     <string name="add_house">បន្ថែម</string>
+    <string name="fname">នាមខ្លួន</string>
+    <string name="lname">នាមត្រកូល</string>
+    <string name="viewer">អ្នកមើល</string>
+    <string name="close">បិទពេលវេលា</string>
+    <string name="size">ទំហំ</string>
+    <string name="change_pass">ផ្លាស់ប្តូរពាក្យសម្ងាត់</string>
+    <string name="old_pass">លេខសំងាត់ចាស់</string>
+    <string name="new_pass">ពាក្យសម្ងាត់ថ្មី</string>
+    <string name="con_pass">បញ្ជាក់ពាក្យសម្ងាត់</string>
+    <string name="Confirm">បញ្ជាក់</string>
+    <string name="pass_not_match">ពាក្យសម្ងាត់មិនត្រូវគ្នា</string>
+    <string name="required_field">សូមបញ្ចូលវាលដែលត្រូវការទាំងអស់</string>
+    <string name="edit">កែប្រែ</string>
+    <string name="save">រក្សាទុក</string>
+    <string name="email">អ៊ីមែល</string>
+
+    <string name="type">ប្រភេទ</string>
+    <string name="other_price">តម្លៃផ្សេងទៀត</string>
+    <string name="specification">ការបញ្ជាក់</string>
+    <string name="aircon">ម៉ាស៊ីនត្រជាក់</string>
+    <string name="table">តុ</string>
+    <string name="secu_cam">កាមេរ៉ាសុវត្ថិភាព</string>
+    <string name="secu_man">សន្តិសុខ</string>
+    <string name="floor">ជាន់</string>
+    <string name="busy">រវល់</string>
+    <string name="title">ពិពណ៌នា</string>
+    <string name="server_error">Server Error</string>
+
+    <string name="province">ខេត្ត</string>
+    <string name="district">ស្រុក/ខណ្ឌ</string>
+    <string name="commune">ឃុំ/សង្កាត់</string>
+    <string name="village">ភូមិ</string>
+    <string name="width">បណ្ដោយ(ម)</string>
+    <string name="length">ទទឹង(ម)</string>
+    <string name="open_time">ម៉ោងបើក</string>
+    <string name="upload_more_desc">តើអ្នកចង់ផ្ទុកឡើងការពិពណ៌នាបន្ថែមទេ?</string>
+    <string name="login_required">អ្នកត្រូវចូលទៅគណនីរបស់អ្នកមុនពេលប្រើមុខងារនេះ</string>
+
 </resources>

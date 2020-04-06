@@ -19,6 +19,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import khay.dy.ptasjurl.R;
@@ -39,40 +40,19 @@ public class ActivityMain extends ActivityController {
 
     }
 
-    private void initView(){
-       initData();
-       registerNotification();
-       initLocalize();
+    private void initView() {
+        initData();
+        initLocalize();
 
     }
 
-    private void initData(){
-        if (MyFunction.getInstance().isHistory(ActivityMain.this)) {
-            loadHome();
-        } else {
-            MyFunction.getInstance().openActivity(ActivityMain.this, ActivityLogin.class);
-            MyFunction.getInstance().finishActivity(ActivityMain.this);
-        }
+    private void initData() {
+        loadHome();
     }
 
-    private void registerNotification(){
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("task", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        // Get new Instance ID token
-                        /*String token = task.getResult().getToken();
-                        Log.e("Token", token);*/
-                    }
-                });
-    }
 
     private void initLocalize() {
-       final String lang = MyFunction.getInstance().getText(ActivityMain.this, Global.LANGUAGE);
+        final String lang = MyFunction.getInstance().getText(ActivityMain.this, Global.LANGUAGE);
         //lang = MyFunction.getInstance().getText(ActivityMain.this, AirConConstant.LANG);
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);

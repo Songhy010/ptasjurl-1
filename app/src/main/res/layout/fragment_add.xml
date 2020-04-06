@@ -7,252 +7,281 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
     <include layout="@layout/top_menu_fragment"/>
-
-    <androidx.core.widget.NestedScrollView
-        android:scrollbars="none"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/iv_height_10">
+            android:layout_height="match_parent">
 
-
-            <TextView
-                android:textColor="@color/grey"
-                android:textStyle="normal"
-                android:textSize="@dimen/text_size_normal"
-                android:text="Type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <RadioGroup
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="@dimen/iv_height_10">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/room" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/iv_height_15"
-                    android:text="@string/house" />
-            </RadioGroup>
-
-            <EditText
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/price"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-
-
-            <RelativeLayout
-                android:id="@+id/layout_pin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_round"
-                    android:padding="@dimen/iv_height_8"
-                    android:text="@string/address"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-
-                <ImageView
-                    android:layout_width="@dimen/iv_height_30"
-                    android:layout_height="@dimen/iv_height_30"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_weight="1"
-                    android:hint="@string/free"
-                    android:padding="@dimen/iv_height_8"
-                    android:src="@drawable/img_pin"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-            </RelativeLayout>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_100"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:gravity="start"
-                android:hint="@string/desc"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10">
 
                 <TextView
                     android:textColor="@color/grey"
                     android:textStyle="normal"
                     android:textSize="@dimen/text_size_normal"
-                    android:id="@+id/tv_post"
+                    android:text="Type"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/post_by" />
+                    android:layout_height="wrap_content" />
 
                 <RadioGroup
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_post"
+                    android:layout_marginTop="@dimen/iv_height_10"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rd_room"
+                        android:checked="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:text="Owner" />
+                        android:text="@string/room" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/iv_height_10"
-                        android:layout_marginTop="@dimen/iv_height_5"
-                        android:text="Other" />
+                        android:layout_marginLeft="@dimen/iv_height_15"
+                        android:text="@string/house" />
                 </RadioGroup>
-            </RelativeLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/home_owner_name"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/home_owner_phone"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/home_owner_phone"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <RelativeLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_room"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/room_pic"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal"
-                    android:textStyle="normal" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card"
-                    android:layout_below="@+id/tv_room"
+                <EditText
+                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/iv_height_200"
-                    android:layout_marginTop="@dimen/iv_height_5"
-                    app:cardMaxElevation="@dimen/iv_height_5"
-                    app:cardUseCompatPadding="false">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/price"
+                    android:padding="@dimen/iv_height_8"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_round"
+                        android:padding="@dimen/iv_height_8"
+                        android:text="@string/address"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_size_normal" />
 
                     <ImageView
-                        android:id="@+id/iv_thum"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_sample" />
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/tv_more_desc"
-                android:layout_marginTop="@dimen/iv_height_15"
-                android:layout_gravity="end"
-                android:text="@string/setup_more"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                        android:layout_width="@dimen/iv_height_30"
+                        android:layout_height="@dimen/iv_height_30"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:hint="@string/free"
+                        android:padding="@dimen/iv_height_8"
+                        android:src="@drawable/img_pin"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_size_normal" />
+                </RelativeLayout>
 
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <CheckBox
-                    android:textSize="@dimen/text_size_small"
-                    android:textStyle="normal"
-                    android:text="@string/accept_term"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:id="@+id/edt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_height_100"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_round"
+                    android:gravity="start"
+                    android:hint="@string/title"
+                    android:padding="@dimen/iv_height_8"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10">
+
+                    <TextView
+                        android:textColor="@color/grey"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/text_size_normal"
+                        android:id="@+id/tv_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/post_by" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_post"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/iv_height_5"
+                            android:text="Owner" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/iv_height_10"
+                            android:layout_marginTop="@dimen/iv_height_5"
+                            android:text="Other" />
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edt_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/price"
+                    android:padding="@dimen/iv_height_8"
+                    android:inputType="number"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/edt_owner_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/home_owner_name"
+                    android:padding="@dimen/iv_height_8"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/edt_owner_phone1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/home_owner_phone"
+                    android:padding="@dimen/iv_height_8"
+                    android:inputType="phone"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <EditText
+                    android:id="@+id/edt_owner_phone2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/home_owner_phone"
+                    android:padding="@dimen/iv_height_8"
+                    android:inputType="phone"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/room_pic"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textStyle="normal" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card"
+                        android:layout_below="@+id/tv_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/iv_height_200"
+                        android:layout_marginTop="@dimen/iv_height_5"
+                        app:cardMaxElevation="@dimen/iv_height_5"
+                        app:cardUseCompatPadding="false">
+
+                        <ImageView
+                            android:id="@+id/iv_thum"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_sample" />
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
                 <TextView
-                    android:id="@+id/tv_term"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="@dimen/iv_height_3"
-                    android:text="@string/term_condition"
+                    android:id="@+id/tv_more_desc"
+                    android:layout_marginTop="@dimen/iv_height_15"
+                    android:layout_gravity="end"
+                    android:text="@string/setup_more"
                     android:textSize="@dimen/text_size_small"
                     android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btn_upload"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:background="@color/colorPrimary"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/iv_height_35">
-
-                    <TextView
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <CheckBox
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="normal"
+                        android:text="@string/accept_term"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/upload"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_normal"
-                        android:textStyle="normal" />
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_term"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/iv_height_3"
+                        android:text="@string/term_condition"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_upload"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/iv_height_35">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/upload"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_normal"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>

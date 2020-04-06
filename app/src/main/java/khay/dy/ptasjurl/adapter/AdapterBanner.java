@@ -41,7 +41,7 @@ public class AdapterBanner extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return array.length();
     }
 
     @Override

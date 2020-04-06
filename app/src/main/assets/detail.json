@@ -1,79 +1,85 @@
 {
-    "detail":[
-        {
-            "title":"House Infomation",
-            "item":[
-                {
-                    "icon":"",
-                    "title":"Location",
-                    "value":"Phnom Penh"
-                },{
-                    "icon":"",
-                    "title":"Type",
-                    "value":"Room"
-                },{
-                    "icon":"",
-                    "title":"Rent Price",
-                    "value":"150"
-                },{
-                    "icon":"",
-                    "title":"Electric Price",
-                    "value":"2500"
-                },{
-                    "icon":"",
-                    "title":"Water Price",
-                    "value":"1500"
-                },{
-                    "icon":"",
-                    "title":"Floor",
-                    "value":"3th"
-                },{
-                    "icon":"",
-                    "title":"Close Time",
-                    "value":"09:00"
-                },{
-                    "icon":"",
-                    "title":"Address",
-                    "value":"11.12123345,102.12353411"
-                },{
-                    "icon":"",
-                    "title":"Description",
-                    "value":"ខ្ញុំមានបន្ទប់សំរាប់ជួលក្នុងតំលៃធូថ្លៃដែលមានភិនភាគដូចខាងក្រោម\nទំហំ ៤ X ៤\nមានបន្ទប់ទឹកក្នុង\nមានឥដ្ឋការ៉ូ\nផ្លូវចេញ ចូលងាយស្រួល\nទីតាំងនៅជិតផ្សាស្ទឹងជ័យ អ្នកជួលភាគច្រើនជាអ្នកធើ្វកា និង និសិត្ស"
-                }
-            ]
-        },{
-            "title":"Owner Infomation",
-            "item":[
-                {
-                    "icon":"",
-                    "title":"Owner Name",
-                    "value":"Sem Songhy"
-                },{
-                    "icon":"",
-                    "title":"Owner Phone",
-                    "value":"0713248888"
-                },{
-                    "icon":"",
-                    "title":"Owner Address",
-                    "value":"Phnom Penh"
-                }
-            ]
-        }
-    ],
-    "related_item":[
-        {
-            "id":"001",
-            "thum":"image.jpg",
-            "desc":"Room 6A"
-        },
-        {
-            "id":"002",
-            "thum":"image.jpg",
-            "desc":"Room 5A"
-        },{
-            "id":"003",
-            "thum":"image.jpg",
-            "desc":"Room 4A"
-        }
+  "detail": {
+    "title": "បន្ទាប់ជួល",
+    "price": "55",
+    "floor": "1",
+    "people": "4",
+    "width": "3",
+    "length": "4",
+    "e_price": "650",
+    "w_price": "1500",
+    "park_price": "15000",
+    "other_price": "4000",
+    "latitude": "11.538562",
+    "longitude": "104.918489",
+    "available": "1",
+    "type": "2",
+    "close_time": "10:00:00",
+    "viewer": "10",
+    "size": "4mx6m",
+    "desc": "",
+    "accessories": [
+      {
+        "id": 3,
+        "name": "Air-conditioner"
+      },
+      {
+        "id": 2,
+        "name": "Toilet"
+      }
     ]
+  },
+  "owner":{
+    "owner_name":"Sem Songhy",
+    "owner_phone":"0713248888",
+    "owner_address":"Phnom Penh"
+  },
+
+  "gallery": [
+    {
+      "banner": "http://chekromlek.com/wp-content/uploads/room/751b7ea919eca15091780058cfbf8620.png"
+    },
+    {
+      "banner": "http://chekromlek.com/wp-content/uploads/room/0242d180023fb8b2e2bce72b059219cc.png"
+    },
+    {
+      "banner": "http://chekromlek.com/wp-content/uploads/room/b1df94a58ad740309517b180d63be8e4.png"
+    },
+    {
+      "banner": "http://chekromlek.com/wp-content/uploads/room/e56c6d81d99ebba5008b97f6458f21d0.png"
+    },
+    {
+      "banner": "http://chekromlek.com/wp-content/uploads/room/72b606ff5e446ed66c8810f3c6b1da87.png"
+    }
+  ],
+  "related": [
+    {
+      "thumbnail": "http://chekromlek.com/wp-content/uploads/room/199d5b7516f3cf46aa338883555f9534.png",
+      "title": "បន្ទាប់ជួល",
+      "price": "55",
+      "desc": "",
+      "type": "2"
+    },
+    {
+      "thumbnail": "http://chekromlek.com/wp-content/uploads/room/199d5b7516f3cf46aa338883555f9534.png",
+      "title": "បន្ទាប់ជួលជាន់ទី1",
+      "price": "0",
+      "desc": "",
+      "type": "2"
+    },
+    {
+      "thumbnail": "http://chekromlek.com/wp-content/uploads/room/199d5b7516f3cf46aa338883555f9534.png",
+      "title": "បន្ទាប់ជួល",
+      "price": "0",
+      "desc": "",
+      "type": "2"
+    },
+    {
+      "thumbnail": "http://chekromlek.com/wp-content/uploads/room/199d5b7516f3cf46aa338883555f9534.png",
+      "title": "បន្ទាប់ជួលជាន់ទី1",
+      "price": "0",
+      "desc": "",
+      "type": "2"
+    }
+  ]
 }

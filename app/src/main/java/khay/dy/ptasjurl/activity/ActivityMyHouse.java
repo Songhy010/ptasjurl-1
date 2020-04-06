@@ -71,7 +71,7 @@ public class ActivityMyHouse extends ActivityController {
             final JSONObject object = new JSONObject(MyFunction.getInstance().getText(this,Global.INFO_FILE));
             final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[32], Global.arData[5]);
             final HashMap<String,String> param = new HashMap<>();
-            param.put(Global.arData[33],object.getString("id"));
+            param.put(Global.arData[33],object.getString(Global.arData[33]));
             MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
                 @Override
                 public void onResponse(String response) {

@@ -18,6 +18,8 @@ import com.android.volley.my.MyImageLoader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityRoomDetail;
 import khay.dy.ptasjurl.util.Global;
@@ -53,24 +55,45 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
                 holder.tv_title.setText(object.getString(Global.arData[8]));
                 MyFunction.getInstance().displayHtmlInText(holder.tv_desc,object.getString(Global.arData[9]));
                 holder.tv_price.setText(object.getString(Global.arData[10]));
+                holder.card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try{
+                            final HashMap<String,String> map = new HashMap<>();
+                            map.put(Global.arData[7],object.getString(Global.arData[7]));
+                            map.put(Global.arData[44],object.getString(Global.arData[44]));
+                            MyFunction.getInstance().openActivity(context, ActivityRoomDetail.class,map);
+                        }catch (Exception e){
+                            Log.e("Err",e.getMessage()+"");
+                        }
+                    }
+                });
             }else if(type ==1){
                 holder.layout.setVisibility(View.GONE);
                 holder.layout1.setVisibility(View.VISIBLE);
                 holder.tv_title1.setText(object.getString(Global.arData[8]));
                 MyFunction.getInstance().displayHtmlInText(holder.tv_desc1,object.getString(Global.arData[9]));
                 holder.tv_price1.setText(object.getString(Global.arData[10]));
+                holder.card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try{
+                            final HashMap<String,String> map = new HashMap<>();
+                            map.put(Global.arData[7],object.getString(Global.arData[7]));
+                            map.put(Global.arData[44],object.getString(Global.arData[44]));
+                            MyFunction.getInstance().openActivity(context, ActivityRoomDetail.class,map);
+                        }catch (Exception e){
+                            Log.e("Err",e.getMessage()+"");
+                        }
+                    }
+                });
             } else {
                 holder.layout.setVisibility(View.GONE);
                 holder.layout1.setVisibility(View.GONE);
             }
             MyImageLoader.getInstance().setImage(holder.iv_thum, object.getString(Global.arData[11]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
 
-            holder.card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MyFunction.getInstance().openActivity(context, ActivityRoomDetail.class);
-                }
-            });
+
         } catch (Exception e) {
             Log.e("Err", e.getMessage());
         }

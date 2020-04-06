@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ActivityProfileEdit">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_250">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="@dimen/iv_height_90"
+                        android:layout_height="@dimen/iv_height_90">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_profile"
+                            android:src="@drawable/img_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                        <ImageView
+                            android:padding="@dimen/iv_height_3"
+                            android:src="@drawable/ic_plus"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="@dimen/iv_height_25"
+                            android:layout_height="@dimen/iv_height_25"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_marginTop="@dimen/iv_height_5"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:text="Sem Songhy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/iv_height_30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="@dimen/iv_height_2"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_tiny"
+                    android:text="@string/fname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_5"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:id="@+id/edt_fname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_round"
+                            android:padding="@dimen/iv_height_10"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_marginLeft="@dimen/iv_height_2"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_tiny"
+                    android:text="@string/lname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_5"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:id="@+id/edt_lname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_round"
+                            android:padding="@dimen/iv_height_10"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_marginLeft="@dimen/iv_height_2"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_tiny"
+                    android:text="@string/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_5"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:id="@+id/edt_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_round"
+                            android:padding="@dimen/iv_height_10"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_marginLeft="@dimen/iv_height_2"
+                    android:layout_marginTop="@dimen/iv_height_10"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_tiny"
+                    android:text="@string/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_5"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:singleLine="true"
+                            android:maxLines="1"
+                            android:id="@+id/edt_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_round"
+                            android:padding="@dimen/iv_height_10"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/iv_height_45"
+        android:layout_height="@dimen/iv_height_45"
+        android:padding="@dimen/iv_height_13"
+        android:src="@drawable/img_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/iv_height_15"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

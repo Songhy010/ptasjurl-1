@@ -73,40 +73,48 @@ public class ActivityRegister extends ActivityController {
 
     private void register(){
         try {
-            showDialog();
             final EditText edt_phone = findViewById(R.id.edt_phone);
             final EditText edt_username = findViewById(R.id.edt_username);
+            final EditText edt_fname = findViewById(R.id.edt_fname);
+            final EditText edt_lname = findViewById(R.id.edt_lname);
             final HashMap<String,String> param = new HashMap<>();
+            param.put(Global.arData[30],edt_fname.getText().toString());
+            param.put(Global.arData[31],edt_lname.getText().toString());
             param.put(Global.arData[28],edt_username.getText().toString());
             param.put(Global.arData[26],edt_phone.getText().toString());
             param.put(Global.arData[29], edt_password.getText().toString());
-            final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[38], Global.arData[5]);
-            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        Log.e(TAG, response);
-                        final int code = Integer.parseInt(response);
-                        if(code == 3){
-                            MyFunction.getInstance().alertMessage(ActivityRegister.this,getString(R.string.information),getString(R.string.ok),getString(R.string.register_success),1);
-                            MyFunction.getInstance().openActivity(ActivityRegister.this, ActivityLogin.class);
-                            MyFunction.getInstance().finishActivity(ActivityRegister.this);
-                        }else{
-                            MyFunction.getInstance().alertMessage(ActivityRegister.this,getString(R.string.information),getString(R.string.ok),getString(R.string.user_existed),1);
+            if(param.get(Global.arData[30]).isEmpty()||param.get(Global.arData[31]).isEmpty()||param.get(Global.arData[28]).isEmpty()||param.get(Global.arData[26]).isEmpty()||param.get(Global.arData[29]).isEmpty()){
+                MyFunction.getInstance().alertMessage(ActivityRegister.this,getString(R.string.information),getString(R.string.ok),getString(R.string.required_field),1);
+            }else {
+                showDialog();
+                final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[38], Global.arData[5]);
+                MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.e(TAG, response);
+                            final int code = Integer.parseInt(response);
+                            if (code == 3) {
+                                MyFunction.getInstance().alertMessage(ActivityRegister.this, getString(R.string.information), getString(R.string.ok), getString(R.string.register_success), 1);
+                                MyFunction.getInstance().openActivity(ActivityRegister.this, ActivityLogin.class);
+                                MyFunction.getInstance().finishActivity(ActivityRegister.this);
+                            } else {
+                                MyFunction.getInstance().alertMessage(ActivityRegister.this, getString(R.string.information), getString(R.string.ok), getString(R.string.user_existed), 1);
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "" + e.getMessage());
                         }
-                    } catch (Exception e) {
-                        Log.e(TAG, "" + e.getMessage());
+                        hideDialog();
                     }
-                    hideDialog();
-                }
 
-                @Override
-                public void onErrorResponse(VolleyError e) {
-                    register();
-                    Log.e(TAG, e.getMessage() + "");
-                    hideDialog();
-                }
-            });
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        register();
+                        Log.e(TAG, e.getMessage() + "");
+                        hideDialog();
+                    }
+                });
+            }
         } catch (Exception e) {
             hideDialog();
             Log.e(TAG, "" + e.getMessage());

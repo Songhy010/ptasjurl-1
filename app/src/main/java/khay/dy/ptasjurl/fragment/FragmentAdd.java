@@ -8,27 +8,40 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+
+import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityController;
 import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
 import khay.dy.ptasjurl.activity.ActivityTermAndCondition;
+import khay.dy.ptasjurl.listener.AlertListenner;
+import khay.dy.ptasjurl.listener.OkhttpListenner;
+import khay.dy.ptasjurl.model.ModelHome;
 import khay.dy.ptasjurl.model.ModelLatLng;
+import khay.dy.ptasjurl.util.ConstantStatus;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -45,13 +58,14 @@ public class FragmentAdd extends Fragment {
     private CardView card;
 
     private ImageView iv_thum;
-    private TextView tv_address,tv_more_desc;
+    private TextView tv_address, tv_more_desc;
 
     private final String TAG = "FragmentAdd";
     private View root_view;
     private final int PICK_THUM = 1;
     private byte[] pathThum;
-    private uploadImage asyncUpload;
+    private UploadImage asyncUpload;
+    private SwipeRefreshLayout swipe;
 
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
 
@@ -122,8 +136,10 @@ public class FragmentAdd extends Fragment {
         iv_thum = root_view.findViewById(R.id.iv_thum);
         tv_more_desc = root_view.findViewById(R.id.tv_more_desc);
         final int height = MyFunction.getInstance().getBannerHeight(root_view.getContext());
-        card.getLayoutParams().height = height-200;
+        card.getLayoutParams().height = height - 200;
         tv_address = root_view.findViewById(R.id.tv_address);
+        swipe = root_view.findViewById(R.id.swipe);
+
     }
 
     private void initToolBar() {
@@ -156,7 +172,8 @@ public class FragmentAdd extends Fragment {
             }
         });
     }
-    private void initMoreDesc(){
+
+    private void initMoreDesc() {
         tv_more_desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,49 +217,109 @@ public class FragmentAdd extends Fragment {
 
     // Upload to server
     private void uploadFileServer() {
+        ((ActivityController)root_view.getContext()).showDialog();
         new Thread(new Runnable() {
             public void run() {
                 if (asyncUpload != null) {
                     asyncUpload.cancel(true);
                 }
-                asyncUpload = new uploadImage();
-                asyncUpload.execute();
+                try {
+                    String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[15], Global.arData[67]);
+                    final RadioButton rd_room = root_view.findViewById(R.id.rd_room);
+                    if (rd_room.isChecked()) {
+                        url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[14], Global.arData[67]);
+                    }
+                    final EditText edt_title = root_view.findViewById(R.id.edt_title);
+                    final EditText edt_owner_name = root_view.findViewById(R.id.edt_owner_name);
+                    final EditText edt_owner_phone1 = root_view.findViewById(R.id.edt_owner_phone1);
+                    final EditText edt_owner_phone2 = root_view.findViewById(R.id.edt_owner_phone2);
+                    final EditText edt_price = root_view.findViewById(R.id.edt_price);
+
+                    final JSONObject object = new JSONObject(MyFunction.getInstance().getText(root_view.getContext(), Global.INFO_FILE));
+                    final String lat = "" + ModelLatLng.getInstance().getLatlng().latitude;
+                    final String lng = "" + ModelLatLng.getInstance().getLatlng().longitude;
+                    final String title = edt_title.getText().toString().trim();
+                    final String ownerName = edt_owner_name.getText().toString().trim();
+                    final String ownerPhone1 = edt_owner_phone1.getText().toString().trim();
+                    final String ownerPhone2 = edt_owner_phone2.getText().toString().trim();
+                    final String price = edt_price.getText().toString().trim();
+                    MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+                    multipartBody.addFormDataPart(Global.arData[11], "img.png",
+                            RequestBody.create(MediaType.parse("application/octet-stream"),
+                                    pathThum));
+                    multipartBody.addFormDataPart(Global.arData[68], ownerName);
+                    multipartBody.addFormDataPart(Global.arData[69], ownerPhone1);
+                    multipartBody.addFormDataPart(Global.arData[70], ownerPhone2);
+                    multipartBody.addFormDataPart(Global.arData[8], title);
+                    if (rd_room.isChecked()) {
+                        multipartBody.addFormDataPart(Global.arData[75], price);
+                    }else{
+                        multipartBody.addFormDataPart(Global.arData[71], price);
+                    }
+                    multipartBody.addFormDataPart(Global.arData[72], lat);
+                    multipartBody.addFormDataPart(Global.arData[73], lng);
+                    multipartBody.addFormDataPart(Global.arData[43] , "2");
+                    multipartBody.addFormDataPart(Global.arData[33], object.getString(Global.arData[33]));
+
+                    asyncUpload = new UploadImage(url, multipartBody);
+                    asyncUpload.execute();
+                } catch (Exception e) {
+                    Log.e("Err", e.getMessage() + "");
+                }
             }
         }).start();
     }
 
-    public class uploadImage extends AsyncTask<Void, Integer, String> {
+    public class UploadImage extends AsyncTask<Void, Integer, String> {
+
+        private String url;
+        private MultipartBody.Builder multipartBody;
+
+        public UploadImage(String url, MultipartBody.Builder multipartBody) {
+            this.url = url;
+            this.multipartBody = multipartBody;
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                OkHttpClient client = new OkHttpClient().newBuilder()
-                        .build();
-                MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                MyFunction.getInstance().okhttpSendRequest(root_view.getContext(), url, multipartBody, new OkhttpListenner() {
+                    @Override
+                    public void onSuccess(String response) {
+                        if (MyFunction.getInstance().isValidJSON(response)) {
+                            Log.e("Response", response);
+                            final HashMap<String,String> map = new HashMap<>();
+                            map.put("data",response);
+                            MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.upload_more_desc), new AlertListenner() {
+                                @Override
+                                public void onSubmit() {
+                                    MyFunction.getInstance().openActivityForResult(root_view.getContext(),ActivityMoreDesc.class,map, ConstantStatus.ActivityMoreDesc);
+                                }
+                            },1);
+                        } else {
+                            MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
+                        }
+                        ((ActivityController) root_view.getContext()).hideDialog();
+                    }
 
-                multipartBody.addFormDataPart("avatar", "img1.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                pathThum));
-/*                multipartBody.addFormDataPart("avatar", "img2.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                pathBed));
-                multipartBody.addFormDataPart("avatar", "img3.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                pathBath));
-                multipartBody.addFormDataPart("avatar", "img4.png",
-                        RequestBody.create(MediaType.parse("application/octet-stream"),
-                                pathKit));*/
-                RequestBody body = multipartBody.build();
+                    @Override
+                    public void onError(String error) {
+                        Log.e("Error", error);
+                        ((ActivityController) root_view.getContext()).hideDialog();
+                        MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
+                    }
+                });
 
-                Request request = new Request.Builder()
-                        .url("http://192.168.1.3:3000/api/client/upload")
-                        .method("POST", body)
-                        .addHeader("Content-Type", "multipart/form-data; boundary=--------------------------339941246508838218583894")
-                        .build();
-                Response response = client.newCall(request).execute();
-                Log.e("Response", response.toString());
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
+            } catch (final Exception e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("Cache", "error");
+                        ((ActivityController) root_view.getContext()).hideDialog();
+                        Log.e(TAG, e.getMessage() + "");
+                    }
+                });
             }
             return "";
         }

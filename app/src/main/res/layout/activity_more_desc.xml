@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,20 +19,98 @@
             android:padding="@dimen/iv_height_15">
 
             <RelativeLayout
-                android:id="@+id/relative_address"
+                android:id="@+id/relative_province"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_height_40"
                 android:layout_marginTop="@dimen/iv_height_10">
 
                 <TextView
-                    android:id="@+id/tv_location"
+                    android:id="@+id/tv_province"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/iv_height_40"
                     android:background="@drawable/drawable_round"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/iv_height_10"
                     android:paddingRight="@dimen/iv_height_10"
-                    android:text="@string/location"
+                    android:text="@string/province"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/iv_height_40"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_arrow_drop"
+                    android:tint="@color/grey" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_commune"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_marginTop="@dimen/iv_height_10">
+
+                <TextView
+                    android:id="@+id/tv_commune"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:background="@drawable/drawable_round"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/iv_height_10"
+                    android:paddingRight="@dimen/iv_height_10"
+                    android:text="@string/commune"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/iv_height_40"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_arrow_drop"
+                    android:tint="@color/grey" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_district"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_marginTop="@dimen/iv_height_10">
+
+                <TextView
+                    android:id="@+id/tv_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:background="@drawable/drawable_round"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/iv_height_10"
+                    android:paddingRight="@dimen/iv_height_10"
+                    android:text="@string/district"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/iv_height_40"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_arrow_drop"
+                    android:tint="@color/grey" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_village"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_marginTop="@dimen/iv_height_10">
+
+                <TextView
+                    android:id="@+id/tv_village"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:background="@drawable/drawable_round"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/iv_height_10"
+                    android:paddingRight="@dimen/iv_height_10"
+                    android:text="@string/village"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_normal" />
 
@@ -46,17 +123,7 @@
             </RelativeLayout>
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/side"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
+                android:id="@+id/edt_floor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_height_10"
@@ -68,6 +135,113 @@
                 android:textSize="@dimen/text_size_normal" />
 
             <EditText
+                android:id="@+id/edt_electric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/electric"
+                android:padding="@dimen/iv_height_8"
+                android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <EditText
+                android:id="@+id/edt_water"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/water"
+                android:padding="@dimen/iv_height_8"
+                android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+
+            <EditText
+                android:id="@+id/edt_parking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/parking"
+                android:padding="@dimen/iv_height_8"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+            <EditText
+                android:id="@+id/edt_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/other_p"
+                android:padding="@dimen/iv_height_8"
+                android:inputType="number"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_marginRight="@dimen/iv_height_5"
+                    android:id="@+id/edt_width"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/width"
+                    android:inputType="number"
+                    android:padding="@dimen/iv_height_8"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+                <EditText
+                    android:layout_marginLeft="@dimen/iv_height_5"
+                    android:id="@+id/edt_length"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/drawable_round"
+                    android:hint="@string/length"
+                    android:padding="@dimen/iv_height_8"
+                    android:inputType="number"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_open"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/open_time"
+                android:padding="@dimen/iv_height_8"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+
+            <TextView
+                android:id="@+id/tv_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:layout_weight="1"
+                android:background="@drawable/drawable_round"
+                android:hint="@string/close"
+                android:padding="@dimen/iv_height_8"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/tv_available"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/iv_height_10"
@@ -79,95 +253,18 @@
                 android:textSize="@dimen/text_size_normal" />
 
             <EditText
+                android:id="@+id/edt_desc"
+                android:maxLines="10"
+                android:gravity="start"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/iv_height_100"
                 android:layout_marginTop="@dimen/iv_height_10"
                 android:layout_weight="1"
                 android:background="@drawable/drawable_round"
-                android:hint="@string/amount_people"
+                android:hint="@string/desc"
                 android:padding="@dimen/iv_height_8"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/text_size_normal" />
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/time"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/price"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/electric"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/water"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/parking"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/trash"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/iv_height_10"
-                android:layout_weight="1"
-                android:background="@drawable/drawable_round"
-                android:hint="@string/other_p"
-                android:padding="@dimen/iv_height_8"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/text_size_normal" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_height_40"

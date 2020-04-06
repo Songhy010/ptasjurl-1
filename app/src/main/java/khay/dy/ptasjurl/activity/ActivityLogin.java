@@ -1,6 +1,7 @@
 package khay.dy.ptasjurl.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +62,7 @@ public class ActivityLogin extends ActivityController {
             final TextView tv_incorrect = findViewById(R.id.tv_incorrect);
             final EditText edt_username = findViewById(R.id.edt_username);
             final HashMap<String,String> param = new HashMap<>();
-            param.put(Global.arData[28],edt_username.getText().toString());
+            param.put(Global.arData[26],edt_username.getText().toString());
             param.put(Global.arData[29], EasyAES.encryptString(edt_password.getText().toString()));
             final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[27], Global.arData[5]);
             MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
@@ -72,7 +73,7 @@ public class ActivityLogin extends ActivityController {
                         if(MyFunction.getInstance().isValidJSON(response)){
                             tv_incorrect.setVisibility(View.GONE);
                             MyFunction.getInstance().saveText(ActivityLogin.this,Global.INFO_FILE,response);
-                            MyFunction.getInstance().openActivity(ActivityLogin.this, ActivityHome.class);
+                            setResult(RESULT_OK);
                             MyFunction.getInstance().finishActivity(ActivityLogin.this);
                         }else{
                             tv_incorrect.setVisibility(View.VISIBLE);

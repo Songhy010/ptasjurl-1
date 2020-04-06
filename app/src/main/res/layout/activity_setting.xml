@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:padding="@dimen/iv_height_3"
+            android:padding="@dimen/iv_height_5"
             android:id="@+id/language"
-            android:src="@drawable/ic_launcher_background"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/ic_translate"
             android:layout_width="@dimen/iv_height_30"
             android:layout_height="@dimen/iv_height_30"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -27,6 +28,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/language">
             <TextView
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
                 android:layout_centerVertical="true"
                 android:id="@+id/tv_language"
                 android:text="@string/language"
@@ -78,9 +81,10 @@
 
         <ImageView
             android:layout_marginTop="@dimen/iv_height_10"
-            android:padding="@dimen/iv_height_3"
+            android:padding="6dp"
             android:id="@+id/notification"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/img_bell"
+            android:tint="@color/colorPrimary"
             android:layout_width="@dimen/iv_height_30"
             android:layout_height="@dimen/iv_height_30"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -95,6 +99,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp">
             <TextView
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
                 android:text="@string/notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -107,13 +113,40 @@
 
         <ImageView
             android:layout_marginTop="@dimen/iv_height_10"
-            android:padding="@dimen/iv_height_3"
-            android:id="@+id/logout"
-            android:src="@drawable/ic_launcher_background"
+            android:padding="@dimen/iv_height_5"
+            android:id="@+id/change_pass"
+            android:src="@drawable/ic_change"
             android:layout_width="@dimen/iv_height_30"
             android:layout_height="@dimen/iv_height_30"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notification"/>
+        <RelativeLayout
+            android:id="@+id/relative_change_pass"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/iv_height_30"
+            app:layout_constraintBottom_toBottomOf="@id/change_pass"
+            app:layout_constraintTop_toTopOf="@id/change_pass"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/change_pass"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+            <TextView
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
+                android:text="@string/change_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginTop="@dimen/iv_height_10"
+            android:padding="@dimen/iv_height_5"
+            android:id="@+id/logout"
+            android:src="@drawable/ic_logout"
+            android:layout_width="@dimen/iv_height_30"
+            android:layout_height="@dimen/iv_height_30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/change_pass"/>
         <RelativeLayout
             android:id="@+id/relative_logout"
             android:gravity="center_vertical"
@@ -125,7 +158,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp">
             <TextView
-                android:text="@string/logout"
+                android:id="@+id/tv_log"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
+                android:text="@string/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>

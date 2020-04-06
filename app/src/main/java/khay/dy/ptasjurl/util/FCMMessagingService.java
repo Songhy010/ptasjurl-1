@@ -22,12 +22,30 @@ import khay.dy.ptasjurl.activity.ActivityMain;
 
 public class FCMMessagingService extends FirebaseMessagingService {
 
+    private Notification notification;
+    private NotificationManager mNotifyManager;
+    private NotificationCompat.Builder mBuilder;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.e("Received From","Test");
+        //Todo broadcast intent
+
+    }
+
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        Log.e("Received From",remoteMessage.getFrom());
+        Log.e("Received Data",remoteMessage.getData()+"");
+
+        Log.e("Received Data",remoteMessage.getNotification().getBody()+"");
+        Log.e("Received Data",remoteMessage.getNotification().getTitle()+"");
         super.onMessageReceived(remoteMessage);
         //Log.e("Received", remoteMessage.getFrom());
-        Log.e("Received", ""+remoteMessage.getData());
-        sendNotification(FCMMessagingService.this,remoteMessage.getData().get("MyKey1"));
+
+        sendNotification(FCMMessagingService.this,remoteMessage.getNotification().getBody()+"",remoteMessage.getNotification().getTitle()+"");
 //        Log.e("Received", ""+remoteMessage.getNotification().getBody());
     }
 
@@ -36,7 +54,7 @@ public class FCMMessagingService extends FirebaseMessagingService {
         Log.e("Token", "Refreshed token: " + s);
     }
 
-    private void sendNotification(Context context, String messageBody) {
+    private void sendNotification(Context context, String message,String title) {
         try {
             // NotificationCompat.Builder notificationBuilder;
             Intent intent;
@@ -50,22 +68,28 @@ public class FCMMessagingService extends FirebaseMessagingService {
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 String CHANNEL_ID = "channel-01";
-                String channelName = "Kim Srun";
+                String channelName = "Aircon Repairer";
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, channelName, importance);
-                Notification notification =
-                        new NotificationCompat.Builder(this,CHANNEL_ID)
-                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                .setLargeIcon(largeIcon)
-                                .setSound(defaultSoundUri)
-                                .setAutoCancel(true)
-                                .setContentTitle("Notification")
-                                .setContentText(messageBody)
-                                .setContentIntent(pendingIntent).build();
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.createNotificationChannel(mChannel);
-                mNotificationManager.notify(0, notification);
 
+               mBuilder  = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setLargeIcon(largeIcon)
+                        .setContentTitle(title)
+                        .setContentText(message);
+                notification = mBuilder.build();
+                mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotifyManager.createNotificationChannel(mChannel);
+                mNotifyManager.notify(1, notification);
+            } else {
+                mBuilder = new NotificationCompat.Builder(this, "notify_001")
+                        .setSmallIcon(R.drawable.ic_about)
+                        .setLargeIcon(largeIcon)
+                        .setContentTitle(title)
+                        .setContentText(message)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotifyManager.notify(1, mBuilder.build());
             }
 
 

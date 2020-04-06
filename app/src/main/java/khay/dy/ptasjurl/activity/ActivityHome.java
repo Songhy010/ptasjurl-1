@@ -1,5 +1,6 @@
 package khay.dy.ptasjurl.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -10,11 +11,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterViewPager;
@@ -23,15 +37,20 @@ import khay.dy.ptasjurl.fragment.FragmentHome;
 import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentMap;
 import khay.dy.ptasjurl.fragment.FragmentRoom;
+import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.Global;
+import khay.dy.ptasjurl.util.MyFunction;
 
 public class ActivityHome extends ActivityController {
+
+    private final String TAG = "Ac Home";
     private TabLayout tab_layout;
     private ViewPager view_pager;
     private final int TAB_COUNT = 5;
     private final Drawable[] drawables = new Drawable[TAB_COUNT];
     private final Bitmap[] bitmap = new Bitmap[TAB_COUNT];
     private final int[] icons = {
-            R.drawable.ic_home,R.drawable.ic_room,R.drawable.ic_house,
+            R.drawable.ic_home, R.drawable.ic_room, R.drawable.ic_house,
             R.drawable.ic_map, R.drawable.ic_add
     };
     private final TextView[] tv_custom_tab = new TextView[TAB_COUNT];
@@ -46,15 +65,29 @@ public class ActivityHome extends ActivityController {
         setContentView(R.layout.activity_home);
         initView();
     }
-    private void findView(){
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 4){
+                view_pager.setCurrentItem(0);
+            }
+        }
+    }
+
+    private void findView() {
         view_pager = findViewById(R.id.view_pager);
     }
-    private void initView(){
+
+    private void initView() {
         findView();
         initViewPager();
         initTabLayout();
+        registerNotification();
     }
-    private void initViewPager(){
+
+    private void initViewPager() {
         view_pager.setOffscreenPageLimit(0);
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFrag(new FragmentHome());
@@ -120,7 +153,10 @@ public class ActivityHome extends ActivityController {
                         setSelectedTab(drawables[3], tv_custom_tab[3]);
                         break;
                     case 4:
-                        setSelectedTab(drawables[4], tv_custom_tab[4]);
+                        if (MyFunction.getInstance().isHistory(ActivityHome.this))
+                            setSelectedTab(drawables[4], tv_custom_tab[4]);
+                        else
+                            MyFunction.getInstance().openActivityForResult(ActivityHome.this, ActivityLogin.class, null, 4);
                         break;
                 }
             } catch (Exception e) {
@@ -143,7 +179,7 @@ public class ActivityHome extends ActivityController {
         try {
             final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final int width = getResources().getDimensionPixelSize(R.dimen.iv_height_20);
-            final String[] titles = {getString(R.string.home),getString(R.string.room),getString(R.string.house),getString(R.string.map),getString(R.string.add_house)};
+            final String[] titles = {getString(R.string.home), getString(R.string.room), getString(R.string.house), getString(R.string.map), getString(R.string.add_house)};
 
             /*default selected */
             drawables[0] = ContextCompat.getDrawable(ActivityHome.this, icons[0]);
@@ -178,6 +214,58 @@ public class ActivityHome extends ActivityController {
             }
         } catch (Exception e) {
             Log.e("Err", e.getMessage() + "");
+        }
+    }
+
+
+    private void registerNotification() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("task", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        // Get new Instance ID token
+                        final String deviceId = MyFunction.getInstance().getAndroidID(ActivityHome.this);
+                        Log.e("Device ID", deviceId);
+                        final String token = task.getResult().getToken();
+                        Log.e("Token", token);
+                        sendTokenToServer(token, deviceId);
+                    }
+                });
+    }
+
+    private void sendTokenToServer(final String token, final String deviceId) {
+        try {
+            final JSONObject info = new JSONObject(MyFunction.getInstance().getText(this, Global.INFO_FILE));
+            final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[39], Global.arData[5]);
+            final HashMap<String, String> param = new HashMap<>();
+            param.put(Global.arData[41], deviceId);
+            param.put(Global.arData[42], token);
+            param.put(Global.arData[33], info.getString(Global.arData[33]));
+            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        final int code = Integer.parseInt(response);
+                        if (code == 3) {
+                            Log.e("Success", response);
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError e) {
+                    Log.e(TAG, e.getMessage() + "");
+                    sendTokenToServer(token, deviceId);
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 }

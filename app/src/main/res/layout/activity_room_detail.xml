@@ -9,7 +9,7 @@
 
     <include layout="@layout/top_menu_activity" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -62,10 +62,10 @@
                 android:layout_marginTop="-2dp"
                 android:alpha="0.2"
                 android:background="@color/grey_3" />
-            <androidx.viewpager.widget.ViewPager
+            <khay.dy.ptasjurl.util.WrapContentViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_300"/>
+                android:layout_height="wrap_content"/>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

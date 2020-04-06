@@ -19,6 +19,16 @@
                 android:src="@drawable/img_arrow"
                 android:layout_width="@dimen/iv_height_45"
                 android:layout_height="@dimen/iv_height_45"/>
+            <TextView
+                android:padding="@dimen/iv_height_15"
+                android:id="@+id/tv_edit"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal"
+                android:textColor="@color/white"
+                android:text="@string/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <LinearLayout
                 android:gravity="center"
                 android:orientation="vertical"
@@ -32,13 +42,6 @@
                         android:src="@drawable/img_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
-                    <ImageView
-                        android:padding="@dimen/iv_height_3"
-                        android:src="@drawable/ic_plus"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_width="@dimen/iv_height_25"
-                        android:layout_height="@dimen/iv_height_25"/>
                 </RelativeLayout>
 
                 <TextView
@@ -46,7 +49,7 @@
                     android:layout_marginTop="@dimen/iv_height_5"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:text="Sem Songhy"
+                    android:text="Ptas Jurl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -105,7 +108,7 @@
             <TextView
                 android:id="@+id/username"
                 android:textSize="@dimen/text_size_tiny"
-                android:text="Username"
+                android:text="@string/username"
                 android:textStyle="normal"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -116,7 +119,7 @@
                 android:id="@+id/tv_username"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:textSize="@dimen/text_size_normal"
-                android:text="Songhy Sem"
+                android:text=""
                 android:textStyle="normal"
                 android:textColor="@color/grey"
                 android:layout_width="wrap_content"
@@ -128,7 +131,7 @@
                 android:layout_marginTop="@dimen/iv_height_20"
                 android:id="@+id/email"
                 android:textSize="@dimen/text_size_tiny"
-                android:text="Email"
+                android:text="@string/email"
                 android:textStyle="normal"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -139,7 +142,7 @@
                 android:id="@+id/tv_email"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:textSize="@dimen/text_size_normal"
-                android:text="semsonghy@gmail.com"
+                android:text=""
                 android:textStyle="normal"
                 android:textColor="@color/grey"
                 android:layout_width="wrap_content"
@@ -152,7 +155,7 @@
                 android:layout_marginTop="@dimen/iv_height_20"
                 android:id="@+id/phone"
                 android:textSize="@dimen/text_size_tiny"
-                android:text="phone"
+                android:text="@string/phone"
                 android:textStyle="normal"
                 android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
@@ -163,13 +166,36 @@
                 android:id="@+id/tv_phone"
                 android:layout_marginTop="@dimen/iv_height_5"
                 android:textSize="@dimen/text_size_normal"
-                android:text="+855 713 248 888"
+                android:text=""
                 android:textStyle="normal"
                 android:textColor="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/phone"
                 app:layout_constraintLeft_toLeftOf="@id/phone"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/iv_height_20"
+                android:id="@+id/address"
+                android:textSize="@dimen/text_size_tiny"
+                android:text="@string/address"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_phone"/>
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_marginTop="@dimen/iv_height_5"
+                android:textSize="@dimen/text_size_normal"
+                android:text=""
+                android:textStyle="normal"
+                android:textColor="@color/grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/address"
+                app:layout_constraintLeft_toLeftOf="@id/address"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 

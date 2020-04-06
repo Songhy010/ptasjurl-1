@@ -48,6 +48,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.app.ActivityCompat;
@@ -88,9 +89,15 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityController;
 import khay.dy.ptasjurl.listener.AlertListenner;
 import khay.dy.ptasjurl.listener.DialogCallBack;
+import khay.dy.ptasjurl.listener.OkhttpListenner;
 import khay.dy.ptasjurl.listener.VolleyCallback;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class MyFunction {
     private static final MyFunction ourInstance = new MyFunction();
@@ -1097,6 +1104,39 @@ public class MyFunction {
             textView.setText(Html.fromHtml(strHTML, Html.FROM_HTML_MODE_COMPACT));
         } else {
             textView.setText(Html.fromHtml(strHTML));
+        }
+    }
+
+    public void okhttpSendRequest(final Context context, String url, MultipartBody.Builder multipartBody, final OkhttpListenner okhttpListenner)throws Exception{
+        final String cred = String.format("%s:%s", Global.arData[3], Global.arData[4]);
+        final String auth = "Basic " + Base64.encodeToString(cred.getBytes(), Base64.DEFAULT);
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        RequestBody body = multipartBody.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .addHeader(Global.arData[65], auth.trim())
+                .build();
+        final okhttp3.Response response = client.newCall(request).execute();
+        final String result = response.body().string();
+        final int code = response.code();
+        if (code == 200) {
+            ((Activity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    okhttpListenner.onSuccess(result);
+                }
+            });
+        }else{
+            ((Activity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    okhttpListenner.onSuccess(response.toString());
+                }
+            });
         }
     }
 }

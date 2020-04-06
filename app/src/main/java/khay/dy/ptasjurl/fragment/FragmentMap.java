@@ -34,6 +34,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -63,8 +64,12 @@ public class FragmentMap extends Fragment {
     private int DEFAULT_ZOOM = 15, CAMERA_ANIMATE = 800;
     private final int PIN_W = 75;
     private final int PIN_H = 75;
+    private boolean isLocation = false;
+
+    private LatLng currentLatLng;
 
     private LocationManager mLocationManager;
+    private Bitmap smallMarker;
 
 
     @Nullable
@@ -83,6 +88,13 @@ public class FragmentMap extends Fragment {
         initView();
     }
 
+    private void initView() {
+        findView();
+        if (!isLocation)
+            getCurrentLocation();
+        loadMap();
+    }
+
     private void findView() {
         progress = root_view.findViewById(R.id.progress);
         mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map_view));
@@ -93,10 +105,26 @@ public class FragmentMap extends Fragment {
         root_view.findViewById(R.id.iv_current).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progress.setVisibility(View.VISIBLE);
-                mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5,
-                        5, mLocationListener);
+                if(!isLocation) {
+                    progress.setVisibility(View.VISIBLE);
+                    mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+                    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5,
+                            5, mLocationListener);
+                }else{
+                    try {
+                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_location);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+
+                        MarkerOptions marker = new MarkerOptions().position(currentLatLng).title("You").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                        mMap.addMarker(marker);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage() + "");
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 15);
+                    mMap.animateCamera(cameraUpdate);
+                }
             }
         });
 
@@ -106,6 +134,7 @@ public class FragmentMap extends Fragment {
         @Override
         public void onLocationChanged(final Location location) {
             final LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            currentLatLng = latLng;
             try {
                 BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_location);
                 Bitmap b = bitmapdraw.getBitmap();
@@ -120,6 +149,7 @@ public class FragmentMap extends Fragment {
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
             mMap.animateCamera(cameraUpdate);
             progress.setVisibility(View.GONE);
+            isLocation = true;
             return;
         }
 
@@ -139,11 +169,6 @@ public class FragmentMap extends Fragment {
         }
     };
 
-    private void initView() {
-        findView();
-        getCurrentLocation();
-        loadMap();
-    }
 
     private void initLocation(final JSONArray array) {
         try {
@@ -181,15 +206,33 @@ public class FragmentMap extends Fragment {
                             try {
                                 for (int i = 0; i < array.length(); i++) {
                                     final JSONObject object = array.getJSONObject(i);
-                                    latLng.add(new LatLng(object.getDouble("lat"), object.getDouble("long")));
+                                    try{
+                                        latLng.add(new LatLng(object.getDouble("lat"), object.getDouble("long")));
+                                    }catch (Exception e){
+                                        Log.e("LatLong","Error");
+                                    }
+                                    final int type = object.getInt(Global.arData[7]);
+                                    final String phone = object.getString(Global.arData[26]);
+                                    final String price = object.getString(Global.arData[10]);
+                                    if(type == 1) {
+                                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin1);
+                                        Bitmap b = bitmapdraw.getBitmap();
+                                        smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+                                    }else{
+                                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
+                                        Bitmap b = bitmapdraw.getBitmap();
+                                        smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+                                    }
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .position(latLng.get(i))
+                                            .title("Price: "+price+"$")
+                                            .snippet("Phone: "+phone)
+                                            .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
 
-                                    BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
-                                    Bitmap b = bitmapdraw.getBitmap();
-                                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+                                    marker.showInfoWindow();
+                                    // MarkerOptions marker = new MarkerOptions().position(latLng.get(i)).title("Phone: "+price+"\nPrice: "+phone).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
 
-                                    MarkerOptions marker = new MarkerOptions().position(latLng.get(i)).title(object.getString("id")).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-
-                                    mMap.addMarker(marker);
+                                    //mMap.addMarker(marker);
                                 }
                             } catch (Exception e) {
                                 Log.e(TAG, e.getMessage() + "");

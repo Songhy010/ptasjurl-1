@@ -1,5 +1,6 @@
 package khay.dy.ptasjurl.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,18 @@ public class ActivityProfile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Tools.setSystemBarColor(this,R.color.colorPrimaryDark);
         initView();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == 0){
+                MyFunction.getInstance().openActivity(ActivityProfile.this,ActivityProfileView.class);
+            }else if(requestCode == 1){
+                MyFunction.getInstance().openActivity(ActivityProfile.this,ActivityMyHouse.class);
+            }
+        }
     }
 
     private void initView(){
