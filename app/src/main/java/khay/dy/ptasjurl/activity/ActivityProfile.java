@@ -13,15 +13,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+
 import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterProfile;
+import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
 
-public class ActivityProfile extends AppCompatActivity {
+public class ActivityProfile extends ActivityController {
 
     private final String TAG = "Ac Profile";
     @Override

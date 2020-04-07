@@ -92,10 +92,10 @@ public class FragmentDetail extends Fragment {
             tv_price.setText(data.getString(Global.arData[10])+"$");
             tv_floor.setText(getString(R.string.floor) + " " + data.getString(Global.arData[53]));
             tv_member.setText(data.getString(Global.arData[54]) + " member");
-            tv_electric.setText(data.getString(Global.arData[55]));
-            tv_water.setText(data.getString(Global.arData[56]));
-            tv_park.setText(data.getString(Global.arData[57]));
-            tv_other.setText(data.getString(Global.arData[58]));
+            tv_electric.setText(data.getString(Global.arData[55])+"៛");
+            tv_water.setText(data.getString(Global.arData[56])+"៛");
+            tv_park.setText(data.getString(Global.arData[57])+"៛");
+            tv_other.setText(data.getString(Global.arData[58])+"$");
             final int available = Integer.parseInt(data.getString(Global.arData[61]));
             if (available == 1)
                 tv_available.setText(getString(R.string.available));
@@ -105,8 +105,8 @@ public class FragmentDetail extends Fragment {
             }
             tv_viewer.setText(/*data.getString(Global.arData[59])*/"0");
             tv_close.setText(data.getString(Global.arData[62]));
-            tv_size.setText(String.format("%sx%s", data.getString(Global.arData[60]), data.getString(Global.arData[66])));
-            tv_desc.setText(data.getString(Global.arData[9]));
+            tv_size.setText(String.format("%smx%sm", data.getString(Global.arData[60]), data.getString(Global.arData[66])));
+            MyFunction.getInstance().displayHtmlInText(tv_desc,data.getString(Global.arData[9]));
 
             final JSONArray array = data.getJSONArray(Global.arData[63]);
             for (int i = 0 ; i<array.length();i++){

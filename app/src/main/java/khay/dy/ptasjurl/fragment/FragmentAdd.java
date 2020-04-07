@@ -34,6 +34,7 @@ import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityController;
+import khay.dy.ptasjurl.activity.ActivityHome;
 import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
 import khay.dy.ptasjurl.activity.ActivityTermAndCondition;
@@ -139,7 +140,10 @@ public class FragmentAdd extends Fragment {
         card.getLayoutParams().height = height - 200;
         tv_address = root_view.findViewById(R.id.tv_address);
         swipe = root_view.findViewById(R.id.swipe);
-
+        swipe.setEnabled(false);
+        if(MyFunction.getInstance().isHistory(root_view.getContext())){
+            swipe.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initToolBar() {

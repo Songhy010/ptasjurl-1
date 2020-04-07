@@ -95,10 +95,7 @@ public class ActivityHome extends ActivityController {
         adapter.addFrag(new FragmentRoom());
         adapter.addFrag(new FragmentHouse());
         adapter.addFrag(new FragmentMapTest());
-        if (MyFunction.getInstance().isHistory(ActivityHome.this))
-            adapter.addFrag(new FragmentAdd());
-        else
-            adapter.addFrag(new FragmentMap());
+        adapter.addFrag(new FragmentAdd());
         view_pager.setAdapter(adapter);
     }
 
@@ -157,9 +154,10 @@ public class ActivityHome extends ActivityController {
                         setSelectedTab(drawables[3], tv_custom_tab[3]);
                         break;
                     case 4:
-
-                        setSelectedTab(drawables[4], tv_custom_tab[4]);
-
+                        if (MyFunction.getInstance().isHistory(ActivityHome.this))
+                            setSelectedTab(drawables[4], tv_custom_tab[4]);
+                        else
+                            MyFunction.getInstance().openActivityForResult(ActivityHome.this, ActivityLogin.class, null, 4);
                         break;
                 }
             } catch (Exception e) {

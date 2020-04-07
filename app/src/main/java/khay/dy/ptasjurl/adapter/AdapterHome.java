@@ -52,9 +52,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
             if (type == 2) {
                 holder.layout.setVisibility(View.VISIBLE);
                 holder.layout1.setVisibility(View.GONE);
-                holder.tv_title.setText(object.getString(Global.arData[8]));
-                MyFunction.getInstance().displayHtmlInText(holder.tv_desc,object.getString(Global.arData[9]));
-                holder.tv_price.setText(object.getString(Global.arData[10]));
+                holder.tv_title.setText("Room for Rent");
+                MyFunction.getInstance().displayHtmlInText(holder.tv_desc,object.getString(Global.arData[69]));
+                holder.tv_price.setText(object.getString(Global.arData[10]) + "$");
                 holder.card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -71,9 +71,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ItemHolder> {
             }else if(type ==1){
                 holder.layout.setVisibility(View.GONE);
                 holder.layout1.setVisibility(View.VISIBLE);
-                holder.tv_title1.setText(object.getString(Global.arData[8]));
-                MyFunction.getInstance().displayHtmlInText(holder.tv_desc1,object.getString(Global.arData[9]));
-                holder.tv_price1.setText(object.getString(Global.arData[10]));
+                holder.tv_title1.setText("Flat for rent");
+                MyFunction.getInstance().displayHtmlInText(holder.tv_desc1,object.getString(Global.arData[69]));
+                holder.tv_price1.setText(object.getString(Global.arData[10])+"$");
                 holder.card.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

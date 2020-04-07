@@ -104,6 +104,7 @@
     <string name="width">Width(m)</string>
     <string name="length">Length(m)</string>
     <string name="open_time">Open time</string>
+    <string name="accessories">Accessories</string>
     <string name="upload_more_desc">Success...! \nDo you want to upload more description?</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

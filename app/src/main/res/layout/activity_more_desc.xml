@@ -265,30 +265,23 @@
                 android:padding="@dimen/iv_height_8"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/text_size_normal" />
-            <RelativeLayout
+            <LinearLayout
+                android:layout_marginTop="@dimen/iv_height_10"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_40"
-                android:layout_marginTop="@dimen/iv_height_10">
-
+                android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tv_check"
+                    android:text="@string/accessories"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_acc"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:background="@drawable/drawable_round"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/iv_height_10"
-                    android:paddingRight="@dimen/iv_height_10"
-                    android:text="@string/check"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/iv_height_10"/>
+            </LinearLayout>
 
-                <ImageView
-                    android:layout_width="@dimen/iv_height_40"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_arrow_drop"
-                    android:tint="@color/grey" />
-            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
