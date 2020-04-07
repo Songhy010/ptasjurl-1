@@ -13,8 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +70,7 @@ public class FragmentAdd extends Fragment {
     private byte[] pathThum;
     private UploadImage asyncUpload;
     private SwipeRefreshLayout swipe;
-
+    private LinearLayout btn_upload ;
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
 
 
@@ -124,15 +127,35 @@ public class FragmentAdd extends Fragment {
     }
 
     private void initTerm() {
+        final CheckBox checkBox = root_view.findViewById(R.id.check);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if(b) {
+                    btn_upload.setEnabled(true);
+                    btn_upload.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                }
+                else {
+                    btn_upload.setEnabled(false);
+                    btn_upload.setBackgroundColor(getResources().getColor(R.color.grey));
+                }
+
+            }
+        });
         root_view.findViewById(R.id.tv_term).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyFunction.getInstance().openActivity(root_view.getContext(), ActivityTermAndCondition.class);
             }
         });
+
     }
 
     private void findView() {
+        btn_upload = root_view.findViewById(R.id.btn_upload);
+        btn_upload.setEnabled(false);
+        btn_upload.setBackgroundColor(getResources().getColor(R.color.grey));
         card = root_view.findViewById(R.id.card);
         iv_thum = root_view.findViewById(R.id.iv_thum);
         tv_more_desc = root_view.findViewById(R.id.tv_more_desc);

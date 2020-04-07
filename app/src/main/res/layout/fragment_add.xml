@@ -245,6 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <CheckBox
+                        android:id="@+id/check"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="normal"
                         android:text="@string/accept_term"
@@ -262,11 +263,11 @@
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/btn_upload"
                     android:layout_marginTop="@dimen/iv_height_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:id="@+id/btn_upload"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
                         android:layout_width="match_parent"

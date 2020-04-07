@@ -80,7 +80,6 @@ public class ActivityMoreDesc extends ActivityController {
     private final int PICK_CODE = 1;
     private ArrayList<byte[]> mArrayByte = new ArrayList<byte[]>();
     private ArrayList<Bitmap> mArrayBit = new ArrayList<Bitmap>();
-    private JSONArray arrayAccessories;
     private String[] available = {"Busy", "Available"};
 
     private UploadMoredata asyncUpload;
