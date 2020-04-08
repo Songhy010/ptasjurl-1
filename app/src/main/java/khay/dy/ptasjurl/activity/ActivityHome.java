@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +35,6 @@ import khay.dy.ptasjurl.fragment.FragmentAdd;
 import khay.dy.ptasjurl.fragment.FragmentHome;
 import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentMap;
-import khay.dy.ptasjurl.fragment.FragmentMapTest;
 import khay.dy.ptasjurl.fragment.FragmentRoom;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
@@ -94,7 +92,7 @@ public class ActivityHome extends ActivityController {
         adapter.addFrag(new FragmentHome());
         adapter.addFrag(new FragmentRoom());
         adapter.addFrag(new FragmentHouse());
-        adapter.addFrag(new FragmentMapTest());
+        adapter.addFrag(new FragmentMap());
         adapter.addFrag(new FragmentAdd());
         view_pager.setAdapter(adapter);
     }

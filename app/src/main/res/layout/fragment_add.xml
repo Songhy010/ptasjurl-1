@@ -229,7 +229,7 @@
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
                 <TextView
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/tv_more_desc"
                     android:layout_marginTop="@dimen/iv_height_15"
                     android:layout_gravity="end"

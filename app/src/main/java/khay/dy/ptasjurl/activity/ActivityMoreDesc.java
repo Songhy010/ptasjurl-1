@@ -350,7 +350,7 @@ public class ActivityMoreDesc extends ActivityController {
                         else
                             multipartBody.addFormDataPart("avail_room", "1");
                     }
-                    multipartBody.addFormDataPart("home-accessories", String.format("[%s]",accessoriesStr));
+                    multipartBody.addFormDataPart("home-accessories",accessoriesStr);
                     multipartBody.addFormDataPart("elect_price", electricPrice);
                     multipartBody.addFormDataPart("water_price", waterPrice);
                     multipartBody.addFormDataPart("parking_price", parkingPrice);
@@ -396,17 +396,21 @@ public class ActivityMoreDesc extends ActivityController {
                 MyFunction.getInstance().okhttpSendRequest(ActivityMoreDesc.this, url, multipartBody, new OkhttpListenner() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.e("Err", response);
-                        final int code = Integer.parseInt(response);
-                        if (code == 3) {
-                            MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.register_success), new AlertListenner() {
-                                @Override
-                                public void onSubmit() {
-                                    finish();
-                                }
-                            }, 1);
-                        } else {
-                            MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
+                        try{
+                            Log.e("Err", response);
+                            final int code = Integer.parseInt(response);
+                            if (code == 3) {
+                                MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.register_success), new AlertListenner() {
+                                    @Override
+                                    public void onSubmit() {
+                                        finish();
+                                    }
+                                }, 1);
+                            } else {
+                                MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
+                            }
+                        }catch (Exception e){
+                            Log.e("Err",e.getMessage()+"");
                         }
                         hideDialog();
                     }

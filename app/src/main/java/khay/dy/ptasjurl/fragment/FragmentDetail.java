@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,8 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.adapter.AdapterAccessories;
+import khay.dy.ptasjurl.adapter.AdapterAccessoriesDetail;
 import khay.dy.ptasjurl.adapter.AdapterDetail;
 import khay.dy.ptasjurl.adapter.AdapterHome;
+import khay.dy.ptasjurl.listener.AccesoriesListener;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 import khay.dy.ptasjurl.util.MyFunction;
@@ -78,10 +83,10 @@ public class FragmentDetail extends Fragment {
         final TextView tv_size = root_view.findViewById(R.id.tv_size);
         final TextView tv_desc = root_view.findViewById(R.id.tv_desc);
 
-        final CheckBox check_aircon = root_view.findViewById(R.id.check_aircon);
+     /*   final CheckBox check_aircon = root_view.findViewById(R.id.check_aircon);
         final CheckBox check_table = root_view.findViewById(R.id.check_table);
         final CheckBox check_secu_cam = root_view.findViewById(R.id.check_secu_cam);
-        final CheckBox check_secu_man = root_view.findViewById(R.id.check_secu_man);
+        final CheckBox check_secu_man = root_view.findViewById(R.id.check_secu_man);*/
 
         try {
             final int type = Integer.parseInt(data.getString(Global.arData[7]));
@@ -109,26 +114,22 @@ public class FragmentDetail extends Fragment {
             MyFunction.getInstance().displayHtmlInText(tv_desc,data.getString(Global.arData[9]));
 
             final JSONArray array = data.getJSONArray(Global.arData[63]);
-            for (int i = 0 ; i<array.length();i++){
-                final JSONObject obj = array.getJSONObject(i);
-                final int id = Integer.parseInt(obj.getString(Global.arData[44]));
-                switch (id){
-                    case 0:
-                        check_secu_man.setChecked(true);
-                        break;
-                    case 1:
-                        check_secu_cam.setChecked(true);
-                        break;
-                    case 2:
-                        check_table.setChecked(true);
-                        break;
-                    case 3:
-                        check_aircon.setChecked(true);
-                        break;
-                }
-            }
+            initAccessories(array);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage() + "");
+        }
+    }
+    private void initAccessories(JSONArray array) {
+        if(array.length()>0) {
+            final LinearLayout linear = root_view.findViewById(R.id.linear);
+            linear.setVisibility(View.VISIBLE);
+            final RecyclerView recycler = root_view.findViewById(R.id.recycler);
+            GridLayoutManager manager = new GridLayoutManager(root_view.getContext(), 2);
+            recycler.setLayoutManager(manager);
+            recycler.setAdapter(new AdapterAccessoriesDetail(root_view.getContext(), array));
+        }else{
+            final LinearLayout linear = root_view.findViewById(R.id.linear);
+            linear.setVisibility(View.GONE);
         }
     }
 }
