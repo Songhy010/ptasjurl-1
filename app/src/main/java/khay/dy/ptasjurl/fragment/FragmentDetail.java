@@ -96,7 +96,7 @@ public class FragmentDetail extends Fragment {
                 tv_type.setText(getString(R.string.room));
             tv_price.setText(data.getString(Global.arData[10])+"$");
             tv_floor.setText(getString(R.string.floor) + " " + data.getString(Global.arData[53]));
-            tv_member.setText(data.getString(Global.arData[54]) + " member");
+            tv_member.setText(data.getString(Global.arData[54]) + getString(R.string.member));
             tv_electric.setText(data.getString(Global.arData[55])+"៛");
             tv_water.setText(data.getString(Global.arData[56])+"៛");
             tv_park.setText(data.getString(Global.arData[57])+"៛");

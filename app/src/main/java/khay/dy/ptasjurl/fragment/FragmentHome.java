@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.Request;
@@ -30,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.activity.ActivityFilterLocation;
+import khay.dy.ptasjurl.activity.ActivityHome;
+import khay.dy.ptasjurl.activity.ActivityMain;
 import khay.dy.ptasjurl.activity.ActivityNotification;
 import khay.dy.ptasjurl.activity.ActivityProfile;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
@@ -51,7 +55,6 @@ public class FragmentHome extends Fragment {
     private Runnable runnable = null;
     private Handler handler = new Handler();
     private ViewPager viewPager;
-    private ImageView iv_noti;
 
     @Nullable
     @Override
@@ -78,14 +81,14 @@ public class FragmentHome extends Fragment {
     private void initView() {
         try{
             findView();
-            loadHome();
+            initHome();
             onClick();
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
     }
 
-    private void loadHome() {
+    private void initHome() {
         try{
             final JSONObject object = ModelHome.getInstance().getObjHome();
             final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
@@ -108,6 +111,12 @@ public class FragmentHome extends Fragment {
            @Override
            public void onClick(View view) {
                MyFunction.getInstance().openActivity(root_view.getContext(), ActivityProfile.class);
+           }
+       });
+       root_view.findViewById(R.id.search_bar).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               MyFunction.getInstance().openActivity(root_view.getContext(), ActivityFilterLocation.class);
            }
        });
     }
@@ -185,5 +194,7 @@ public class FragmentHome extends Fragment {
         manager = new LinearLayoutManager(root_view.getContext(), RecyclerView.VERTICAL, false);
         recycler.setLayoutManager(manager);
         recycler.setAdapter(new AdapterHome(array, root_view.getContext()));
+
     }
+
 }

@@ -92,8 +92,9 @@
     <string name="floor">ជាន់</string>
     <string name="busy">រវល់</string>
     <string name="title">ពិពណ៌នា</string>
-    <string name="server_error">Server Error</string>
-
+    <string name="server_error">មិនអាចភ្ជាប់ទៅ Server​បាន</string>
+    <string name="room_rent">បន្ទប់ជួល</string>
+    <string name="house_rent">ផ្ទះជួល</string>
     <string name="province">ខេត្ត</string>
     <string name="district">ស្រុក/ខណ្ឌ</string>
     <string name="commune">ឃុំ/សង្កាត់</string>
@@ -102,6 +103,9 @@
     <string name="length">ទទឹង(ម)</string>
     <string name="open_time">ម៉ោងបើក</string>
     <string name="accessories">គ្រឿងបន្ថែម</string>
+    <string name="detail">លំអិត</string>
+    <string name="owner">ម្ចាស់ផ្ទះ</string>
+    <string name="member">នាក់</string>
     <string name="upload_more_desc">តើអ្នកចង់ផ្ទុកឡើងការពិពណ៌នាបន្ថែមទេ?</string>
     <string name="login_required">អ្នកត្រូវចូលទៅគណនីរបស់អ្នកមុនពេលប្រើមុខងារនេះ</string>
 

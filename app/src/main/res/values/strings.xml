@@ -32,7 +32,7 @@
     <string name="upload">Upload</string>
     <string name="room_detail">Room Detail</string>
     <string name="related_item">Related Item</string>
-    <string name="search">Search Locations</string>Setup more description
+    <string name="search">Search Locations</string>
     <string name="setup_more">Setup more description</string>
     <string name="side">Side (WxH) *</string>
     <string name="Floor">Floor</string>
@@ -84,7 +84,8 @@
     <string name="save">Save</string>
     <string name="email">Email</string>
     <string name="required_field">Please input all required field</string>
-
+    <string name="room_rent">Room for rent</string>
+    <string name="house_rent">House for rent</string>
     <string name="type">Type</string>
     <string name="other_price">Other Prices</string>
     <string name="specification">Specification</string>
@@ -93,7 +94,7 @@
     <string name="secu_cam">Security Camera</string>
     <string name="secu_man">Security Man</string>
     <string name="floor">Floor</string>
-    <string name="busy">Busy</string>
+    <string name="busy">Unavailable</string>
     <string name="server_error">Sever Error</string>
     <string name="title">Title</string>
     <string name="login_required">You need to login to your account before use this feature</string>
@@ -105,6 +106,10 @@
     <string name="length">Length(m)</string>
     <string name="open_time">Open time</string>
     <string name="accessories">Accessories</string>
+    <string name="detail">Detail</string>
+    <string name="owner">Owner</string>
+    <string name="member">Member</string>
+
     <string name="upload_more_desc">Success...! \nDo you want to upload more description?</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

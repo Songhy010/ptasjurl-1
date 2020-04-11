@@ -15,11 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:src="@drawable/ic_profile"
+            android:src="@drawable/icon"
             android:layout_width="@dimen/iv_height_80"
             android:layout_height="@dimen/iv_height_80"/>
 
         <TextView
+            android:layout_marginTop="@dimen/iv_height_15"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small"
             android:padding="@dimen/iv_height_10"

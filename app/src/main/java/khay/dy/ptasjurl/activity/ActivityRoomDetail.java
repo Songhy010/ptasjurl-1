@@ -62,7 +62,6 @@ public class ActivityRoomDetail extends ActivityController {
     private Handler handler = new Handler();
     private final String TAG = "Ac Detail";
 
-
     private AdapterPagerDetail adapterPager;
 
     private String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
@@ -185,7 +184,7 @@ public class ActivityRoomDetail extends ActivityController {
             network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!MyFunction.getInstance().hasPermissions(ActivityRoomDetail.this, PERMISSIONS)) {
-                ActivityCompat.requestPermissions((Activity) ActivityRoomDetail.this, PERMISSIONS, Global.PERMISSION_ALL);
+                ActivityCompat.requestPermissions(ActivityRoomDetail.this, PERMISSIONS, Global.PERMISSION_ALL);
                 initMap(latLng,type);
             } else {
                 initMap(latLng,type);
@@ -211,21 +210,19 @@ public class ActivityRoomDetail extends ActivityController {
                         if (map != null) {
                             mMap = map;
                             //initialize map
-                            if(type == 1) {
+                            if(type == 2) {
                                 BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
                                 Bitmap b = bitmapdraw.getBitmap();
                                 Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
-                                MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                                MarkerOptions marker = new MarkerOptions().position(latLng).title(getString(R.string.room_rent)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                                 mMap.addMarker(marker);
                             }else {
                                 BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin1);
                                 Bitmap b = bitmapdraw.getBitmap();
                                 Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
-                                MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                                MarkerOptions marker = new MarkerOptions().position(latLng).title(getString(R.string.house_rent)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                                 mMap.addMarker(marker);
                             }
-
-
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
                             mMap.animateCamera(cameraUpdate);
@@ -263,6 +260,7 @@ public class ActivityRoomDetail extends ActivityController {
             }
             final HashMap<String, String> param = new HashMap<>();
             param.put(Global.arData[44], id);
+            showDialog();
             MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
                 @Override
                 public void onResponse(String response) {
@@ -280,18 +278,20 @@ public class ActivityRoomDetail extends ActivityController {
                             }
                             try{
                                 final JSONObject obj = object.getJSONObject(Global.arData[51]);
-                                final double lat = Double.parseDouble(obj.getString("latitude"));
-                                final double lng = Double.parseDouble(obj.getString("longitude"));
+                                final double lat = Double.parseDouble(obj.getString(Global.arData[72]));
+                                final double lng = Double.parseDouble(obj.getString(Global.arData[73]));
                                 initLocation(new LatLng(lat, lng),type);
                             }catch (Exception e){
                                 Log.e(TAG,e.getMessage()+"");
                             }
 
-                            final JSONArray arrRelate = object.getJSONArray("related");
+                            final JSONArray arrRelate = object.getJSONArray(Global.arData[77]);
                             initRelated(arrRelate);
                         }
+                        hideDialog();
                     } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        Log.e(TAG, e.getMessage()+"");
+                        hideDialog();
                     }
                 }
 
@@ -299,17 +299,19 @@ public class ActivityRoomDetail extends ActivityController {
                 public void onErrorResponse(VolleyError e) {
                     Log.e(TAG, e.getMessage() + "");
                     loadDetail();
+                    hideDialog();
                 }
             });
 
         } catch (Exception e) {
             Log.e("Err", e.getMessage());
+            hideDialog();
         }
     }
 
     private void initMenu(JSONObject obj) {
         try {
-            final String[] titles = {"Detail", "Owner"};
+            final String[] titles = {getString(R.string.detail), getString(R.string.owner)};
             adapterPager = new AdapterPagerDetail(getSupportFragmentManager(), titles);
             adapterPager.addFrag(FragmentDetail.newInstance(obj.getJSONObject(Global.arData[51])));
             adapterPager.addFrag(FragmentOwnerDetail.newInstance(/*obj.getJSONObject(Global.arData[52])*/null));

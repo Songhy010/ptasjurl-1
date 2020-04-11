@@ -49,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:padding="@dimen/iv_height_3"
-                android:src="@drawable/ic_launcher_background"
+                android:padding="@dimen/iv_height_5"
+                android:src="@drawable/img_mail"
                 android:layout_marginLeft="@dimen/iv_height_30"
                 android:layout_width="@dimen/iv_height_30"
                 android:layout_height="@dimen/iv_height_30"/>
@@ -71,8 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:padding="@dimen/iv_height_3"
-                android:src="@drawable/ic_launcher_background"
+                android:padding="@dimen/iv_height_5"
+                android:src="@drawable/img_web"
                 android:layout_marginLeft="@dimen/iv_height_30"
                 android:layout_width="@dimen/iv_height_30"
                 android:layout_height="@dimen/iv_height_30"/>
@@ -92,8 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:padding="@dimen/iv_height_3"
-                android:src="@drawable/ic_launcher_background"
+                android:padding="@dimen/iv_height_5"
+                android:src="@drawable/img_tel"
                 android:layout_marginLeft="@dimen/iv_height_30"
                 android:layout_width="@dimen/iv_height_30"
                 android:layout_height="@dimen/iv_height_30"/>

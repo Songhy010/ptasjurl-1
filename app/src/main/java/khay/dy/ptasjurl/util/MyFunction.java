@@ -93,6 +93,7 @@ import khay.dy.ptasjurl.activity.ActivityController;
 import khay.dy.ptasjurl.listener.AlertListenner;
 import khay.dy.ptasjurl.listener.DialogCallBack;
 import khay.dy.ptasjurl.listener.OkhttpListenner;
+import khay.dy.ptasjurl.listener.SelectedListener;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -906,10 +907,39 @@ public class MyFunction {
                         popup.getMenu().add(0, i, i, title);
                     }
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             ((TextView) tv).setText(item.getTitle());
+                            return true;
+                        }
+                    });
+                    popup.show();
+                }
+            });
+        } catch (Exception e) {
+            Log.e("Err", e.getMessage() + "");
+        }
+    }
+
+    public void initSelectItem(final Context context, final View view, final View tv, final String[] items, final int fontType, final SelectedListener selectedListener) {
+        try {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Context wrapper = new ContextThemeWrapper(context, R.style.AppTheme_AppBarOverlay_PopupMenu);
+                    final PopupMenu popup = new PopupMenu(wrapper, view);
+                    for (int i = 0; i < items.length; i++) {
+                        Typeface font = MyFont.getInstance().getFont(context,fontType);
+                        CustomTypefaceSpan typefaceSpan = new CustomTypefaceSpan(font);
+                        SpannableStringBuilder title = new SpannableStringBuilder(items[i]);
+                        title.setSpan(typefaceSpan, 0, title.length(), 0);
+                        popup.getMenu().add(0, i, i, title);
+                    }
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            ((TextView) tv).setText(item.getTitle());
+                            selectedListener.onSelected(item.getItemId());
                             return true;
                         }
                     });

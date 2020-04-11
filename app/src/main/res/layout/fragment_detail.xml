@@ -346,11 +346,19 @@
                 android:textStyle="normal" />
         </LinearLayout>
         <TextView
-            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/iv_height_10"
             android:text="@string/desc"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="normal" />
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/iv_height_5"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
@@ -370,7 +378,7 @@
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/iv_height_110"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/iv_height_15">
         <androidx.recyclerview.widget.RecyclerView

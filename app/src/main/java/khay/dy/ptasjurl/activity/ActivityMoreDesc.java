@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ import khay.dy.ptasjurl.adapter.AdapterPick;
 import khay.dy.ptasjurl.listener.AccesoriesListener;
 import khay.dy.ptasjurl.listener.AlertListenner;
 import khay.dy.ptasjurl.listener.OkhttpListenner;
+import khay.dy.ptasjurl.listener.SelectedListener;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.EasyAES;
 import khay.dy.ptasjurl.util.Global;
@@ -73,6 +75,12 @@ public class ActivityMoreDesc extends ActivityController {
     private TextView tv_available;
     private EditText edt_desc;
     private RecyclerView recycler_acc;
+    private TextView tv_province;
+    private TextView tv_commune;
+    private TextView tv_district;
+    private TextView tv_village;
+    private String[] available = new String[2];
+
     private ArrayList<String> accessories = new ArrayList<>();
     private String accessoriesStr = "";
 
@@ -80,7 +88,6 @@ public class ActivityMoreDesc extends ActivityController {
     private final int PICK_CODE = 1;
     private ArrayList<byte[]> mArrayByte = new ArrayList<byte[]>();
     private ArrayList<Bitmap> mArrayBit = new ArrayList<Bitmap>();
-    private String[] available = {"Busy", "Available"};
 
     private UploadMoredata asyncUpload;
 
@@ -140,11 +147,49 @@ public class ActivityMoreDesc extends ActivityController {
     private void initView() {
         findView();
         initToolBar();
+        initLocation();
         initPickImage();
         initUpload();
         loadAccessoriesData();
         initOpenCloseTime();
+        available[0] = getString(R.string.busy);
+        available[1] = getString(R.string.available);
         MyFunction.getInstance().initSelectItem(this, tv_available, tv_available, available, 2);
+    }
+
+    private void initLocation() {
+        tv_province = findViewById(R.id.tv_province);
+        tv_commune = findViewById(R.id.tv_commune);
+        tv_district = findViewById(R.id.tv_district);
+        tv_village = findViewById(R.id.tv_village);
+        final RelativeLayout relative_province = findViewById(R.id.relative_province);
+        final RelativeLayout relative_commune = findViewById(R.id.relative_commune);
+        final RelativeLayout relative_district = findViewById(R.id.relative_district);
+        final RelativeLayout relative_village = findViewById(R.id.relative_village);
+        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_province, tv_province, available, 1, new SelectedListener() {
+            @Override
+            public void onSelected(int str) {
+                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_commune, tv_commune, available, 1, new SelectedListener() {
+            @Override
+            public void onSelected(int str) {
+                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_district, tv_district, available, 1, new SelectedListener() {
+            @Override
+            public void onSelected(int str) {
+                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
+            }
+        });
+        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_village, tv_village, available, 1, new SelectedListener() {
+            @Override
+            public void onSelected(int str) {
+                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initOpenCloseTime() {

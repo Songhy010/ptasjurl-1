@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ActivityFilterLocation">
+    <include layout="@layout/top_menu_activity" />
+    <LinearLayout
+        android:padding="@dimen/iv_height_10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/relative_province"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_height_40"
+            android:layout_marginTop="@dimen/iv_height_10">
+
+            <TextView
+                android:id="@+id/tv_province"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:background="@drawable/drawable_round"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/iv_height_10"
+                android:paddingRight="@dimen/iv_height_10"
+                android:text="@string/province"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_height_40"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_drop"
+                android:tint="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_commune"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_height_40"
+            android:layout_marginTop="@dimen/iv_height_10">
+
+            <TextView
+                android:id="@+id/tv_commune"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:background="@drawable/drawable_round"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/iv_height_10"
+                android:paddingRight="@dimen/iv_height_10"
+                android:text="@string/commune"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_height_40"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_drop"
+                android:tint="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_district"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_height_40"
+            android:layout_marginTop="@dimen/iv_height_10">
+
+            <TextView
+                android:id="@+id/tv_district"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:background="@drawable/drawable_round"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/iv_height_10"
+                android:paddingRight="@dimen/iv_height_10"
+                android:text="@string/district"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_height_40"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_drop"
+                android:tint="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_village"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_height_40"
+            android:layout_marginTop="@dimen/iv_height_10">
+
+            <TextView
+                android:id="@+id/tv_village"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:background="@drawable/drawable_round"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/iv_height_10"
+                android:paddingRight="@dimen/iv_height_10"
+                android:text="@string/village"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_height_40"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_drop"
+                android:tint="@color/grey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iv_height_40"
+            android:layout_marginTop="@dimen/iv_height_10">
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:background="@drawable/drawable_round"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/iv_height_10"
+                android:paddingRight="@dimen/iv_height_10"
+                android:text="@string/type"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/text_size_normal" />
+
+            <ImageView
+                android:layout_width="@dimen/iv_height_40"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_drop"
+                android:tint="@color/grey" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

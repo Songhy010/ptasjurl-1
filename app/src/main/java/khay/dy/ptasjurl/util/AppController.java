@@ -111,6 +111,7 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[74] = "add_advance_info";
         Global.arData[75] = "room_price";
         Global.arData[76] = "name";
+        Global.arData[77] = "related";
 
 
 
