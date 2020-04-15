@@ -38,7 +38,6 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[3] = "home";
         Global.arData[4] = "s0khay_rady";
         Global.arData[5] = "pull";
-
         Global.arData[6] = "real_estate";
         Global.arData[7] = "type";
         Global.arData[8] = "title";
@@ -57,7 +56,6 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[21] = "number";
         Global.arData[22] = "about";
         Global.arData[23] = "contact";
-
         Global.arData[24] = "email";
         Global.arData[25] = "facebook";
         Global.arData[26] = "phone";
@@ -112,6 +110,14 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[75] = "room_price";
         Global.arData[76] = "name";
         Global.arData[77] = "related";
+        Global.arData[78] = "filter";
+        Global.arData[79] = "district";
+        Global.arData[80] = "commune";
+        Global.arData[81] = "village";
+        Global.arData[82] = "province_id";
+        Global.arData[83] = "district_id";
+        Global.arData[84] = "commune_id";
+        Global.arData[85] = "village_id";
 
 
 
@@ -134,11 +140,11 @@ public class AppController extends com.android.volley.my.AppController {
 
 
     private String getFilename() {
-        String result = "";
-        final int st[] = {100, 97, 116, 97};
-        for (int i = 0; i < st.length; i++) {
-            result += (char) st[i];
+        StringBuilder result = new StringBuilder();
+        final int[] st = {100, 97, 116, 97};
+        for (int value : st) {
+            result.append((char) value);
         }
-        return result;
+        return result.toString();
     }
 }

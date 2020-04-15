@@ -28,7 +28,9 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_normal" />
         <ImageView
-            android:padding="@dimen/iv_height_13"
+            android:visibility="gone"
+            android:src="@drawable/ic_check"
+            android:padding="@dimen/iv_height_10"
             android:layout_alignParentRight="true"
             android:id="@+id/iv_search"
             android:layout_width="@dimen/iv_height_45"

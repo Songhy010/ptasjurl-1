@@ -2,6 +2,8 @@ package khay.dy.ptasjurl.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,15 +33,15 @@ public class ActivityContactUs extends ActivityController {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
-        try{
-            Tools.setSystemBarColor(this,R.color.colorPrimaryDark);
+        try {
+            Tools.setSystemBarColor(this, R.color.colorPrimaryDark);
             initView();
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage()+"");
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage() + "");
         }
     }
 
-    private void initView(){
+    private void initView() {
         initBack();
         loadContact();
     }
@@ -52,6 +54,21 @@ public class ActivityContactUs extends ActivityController {
                 onBackPressed();
             }
         });
+    }
+
+    private void initLink(String link) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + link));
+            intent.setPackage(Global.PACKAGE_IG);
+            try {
+                startActivity(intent);
+            } catch (Exception e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(link)));
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
     private void loadContact() {
@@ -69,16 +86,52 @@ public class ActivityContactUs extends ActivityController {
                         final TextView tv_email = findViewById(R.id.tv_email);
                         final TextView tv_fb = findViewById(R.id.tv_facebook);
                         tv_fb.setText(object.getString(Global.arData[25]));
+                        tv_fb.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                initLink("1118241991550593");
+                            }
+                        });
                         tv_email.setText(object.getString(Global.arData[24]));
+                        tv_email.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                try {
+                                    Intent email = new Intent(Intent.ACTION_SEND);
+                                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{object.getString(Global.arData[24])});
+                                    email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                                    email.putExtra(Intent.EXTRA_TEXT, "");
+
+                                    //need this to prompts email client only
+                                    email.setType("message/rfc822");
+
+                                    startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.getMessage() + "");
+                                }
+                            }
+                        });
                         final FlexboxLayout flex = findViewById(R.id.flex);
                         final JSONArray array = object.getJSONArray(Global.arData[26]);
-                        for(int i = 0 ; i<array.length();i++){
+                        for (int i = 0; i < array.length(); i++) {
                             final JSONObject obj = array.getJSONObject(i);
-                            final View view = LayoutInflater.from(ActivityContactUs.this).inflate(R.layout.custom_tab,null,false);
+                            final View view = LayoutInflater.from(ActivityContactUs.this).inflate(R.layout.custom_tab, null, false);
                             final TextView tv_phone = view.findViewById(R.id.tab);
                             tv_phone.setTextColor(getResources().getColor(R.color.light_blue_50));
                             tv_phone.setTextSize(12);
-                            tv_phone.setText("  "+obj.getString(Global.arData[21]));
+                            tv_phone.setText("  " + obj.getString(Global.arData[21]));
+                            tv_phone.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                                        intent.setData(Uri.parse(String.format("tel:855%s", obj.getString(Global.arData[21]).substring(1))));
+                                        startActivity(intent);
+                                    } catch (Exception e) {
+                                        Log.e(TAG, e.getMessage() + "");
+                                    }
+                                }
+                            });
                             flex.addView(view);
                         }
                         final LinearLayout linear = findViewById(R.id.linear);
