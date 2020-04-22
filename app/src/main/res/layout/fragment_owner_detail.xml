@@ -13,18 +13,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/viewer"
+            android:text="@string/home_owner_name"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/iv_height_10"
             android:layout_weight="1"
             android:paddingLeft="@dimen/iv_height_45"
-            android:text="EDC"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
@@ -39,18 +39,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/close"
+            android:text="@string/home_owner_phone1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/iv_height_10"
             android:layout_weight="1"
             android:paddingLeft="@dimen/iv_height_45"
-            android:text="EDC"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
@@ -65,18 +65,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/size"
+            android:text="@string/home_owner_phone1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tv_phone1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/iv_height_10"
             android:layout_weight="1"
             android:paddingLeft="@dimen/iv_height_45"
-            android:text="EDC"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />

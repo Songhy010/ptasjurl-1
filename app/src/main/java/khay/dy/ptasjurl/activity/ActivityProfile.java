@@ -11,10 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.android.volley.my.MyImageLoader;
 
 import org.json.JSONObject;
 
@@ -43,7 +45,9 @@ public class ActivityProfile extends ActivityController {
             if(requestCode == 0){
                 MyFunction.getInstance().openActivity(ActivityProfile.this,ActivityProfileView.class);
             }else if(requestCode == 1){
-                MyFunction.getInstance().openActivity(ActivityProfile.this,ActivityMyHouse.class);
+                if(MyFunction.getInstance().isHistory(ActivityProfile.this)){
+                    MyFunction.getInstance().openActivity(ActivityProfile.this,ActivityMyHouse.class);
+                }
             }
         }
     }
@@ -62,6 +66,8 @@ public class ActivityProfile extends ActivityController {
             final JSONObject object = new JSONObject(MyFunction.getInstance().getText(this, Global.INFO_FILE));
             final TextView tv_name = findViewById(R.id.tv_name);
             tv_name.setText(object.getString(Global.arData[30])+" "+object.getString(Global.arData[31]));
+            final ImageView iv_profile = findViewById(R.id.iv_profile);
+            MyImageLoader.getInstance().setImage(iv_profile, object.getString(Global.arData[87]), null, 0, 0, -1, R.drawable.img_loading, R.drawable.img_loading);
 
         }catch (Exception e){
             Log.e(TAG,e.getMessage()+"");

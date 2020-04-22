@@ -80,7 +80,7 @@ public class ActivityMoreDesc extends ActivityController {
     private TextView tv_district;
     private TextView tv_village;
     private String[] available = new String[2];
-
+    private HashMap<String, String> param = new HashMap<>();
     private ArrayList<String> accessories = new ArrayList<>();
     private String accessoriesStr = "";
 
@@ -162,34 +162,82 @@ public class ActivityMoreDesc extends ActivityController {
         tv_commune = findViewById(R.id.tv_commune);
         tv_district = findViewById(R.id.tv_district);
         tv_village = findViewById(R.id.tv_village);
-        final RelativeLayout relative_province = findViewById(R.id.relative_province);
-        final RelativeLayout relative_commune = findViewById(R.id.relative_commune);
-        final RelativeLayout relative_district = findViewById(R.id.relative_district);
-        final RelativeLayout relative_village = findViewById(R.id.relative_village);
-        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_province, tv_province, available, 1, new SelectedListener() {
-            @Override
-            public void onSelected(int str) {
-                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
+        loadLocation();
+    }
+
+    private void loadLocation() {
+        try {
+            final String arrAddress = MyFunction.getInstance().getText(this, Global.ADDRESS);
+            final JSONArray arrPro = new JSONArray(arrAddress);
+            final RelativeLayout relative_province = findViewById(R.id.relative_province);
+            MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_province, tv_province, getArrStrFromArrJson(Global.arData[76], arrPro), 1, new SelectedListener() {
+                @Override
+                public void onSelected(int str) {
+                    try {
+                        final JSONObject objPro = arrPro.getJSONObject(str);
+                        param.put(Global.arData[82], objPro.getString(Global.arData[44]));
+                        final JSONArray arrDis = objPro.getJSONArray(Global.arData[79]);
+                        final RelativeLayout relative_district = findViewById(R.id.relative_district);
+                        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_district, tv_district, getArrStrFromArrJson(Global.arData[76], arrDis), 1, new SelectedListener() {
+                            @Override
+                            public void onSelected(int str) {
+                                try {
+                                    final JSONObject objDis = arrDis.getJSONObject(str);
+                                    param.put(Global.arData[83], objDis.getString(Global.arData[44]));
+                                    final JSONArray arrCom = objDis.getJSONArray(Global.arData[80]);
+                                    final RelativeLayout relative_commune = findViewById(R.id.relative_commune);
+                                    MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_commune, tv_commune, getArrStrFromArrJson(Global.arData[76], arrCom), 1, new SelectedListener() {
+                                        @Override
+                                        public void onSelected(int str) {
+                                            try {
+                                                final JSONObject objCom = arrCom.getJSONObject(str);
+                                                param.put(Global.arData[84], objCom.getString(Global.arData[44]));
+                                                final JSONArray arrVil = objCom.getJSONArray(Global.arData[81]);
+                                                final RelativeLayout relative_village = findViewById(R.id.relative_village);
+                                                MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_village, tv_village, getArrStrFromArrJson(Global.arData[76], arrVil), 1, new SelectedListener() {
+                                                    @Override
+                                                    public void onSelected(int str) {
+                                                        try {
+                                                            final JSONObject objVil = arrVil.getJSONObject(str);
+                                                            param.put(Global.arData[85], objVil.getString(Global.arData[44]));
+                                                        } catch (Exception e) {
+                                                            Log.e(TAG, e.getMessage() + "");
+                                                        }
+                                                    }
+                                                });
+                                            } catch (Exception e) {
+                                                Log.e(TAG, e.getMessage() + "");
+                                            }
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.getMessage() + "");
+                                }
+
+                            }
+                        });
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage() + "");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage() + "");
+        }
+
+    }
+
+    private String[] getArrStrFromArrJson(final String objectName, final JSONArray array) {
+        final String[] str = new String[array.length()];
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                final JSONObject object = array.getJSONObject(i);
+                str[i] = object.getString(objectName);
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage() + "");
             }
-        });
-        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_commune, tv_commune, available, 1, new SelectedListener() {
-            @Override
-            public void onSelected(int str) {
-                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
-            }
-        });
-        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_district, tv_district, available, 1, new SelectedListener() {
-            @Override
-            public void onSelected(int str) {
-                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
-            }
-        });
-        MyFunction.getInstance().initSelectItem(ActivityMoreDesc.this, relative_village, tv_village, available, 1, new SelectedListener() {
-            @Override
-            public void onSelected(int str) {
-                Toast.makeText(ActivityMoreDesc.this, ""+str, Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
+        return str;
     }
 
     private void initOpenCloseTime() {
@@ -263,15 +311,15 @@ public class ActivityMoreDesc extends ActivityController {
             public void onChecked(String id) {
                 accessories.add(id);
                 accessoriesStr = "";
-                for (int i = 0 ;i < accessories.size();i++){
-                    accessoriesStr += String.format("%s,",accessories.get(i));
+                for (int i = 0; i < accessories.size(); i++) {
+                    accessoriesStr += String.format("%s,", accessories.get(i));
                 }
             }
 
             @Override
             public void onUnCheck(String id) {
-                for (int i = 0 ;i < accessories.size();i++){
-                    if(accessories.get(i).equals(id)){
+                for (int i = 0; i < accessories.size(); i++) {
+                    if (accessories.get(i).equals(id)) {
                         accessories.remove(i);
                     }
                 }
@@ -314,6 +362,12 @@ public class ActivityMoreDesc extends ActivityController {
     }
 
     private void findView() {
+
+        param.put(Global.arData[82],"");
+        param.put(Global.arData[84],"");
+        param.put(Global.arData[83],"");
+        param.put(Global.arData[85],"");
+
         iv_pick = findViewById(R.id.iv_pick);
         recycler = findViewById(R.id.recycler);
 
@@ -352,7 +406,6 @@ public class ActivityMoreDesc extends ActivityController {
                     asyncUpload.cancel(true);
                 }
                 try {
-
                     final HashMap<String, String> map = MyFunction.getInstance().getIntentHashMap(getIntent());
                     final JSONObject object = new JSONObject(map.get("data"));
                     final String id = object.getString("id");
@@ -395,7 +448,7 @@ public class ActivityMoreDesc extends ActivityController {
                         else
                             multipartBody.addFormDataPart("avail_room", "1");
                     }
-                    multipartBody.addFormDataPart("home-accessories",accessoriesStr);
+                    multipartBody.addFormDataPart("home-accessories", accessoriesStr);
                     multipartBody.addFormDataPart("elect_price", electricPrice);
                     multipartBody.addFormDataPart("water_price", waterPrice);
                     multipartBody.addFormDataPart("parking_price", parkingPrice);
@@ -403,10 +456,10 @@ public class ActivityMoreDesc extends ActivityController {
                     multipartBody.addFormDataPart("open_time", open);
                     multipartBody.addFormDataPart("close_time", close);
 
-                    multipartBody.addFormDataPart("province_id", "1");
-                    multipartBody.addFormDataPart("commune_id", "1");
-                    multipartBody.addFormDataPart("district_id", "1");
-                    multipartBody.addFormDataPart("village_id", "1");
+                    multipartBody.addFormDataPart("province_id", param.get(Global.arData[82]));
+                    multipartBody.addFormDataPart("commune_id", param.get(Global.arData[84]));
+                    multipartBody.addFormDataPart("district_id", param.get(Global.arData[83]));
+                    multipartBody.addFormDataPart("village_id", param.get(Global.arData[85]));
                     multipartBody.addFormDataPart("description", desc);
 
                     for (int i = 0; i < mArrayByte.size(); i++) {
@@ -415,9 +468,26 @@ public class ActivityMoreDesc extends ActivityController {
                                         mArrayByte.get(i)));
                     }
 
-                    showDialog();
-                    asyncUpload = new UploadMoredata(multipartBody, url);
-                    asyncUpload.execute();
+                    if (!param.get(Global.arData[82]).isEmpty() &&
+                            !param.get(Global.arData[83]).isEmpty() &&
+                            !electricPrice.isEmpty() &&
+                            !waterPrice.isEmpty() &&
+                            !close.isEmpty() &&
+                            mArrayByte.size() > 0) {
+
+                        asyncUpload = new UploadMoredata(multipartBody, url);
+                        asyncUpload.execute();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideDialog();
+                                MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.information), getString(R.string.ok), getString(R.string.required_field), 1);
+                            }
+                        });
+                    }
+
+
                 } catch (Exception e) {
                     Log.e("Err", e.getMessage() + "");
                 }
@@ -441,7 +511,7 @@ public class ActivityMoreDesc extends ActivityController {
                 MyFunction.getInstance().okhttpSendRequest(ActivityMoreDesc.this, url, multipartBody, new OkhttpListenner() {
                     @Override
                     public void onSuccess(String response) {
-                        try{
+                        try {
                             Log.e("Err", response);
                             final int code = Integer.parseInt(response);
                             if (code == 3) {
@@ -454,8 +524,8 @@ public class ActivityMoreDesc extends ActivityController {
                             } else {
                                 MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
                             }
-                        }catch (Exception e){
-                            Log.e("Err",e.getMessage()+"");
+                        } catch (Exception e) {
+                            Log.e("Err", e.getMessage() + "");
                         }
                         hideDialog();
                     }

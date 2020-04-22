@@ -37,13 +37,11 @@ import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityController;
-import khay.dy.ptasjurl.activity.ActivityHome;
 import khay.dy.ptasjurl.activity.ActivityMoreDesc;
 import khay.dy.ptasjurl.activity.ActivitySelectMap;
 import khay.dy.ptasjurl.activity.ActivityTermAndCondition;
 import khay.dy.ptasjurl.listener.AlertListenner;
 import khay.dy.ptasjurl.listener.OkhttpListenner;
-import khay.dy.ptasjurl.model.ModelHome;
 import khay.dy.ptasjurl.model.ModelLatLng;
 import khay.dy.ptasjurl.util.ConstantStatus;
 import khay.dy.ptasjurl.util.Global;
@@ -52,10 +50,7 @@ import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.PathUtil;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class FragmentAdd extends Fragment {
 
@@ -270,27 +265,47 @@ public class FragmentAdd extends Fragment {
                     final String ownerPhone1 = edt_owner_phone1.getText().toString().trim();
                     final String ownerPhone2 = edt_owner_phone2.getText().toString().trim();
                     final String price = edt_price.getText().toString().trim();
-                    MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                    if(!price.isEmpty()){
+                        if(!ownerPhone1.isEmpty()) {
+                            MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-                    multipartBody.addFormDataPart(Global.arData[11], "img.png",
-                            RequestBody.create(MediaType.parse("application/octet-stream"),
-                                    pathThum));
-                    multipartBody.addFormDataPart(Global.arData[68], ownerName);
-                    multipartBody.addFormDataPart(Global.arData[69], ownerPhone1);
-                    multipartBody.addFormDataPart(Global.arData[70], ownerPhone2);
-                    multipartBody.addFormDataPart(Global.arData[8], title);
-                    if (rd_room.isChecked()) {
-                        multipartBody.addFormDataPart(Global.arData[75], price);
-                    }else{
-                        multipartBody.addFormDataPart(Global.arData[71], price);
+                            multipartBody.addFormDataPart(Global.arData[11], "img.png",
+                                    RequestBody.create(MediaType.parse("application/octet-stream"),
+                                            pathThum));
+                            multipartBody.addFormDataPart(Global.arData[68], ownerName);
+                            multipartBody.addFormDataPart(Global.arData[69], ownerPhone1);
+                            multipartBody.addFormDataPart(Global.arData[70], ownerPhone2);
+                            multipartBody.addFormDataPart(Global.arData[8], title);
+                            if (rd_room.isChecked()) {
+                                multipartBody.addFormDataPart(Global.arData[75], price);
+                            } else {
+                                multipartBody.addFormDataPart(Global.arData[71], price);
+                            }
+                            multipartBody.addFormDataPart(Global.arData[72], lat);
+                            multipartBody.addFormDataPart(Global.arData[73], lng);
+                            multipartBody.addFormDataPart(Global.arData[43], "2");
+                            multipartBody.addFormDataPart(Global.arData[33], object.getString(Global.arData[33]));
+
+                            asyncUpload = new UploadImage(url, multipartBody);
+                            asyncUpload.execute();
+                        }else {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.required_field), 1);
+                                    ((ActivityController)root_view.getContext()).hideDialog();
+                                }
+                            });
+                        }
+                    }else {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.required_field), 1);
+                                ((ActivityController)root_view.getContext()).hideDialog();
+                            }
+                        });
                     }
-                    multipartBody.addFormDataPart(Global.arData[72], lat);
-                    multipartBody.addFormDataPart(Global.arData[73], lng);
-                    multipartBody.addFormDataPart(Global.arData[43] , "2");
-                    multipartBody.addFormDataPart(Global.arData[33], object.getString(Global.arData[33]));
-
-                    asyncUpload = new UploadImage(url, multipartBody);
-                    asyncUpload.execute();
                 } catch (Exception e) {
                     Log.e("Err", e.getMessage() + "");
                 }

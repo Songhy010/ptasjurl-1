@@ -94,24 +94,37 @@ public class FragmentDetail extends Fragment {
                 tv_type.setText(getString(R.string.house));
             else
                 tv_type.setText(getString(R.string.room));
-            tv_price.setText(data.getString(Global.arData[10])+"$");
-            tv_floor.setText(getString(R.string.floor) + " " + data.getString(Global.arData[53]));
-            tv_member.setText(data.getString(Global.arData[54]) + getString(R.string.member));
-            tv_electric.setText(data.getString(Global.arData[55])+"៛");
-            tv_water.setText(data.getString(Global.arData[56])+"៛");
-            tv_park.setText(data.getString(Global.arData[57])+"៛");
-            tv_other.setText(data.getString(Global.arData[58])+"$");
+            tv_price.setText(data.getString(Global.arData[10]) + "$");
+            final String floor = data.getString(Global.arData[53]).equals("null") ? "N/A" : String.format("%s %s", getString(R.string.floor), data.getString(Global.arData[53]));
+            tv_floor.setText(floor);
+            final String member = data.getString(Global.arData[54]).equals("null") ? "N/A" : String.format("%s %s", data.getString(Global.arData[54]), getString(R.string.member));
+            tv_member.setText(member);
+            final String electric = data.getString(Global.arData[55]).equals("null") ? "N/A" : String.format("%s%s", data.getString(Global.arData[55]), "៛");
+            tv_electric.setText(electric);
+            final String water = data.getString(Global.arData[56]).equals("null") ? "N/A" : String.format("%s%s", data.getString(Global.arData[56]), "៛");
+            tv_water.setText(water);
+            final String park = data.getString(Global.arData[57]).equals("null") ? "N/A" : String.format("%s%s",data.getString(Global.arData[57]), "៛");
+            tv_park.setText(park);
+            final String other = data.getString(Global.arData[58]).equals("null") ? "N/A" : String.format("%s%s",data.getString(Global.arData[58]), "$");
+            tv_other.setText(other);
             final int available = Integer.parseInt(data.getString(Global.arData[61]));
             if (available == 1)
-                tv_available.setText(getString(R.string.available));
+                tv_available.setText(getString(R.string.available_dis));
             else {
                 tv_available.setText(getString(R.string.busy));
                 tv_available.setTextColor(root_view.getResources().getColor(R.color.colorAccent));
             }
             tv_viewer.setText(/*data.getString(Global.arData[59])*/"0");
-            tv_close.setText(data.getString(Global.arData[62]));
-            tv_size.setText(String.format("%smx%sm", data.getString(Global.arData[60]), data.getString(Global.arData[66])));
-            MyFunction.getInstance().displayHtmlInText(tv_desc,data.getString(Global.arData[9]));
+            final String close = data.getString(Global.arData[62]).equals("null") ? "N/A" : data.getString(Global.arData[62]);
+            tv_close.setText(close);
+            final String width = data.getString(Global.arData[60]);
+            final String height = data.getString(Global.arData[66]);
+            if (!width.equals("null") || !height.equals("null"))
+                tv_size.setText(String.format("%smx%sm", width, height));
+            else
+                tv_size.setText("N/A");
+            final String desc = data.getString(Global.arData[9]).equals("null") ? "N/A" : data.getString(Global.arData[9]);
+            MyFunction.getInstance().displayHtmlInText(tv_desc, desc);
 
             final JSONArray array = data.getJSONArray(Global.arData[63]);
             initAccessories(array);
@@ -119,15 +132,16 @@ public class FragmentDetail extends Fragment {
             Log.e(TAG, e.getMessage() + "");
         }
     }
+
     private void initAccessories(JSONArray array) {
-        if(array.length()>0) {
+        if (array.length() > 0) {
             final LinearLayout linear = root_view.findViewById(R.id.linear);
             linear.setVisibility(View.VISIBLE);
             final RecyclerView recycler = root_view.findViewById(R.id.recycler);
             GridLayoutManager manager = new GridLayoutManager(root_view.getContext(), 2);
             recycler.setLayoutManager(manager);
             recycler.setAdapter(new AdapterAccessoriesDetail(root_view.getContext(), array));
-        }else{
+        } else {
             final LinearLayout linear = root_view.findViewById(R.id.linear);
             linear.setVisibility(View.GONE);
         }

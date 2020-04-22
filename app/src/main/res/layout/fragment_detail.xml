@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/iv_height_5"
-                    android:text="@string/price"
+                    android:text="@string/price_dis"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_small"
                     android:textStyle="normal" />
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/iv_height_30"
-                android:text="@string/electric"
+                android:text="@string/electric_dis"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/iv_height_30"
-                android:text="@string/water"
+                android:text="@string/water_dis"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/iv_height_30"
-                android:text="@string/parking"
+                android:text="@string/parking_dis"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
@@ -261,7 +261,7 @@
             android:id="@+id/tv_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/available"
+            android:text="@string/available_dis"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_small"
             android:textStyle="normal" />

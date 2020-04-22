@@ -45,32 +45,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relative_commune"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_40"
-                android:layout_marginTop="@dimen/iv_height_10">
-
-                <TextView
-                    android:id="@+id/tv_commune"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:background="@drawable/drawable_round"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/iv_height_10"
-                    android:paddingRight="@dimen/iv_height_10"
-                    android:text="@string/commune"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size_normal" />
-
-                <ImageView
-                    android:layout_width="@dimen/iv_height_40"
-                    android:layout_height="@dimen/iv_height_40"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_arrow_drop"
-                    android:tint="@color/grey" />
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/relative_district"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_height_40"
@@ -85,6 +59,31 @@
                     android:paddingLeft="@dimen/iv_height_10"
                     android:paddingRight="@dimen/iv_height_10"
                     android:text="@string/district"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageView
+                    android:layout_width="@dimen/iv_height_40"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_arrow_drop"
+                    android:tint="@color/grey" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relative_commune"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_height_40"
+                android:layout_marginTop="@dimen/iv_height_10">
+
+                <TextView
+                    android:id="@+id/tv_commune"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/iv_height_40"
+                    android:background="@drawable/drawable_round"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/iv_height_10"
+                    android:paddingRight="@dimen/iv_height_10"
+                    android:text="@string/commune"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_normal" />
 
@@ -296,7 +295,7 @@
                 android:id="@+id/iv_pick"
                 android:layout_marginTop="@dimen/iv_height_8"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_sample"
+                android:src="@drawable/img_back"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_height_200" />
             <androidx.recyclerview.widget.RecyclerView

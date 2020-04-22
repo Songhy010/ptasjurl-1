@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipe"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,8 +53,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/ic_profile_setting"
-                        android:layout_width="@dimen/iv_height_25"
-                        android:layout_height="@dimen/iv_height_25" />
+                        android:layout_width="@dimen/iv_height_30"
+                        android:layout_height="@dimen/iv_height_30" />
                     <ImageView
                         android:id="@+id/iv_noti"
                         android:padding="@dimen/iv_height_5"
@@ -63,8 +62,8 @@
                         android:layout_marginRight="@dimen/iv_height_10"
                         android:layout_marginTop="@dimen/iv_height_30"
                         android:src="@drawable/img_bell"
-                        android:layout_width="@dimen/iv_height_25"
-                        android:layout_height="@dimen/iv_height_25" />
+                        android:layout_width="@dimen/iv_height_30"
+                        android:layout_height="@dimen/iv_height_30" />
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
@@ -114,12 +113,16 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:paddingRight="@dimen/iv_height_5"
             android:paddingLeft="@dimen/iv_height_5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

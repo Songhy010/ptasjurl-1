@@ -1,9 +1,11 @@
 package khay.dy.ptasjurl.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFont;
 
 public class FragmentOwnerDetail extends Fragment {
@@ -21,7 +24,7 @@ public class FragmentOwnerDetail extends Fragment {
     private View root_view;
     private static JSONObject data;
 
-    public static FragmentOwnerDetail newInstance(JSONObject array){
+    public static FragmentOwnerDetail newInstance(JSONObject array) {
         FragmentOwnerDetail myFragment = new FragmentOwnerDetail();
         data = array;
 
@@ -43,10 +46,29 @@ public class FragmentOwnerDetail extends Fragment {
         initView();
 
         /* TODO set font with current language */
-        MyFont.getInstance().setFont(root_view.getContext(),root_view,2);
+        MyFont.getInstance().setFont(root_view.getContext(), root_view, 2);
     }
 
 
-    private void initView(){
+    private void initView() {
+        initData();
+    }
+
+    private void initData() {
+        try {
+            final TextView tv_name = root_view.findViewById(R.id.tv_name);
+            final TextView tv_phone = root_view.findViewById(R.id.tv_phone);
+            final TextView tv_phone1 = root_view.findViewById(R.id.tv_phone1);
+
+            final String name = data.getString(Global.arData[76]).equals("null") ? "N/A" : data.getString(Global.arData[76]);
+            tv_name.setText(name);
+            final String phone = data.getString(Global.arData[69]).equals("null")? "N/A" : data.getString(Global.arData[69]);
+            tv_phone.setText(phone);
+            final String phone1 = data.getString(Global.arData[70]).equals("null")? "N/A" : data.getString(Global.arData[70]);
+            tv_phone1.setText(phone1);
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage() + "");
+        }
     }
 }

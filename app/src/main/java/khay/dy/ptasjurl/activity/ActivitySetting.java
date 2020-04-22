@@ -22,7 +22,9 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 
 import khay.dy.ptasjurl.R;
+import khay.dy.ptasjurl.listener.AlertListenner;
 import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.ConstantStatus;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
@@ -51,6 +53,10 @@ public class ActivitySetting extends ActivityController {
         if(resultCode == RESULT_OK){
             if (requestCode == 3){
                 gotoMain();
+            }else if(requestCode == ConstantStatus.ActivitySetting){
+                if(MyFunction.getInstance().isHistory(ActivitySetting.this)){
+                    MyFunction.getInstance().openActivity(ActivitySetting.this, ActivityChangePassword.class);
+                }
             }
         }
     }
@@ -103,7 +109,7 @@ public class ActivitySetting extends ActivityController {
     private void initLanguage() {
         try {
             final String lang = MyFunction.getInstance().getText(this, Global.LANGUAGE);
-            if (lang.equals("km")) {
+            if (lang.equals("km") || lang.isEmpty()) {
                 linear_km.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 linear_en.setBackgroundColor(getResources().getColor(R.color.grey));
             } else {
@@ -217,7 +223,17 @@ public class ActivitySetting extends ActivityController {
         findViewById(R.id.relative_change_pass).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyFunction.getInstance().openActivity(ActivitySetting.this, ActivityChangePassword.class);
+
+                if(!MyFunction.getInstance().isHistory(ActivitySetting.this)){
+                    MyFunction.getInstance().alertMessage(ActivitySetting.this, getString(R.string.login_required), new AlertListenner() {
+                        @Override
+                        public void onSubmit() {
+                            MyFunction.getInstance().openActivityForResult(ActivitySetting.this,ActivityLogin.class,null, ConstantStatus.ActivitySetting);
+                        }
+                    },1);
+                }else{
+                   MyFunction.getInstance().openActivity(ActivitySetting.this, ActivityChangePassword.class);
+                }
             }
         });
     }

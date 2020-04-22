@@ -100,7 +100,6 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
 
     private void initView() {
         try {
-
             Dexter.withActivity((Activity) root_view.getContext()).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
                 @Override
                 public void onPermissionGranted(PermissionGrantedResponse response) {
@@ -138,8 +137,6 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 if (mMap != null) {
-
-
                     try {
                         BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_location);
                         Bitmap b = bitmapdraw.getBitmap();

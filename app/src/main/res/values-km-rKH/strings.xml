@@ -10,19 +10,24 @@
     <string name="house">ផ្ទះ</string>
     <string name="map">ផែនទី</string>
     <string name="location">ទីតាំង</string>
-    <string name="price">តម្លៃជួល (ដុល្លារ / ខែ) *</string>
+    <string name="price_dis">តម្លៃជួល (ដុល្លារ / ខែ)</string>
+    <string name="price">តម្លៃជួល (ដុល្លារ / ខែ).ឧ: ៣០-៧៥ដុល្លារ*</string>
     <string name="electric">អគ្គិសនី (៛ / អែម) *</string>
     <string name="water">ទឹក (៛ / ម ៣) *</string>
-    <string name="parking">កន្លែងចតរថយន្ត (៛ / ខែ) *</string>
+    <string name="parking">កន្លែងចតរថយន្ត (៛ / ខែ)</string>
+    <string name="electric_dis">អគ្គិសនី (៛ / អែម)</string>
+    <string name="water_dis">ទឹក (៛ / ម ៣)</string>
+    <string name="parking_dis">កន្លែងចតរថយន្ត (៛ / ខែ)</string>
     <string name="free">ឥតគិតថ្លៃ</string>
     <string name="desc">ការពិពណ៌នា</string>
     <string name="address">អាសយដ្ឋាន</string>
-    <string name="room_pic">រូបភាពបន្ទប់</string>
+    <string name="room_pic">រូបភាពបន្ទប់ *</string>
     <string name="post_by">ប្រកាសតាម</string>
     <string name="home_owner">ម្ចាស់ផ្ទះ</string>
     <string name="other">ផ្សេងទៀត</string>
     <string name="home_owner_phone">ទូរស័ព្ទម្ចាស់ផ្ទះ *</string>
-    <string name="home_owner_name">ទូរស័ព្ទម្ចាស់ផ្ទះ *</string>
+    <string name="home_owner_phone1">ទូរស័ព្ទម្ចាស់ផ្ទះ</string>
+    <string name="home_owner_name">ឈ្មោះម្ចាស់ផ្ទះ</string>
     <string name="bed_room">បន្ទប់គេង</string>
     <string name="kitchen">ផ្ទះបាយ</string>
     <string name="upload">ផ្ទុកឡើង</string>
@@ -32,6 +37,7 @@
     <string name="setup_more">រៀបចំការពិពណ៌នាបន្ថែម</string>
     <string name="side">ចំហៀង (បxទ) *</string>
     <string name="available">ទំនេរ *</string>
+    <string name="available_dis">ទំនេរ</string>
     <string name="Floor">ជាន់</string>
     <string name="amount_people">ចំនួនមនុស្ស</string>
     <string name="trash">សំរាម</string>
@@ -40,8 +46,8 @@
     <string name="check">បញ្ជីត្រួតពិនិត្យ</string>
     <string name="more_desc">ការពិពណ៌នាបន្ថែម</string>
     <string name="notification">ការជូនដំណឹង</string>
-    <string name="term_condition">រយៈពេលនិងលក្ខខណ្ឌ</string>
-    <string name="accept_term">ខ្ញុំបានអាននិងទទួលយកជាមួយនេះ</string>
+    <string name="term_condition">ខនិងលក្ខខណ្ឌ</string>
+    <string name="accept_term">ខ្ញុំបានអាននិងទទួលយកជាមួយ</string>
     <string name="tap">ប៉ះដើម្បីចម្លងអត្ថបទ</string>
     <string name="copied">បានចំលង</string>
     <string name="profile">ប្រវត្តិរូប</string>
@@ -50,6 +56,7 @@
     <string name="language">ភាសា</string>
     <string name="logout">ចាកចេញ</string>
     <string name="incorrect_pass">ឈ្មោះអ្នកប្រើឬលេខសម្ងាត់មិនត្រឹមត្រូវ</string>
+    <string name="incorrect_password">លេខសម្ងាត់មិនត្រឹមត្រូវ</string>
     <string name="setting">ការកំណត់</string>
     <string name="contact">ទាក់ទង​មក​ពួក​យើង</string>
     <string name="donating">អំណោយ</string>
@@ -69,7 +76,7 @@
     <string name="fname">នាមខ្លួន</string>
     <string name="lname">នាមត្រកូល</string>
     <string name="viewer">អ្នកមើល</string>
-    <string name="close">បិទពេលវេលា</string>
+    <string name="close">បិទពេលវេលា *</string>
     <string name="size">ទំហំ</string>
     <string name="change_pass">ផ្លាស់ប្តូរពាក្យសម្ងាត់</string>
     <string name="old_pass">លេខសំងាត់ចាស់</string>
@@ -95,8 +102,8 @@
     <string name="server_error">មិនអាចភ្ជាប់ទៅ Server​បាន</string>
     <string name="room_rent">បន្ទប់ជួល</string>
     <string name="house_rent">ផ្ទះជួល</string>
-    <string name="province">ខេត្ត</string>
-    <string name="district">ស្រុក/ខណ្ឌ</string>
+    <string name="province">ខេត្ត *</string>
+    <string name="district">ស្រុក/ខណ្ឌ *</string>
     <string name="commune">ឃុំ/សង្កាត់</string>
     <string name="village">ភូមិ</string>
     <string name="width">បណ្ដោយ(ម)</string>
@@ -108,5 +115,6 @@
     <string name="member">នាក់</string>
     <string name="upload_more_desc">តើអ្នកចង់ផ្ទុកឡើងការពិពណ៌នាបន្ថែមទេ?</string>
     <string name="login_required">អ្នកត្រូវចូលទៅគណនីរបស់អ្នកមុនពេលប្រើមុខងារនេះ</string>
-
+    <string name="your_approved">ប្រកាសដែលបានអនុម័តរបស់អ្នក</string>
+    <string name="update_profile">តើអ្នកចង់បានប្រវត្តិរូបទាន់សម័យទេ?</string>
 </resources>

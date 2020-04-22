@@ -938,7 +938,7 @@ public class MyFunction {
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            ((TextView) tv).setText(item.getTitle());
+                           ((TextView) tv).setText(item.getTitle());
                             selectedListener.onSelected(item.getItemId());
                             return true;
                         }

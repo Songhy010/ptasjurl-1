@@ -48,17 +48,27 @@ public class ActivityMain extends ActivityController {
 
     private void initData() {
         loadHome();
+        loadAddress();
     }
 
 
     private void initLocalize() {
         final String lang = MyFunction.getInstance().getText(ActivityMain.this, Global.LANGUAGE);
+        if(lang.isEmpty()){
+            Locale locale = new Locale("km");
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        }else{
+            Locale locale = new Locale(lang);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        }
         //lang = MyFunction.getInstance().getText(ActivityMain.this, AirConConstant.LANG);
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
     }
 
     private void loadHome() {
@@ -71,6 +81,26 @@ public class ActivityMain extends ActivityController {
                     ModelHome.getInstance().setObjHome(object);
                     MyFunction.getInstance().openActivity(ActivityMain.this, ActivityHome.class);
                     MyFunction.getInstance().finishActivity(ActivityMain.this);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Log.e(TAG, e.getMessage() + "");
+                loadHome();
+            }
+        });
+    }
+
+    private void loadAddress() {
+        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[49], Global.arData[5]);
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    MyFunction.getInstance().saveText(ActivityMain.this,Global.ADDRESS,response);
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }

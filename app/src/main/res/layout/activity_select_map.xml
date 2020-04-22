@@ -34,4 +34,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_done"
+        android:layout_width="@dimen/iv_height_45"
+        android:layout_height="@dimen/iv_height_45"
+        android:layout_marginTop="@dimen/iv_height_25"
+        android:padding="@dimen/iv_height_10"
+        android:src="@drawable/ic_check"
+        android:tint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

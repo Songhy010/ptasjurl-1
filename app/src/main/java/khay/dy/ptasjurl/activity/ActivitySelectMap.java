@@ -9,23 +9,37 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.model.ModelLatLng;
 
-public class ActivitySelectMap extends ActivityController {
+public class ActivitySelectMap extends ActivityController implements OnMapReadyCallback {
 
     private final String TAG = "Ac Map";
 
@@ -39,6 +53,16 @@ public class ActivitySelectMap extends ActivityController {
     private final int PIN_W = 75;
     private final int PIN_H = 75;
 
+
+
+
+
+    private LocationCallback locationCallback;
+    private LocationRequest locationRequest;
+    private Marker userMaker;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,88 +70,99 @@ public class ActivitySelectMap extends ActivityController {
         initView();
     }
 
-    private void findView() {
-        mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view));
-    }
 
     private void initView() {
-        findView();
+        try {
+
+            Dexter.withActivity(this).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
+                @Override
+                public void onPermissionGranted(PermissionGrantedResponse response) {
+                    getRequest();
+                    getLocation();
+                    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(ActivitySelectMap.this);
+                    setSupportMap();
+                }
+
+                @Override
+                public void onPermissionDenied(PermissionDeniedResponse response) {
+                    Toast.makeText(ActivitySelectMap.this, "You should allow permission location for map view", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                }
+            }).check();
+        } catch (Exception e) {
+            Log.e(TAG, "" + e.getMessage());
+        }
         initBack();
-        initLocation();
+    }
+    private void getLocation() {
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (mMap != null) {
+
+
+                    try {
+                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_location);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
+
+                        if (userMaker != null) userMaker.remove();
+                        userMaker = mMap.addMarker(new MarkerOptions().position(new LatLng(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude())).title("You").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userMaker.getPosition(), 12f));
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage() + "");
+                    }
+                }
+            }
+        };
+    }
+    private void getRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(50000);
+        locationRequest.setFastestInterval(3000);
+        locationRequest.setSmallestDisplacement(10f);
     }
 
-    private void initBack() {
+    private void setSupportMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map_view);
+        mapFragment.getMapAsync(this);
+    }
+
+   private void initBack() {
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+       findViewById(R.id.iv_done).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               onBackPressed();
+           }
+       });
     }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
-    private void initLocation() {
-        try {
-            if (locationManager == null)
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Add a marker in Sydney and move the camera
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        if (fusedLocationProviderClient != null)
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-            // getting GPS status
-            gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            // getting network status
-            network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-            if (!MyFunction.getInstance().hasPermissions(ActivitySelectMap.this, PERMISSIONS)) {
-                ActivityCompat.requestPermissions((Activity) ActivitySelectMap.this, PERMISSIONS, Global.PERMISSION_ALL);
-                initMap();
-            } else {
-                initMap();
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                LatLng latlng = mMap.getCameraPosition().target;
+                ModelLatLng.getInstance().setLatlng(latlng);
             }
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
+        });
     }
-
-    private void initMap() {
-        mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_view));
-        try {
-            if (mapFragment != null) {
-                mapFragment.getMapAsync(new OnMapReadyCallback() {
-
-                    @Override
-                    public void onMapReady(final GoogleMap map) {
-
-                        if (map != null) {
-                            mMap = map;
-                            //initialize map
-                            final LatLng latLng = new LatLng(lat, lng);
-
-                            BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.img_pin);
-                            Bitmap b = bitmapdraw.getBitmap();
-                            Bitmap smallMarker = Bitmap.createScaledBitmap(b, PIN_W, PIN_H, false);
-
-                            MarkerOptions marker = new MarkerOptions().position(latLng).title("Aide et Action").icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-
-                            // mMap.addMarker(marker);
-
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                            mMap.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM), CAMERA_ANIMATE, null);
-                            mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-                                @Override
-                                public void onCameraMove() {
-                                    LatLng latlng = mMap.getCameraPosition().target;
-                                    ModelLatLng.getInstance().setLatlng(latlng);
-                                }
-                            });
-                        }
-                    }
-                });
-            } else {
-                //new DialogAlertCustom(context, null, getString(R.string.error_occured)).show();
-            }
-
-
-        } catch (Exception e) {
-            Log.e("Map ", e.getMessage() + "");
-        }
-    }
-
 }

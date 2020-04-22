@@ -55,6 +55,7 @@ public class FragmentHome extends Fragment {
     private Runnable runnable = null;
     private Handler handler = new Handler();
     private ViewPager viewPager;
+    private SwipeRefreshLayout swipe;
 
     @Nullable
     @Override
@@ -75,6 +76,7 @@ public class FragmentHome extends Fragment {
     }
 
     private void findView() {
+        swipe   = root_view.findViewById(R.id.swipe);
         recycler = root_view.findViewById(R.id.recycler);
     }
 
@@ -83,9 +85,18 @@ public class FragmentHome extends Fragment {
             findView();
             initHome();
             onClick();
+            initSwipe();
         }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG,e.getMessage()+"");
         }
+    }
+    private void initSwipe(){
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadHome();
+            }
+        });
     }
 
     private void initHome() {
@@ -196,5 +207,26 @@ public class FragmentHome extends Fragment {
         recycler.setAdapter(new AdapterHome(array, root_view.getContext()));
 
     }
+    private void loadHome() {
+        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    final JSONObject object = new JSONObject(response);
+                    ModelHome.getInstance().setObjHome(object);
+                    initHome();
+                    swipe.setRefreshing(false);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
 
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Log.e(TAG, e.getMessage() + "");
+                loadHome();
+            }
+        });
+    }
 }

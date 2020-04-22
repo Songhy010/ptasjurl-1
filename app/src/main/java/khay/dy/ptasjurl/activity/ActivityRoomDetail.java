@@ -46,6 +46,7 @@ import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterBanner;
 import khay.dy.ptasjurl.adapter.AdapterHome;
 import khay.dy.ptasjurl.adapter.AdapterPagerDetail;
+import khay.dy.ptasjurl.adapter.AdapterRelated;
 import khay.dy.ptasjurl.fragment.FragmentDetail;
 import khay.dy.ptasjurl.fragment.FragmentOwnerDetail;
 import khay.dy.ptasjurl.listener.VolleyCallback;
@@ -243,7 +244,7 @@ public class ActivityRoomDetail extends ActivityController {
         final RecyclerView recyclerView = findViewById(R.id.recycler_relate);
         final LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(new AdapterHome(array, this));
+        recyclerView.setAdapter(new AdapterRelated(array, this));
     }
 
     private void loadDetail() {
@@ -314,7 +315,7 @@ public class ActivityRoomDetail extends ActivityController {
             final String[] titles = {getString(R.string.detail), getString(R.string.owner)};
             adapterPager = new AdapterPagerDetail(getSupportFragmentManager(), titles);
             adapterPager.addFrag(FragmentDetail.newInstance(obj.getJSONObject(Global.arData[51])));
-            adapterPager.addFrag(FragmentOwnerDetail.newInstance(/*obj.getJSONObject(Global.arData[52])*/null));
+            adapterPager.addFrag(FragmentOwnerDetail.newInstance(obj.getJSONObject(Global.arData[86])));
             final WrapContentViewPager view_pager = findViewById(R.id.view_pager);
             view_pager.setOffscreenPageLimit(2);
             view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

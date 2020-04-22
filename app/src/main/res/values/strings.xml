@@ -14,19 +14,24 @@
     <string name="map">Map</string>
     <string name="add_house">Add</string>
     <string name="location">Location</string>
-    <string name="price">Rental Price ($/month) *</string>
+    <string name="price_dis">Rental Price ($/month)</string>
+    <string name="price">Rental Price ($/month).Ex: 30-75$ *</string>
     <string name="electric">Electric (៛/kwm) *</string>
     <string name="water">Water (៛/m3) *</string>
-    <string name="parking">Parking (៛/month) *</string>
+    <string name="parking">Parking (៛/month)</string>
+    <string name="electric_dis">Electric (៛/kwm)</string>
+    <string name="water_dis">Water (៛/m3)</string>
+    <string name="parking_dis">Parking (៛/month)</string>
     <string name="free">Free</string>
     <string name="desc">Description</string>
     <string name="address">Address</string>
-    <string name="room_pic">Room Picture</string>
+    <string name="room_pic">Room Picture *</string>
     <string name="post_by">Post By</string>
     <string name="home_owner">Home Owner</string>
     <string name="other">Other</string>
     <string name="home_owner_phone">Home Owner Phone *</string>
-    <string name="home_owner_name">Home Owner Name *</string>
+    <string name="home_owner_phone1">Home Owner Phone</string>
+    <string name="home_owner_name">Home Owner Name</string>
     <string name="bed_room">Bed Room</string>
     <string name="kitchen">Kitchen</string>
     <string name="upload">Upload</string>
@@ -36,7 +41,8 @@
     <string name="setup_more">Setup more description</string>
     <string name="side">Side (WxH) *</string>
     <string name="Floor">Floor</string>
-    <string name="available">Available *</string>Trash
+    <string name="available">Available</string>
+    <string name="available_dis">Available</string>Trash
     <string name="amount_people">Amount People</string>
     <string name="trash">Trash</string>Other
     <string name="other_p">Other ($)</string>
@@ -56,6 +62,7 @@
     <string name="en" translatable="false">English</string>
     <string name="logout">Logout</string>
     <string name="incorrect_pass">Incorrect Username or Password</string>
+    <string name="incorrect_password">Incorrect​Password</string>
     <string name="setting">Setting</string>
     <string name="contact">Contact Us</string>
     <string name="donating">Donation</string>
@@ -72,7 +79,7 @@
     <string name="register_success">Successful</string>
     <string name="user_existed">User Existed</string>
     <string name="viewer">Viewer</string>
-    <string name="close">Close Time</string>
+    <string name="close">Close Time *</string>
     <string name="size">Size</string>
     <string name="change_pass">Change Password</string>
     <string name="old_pass">Old Password</string>
@@ -98,8 +105,8 @@
     <string name="server_error">Sever Error</string>
     <string name="title">Title</string>
     <string name="login_required">You need to login to your account before use this feature</string>
-    <string name="province">Province</string>
-    <string name="district">District</string>
+    <string name="province">Province *</string>
+    <string name="district">District *</string>
     <string name="commune">Commune</string>
     <string name="village">Village</string>
     <string name="width">Width(m)</string>
@@ -109,7 +116,8 @@
     <string name="detail">Detail</string>
     <string name="owner">Owner</string>
     <string name="member">Member</string>
-
+    <string name="update_profile">Do you want update profile?</string>
+    <string name="your_approved">Your Approved Posted</string>
     <string name="upload_more_desc">Success...! \nDo you want to upload more description?</string>
     <string name="google_maps_key" translatable="false">AIzaSyCQ-kYIujt0ONGIo2kUsAIoDd-CRuco1f8</string>
 </resources>

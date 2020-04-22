@@ -118,6 +118,8 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[83] = "district_id";
         Global.arData[84] = "commune_id";
         Global.arData[85] = "village_id";
+        Global.arData[86] = "owner_info";
+        Global.arData[87] = "profile";
 
 
 
