@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,6 +32,7 @@ import khay.dy.ptasjurl.util.MyFunction;
 public class ActivityMain extends ActivityController {
 
     private final String TAG = "Ac Main";
+    private ImageView iv_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,16 @@ public class ActivityMain extends ActivityController {
     }
 
     private void initView() {
+        initSlashScreen();
         initData();
         initLocalize();
 
+    }
+
+    private void initSlashScreen() {
+        iv_img = findViewById(R.id.iv_img);
+        int height = MyFunction.getInstance().getBannerHeight(this);
+        iv_img.getLayoutParams().height = height;
     }
 
     private void initData() {

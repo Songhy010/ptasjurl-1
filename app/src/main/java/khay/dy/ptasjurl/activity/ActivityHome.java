@@ -37,6 +37,7 @@ import khay.dy.ptasjurl.fragment.FragmentHouse;
 import khay.dy.ptasjurl.fragment.FragmentMap;
 import khay.dy.ptasjurl.fragment.FragmentRoom;
 import khay.dy.ptasjurl.listener.VolleyCallback;
+import khay.dy.ptasjurl.util.ConstantStatus;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 
@@ -69,9 +70,10 @@ public class ActivityHome extends ActivityController {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == 4) {
+            if (requestCode == 4)
                 view_pager.setCurrentItem(0);
-            }
+            else if (requestCode == ConstantStatus.ActivityMoreDesc)
+                view_pager.setCurrentItem(0);
         }
     }
 

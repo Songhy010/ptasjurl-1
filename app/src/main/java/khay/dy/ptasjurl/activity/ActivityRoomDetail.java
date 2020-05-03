@@ -1,5 +1,6 @@
 package khay.dy.ptasjurl.activity;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -146,7 +147,8 @@ public class ActivityRoomDetail extends ActivityController {
     private void initPagerBanner(JSONArray arr) {
         final LinearLayout layout_dots = findViewById(R.id.layout_dots);
         final int height = MyFunction.getInstance().getBannerHeight(this);
-        viewPager.getLayoutParams().height = height;
+        final ConstraintLayout cons_pager = findViewById(R.id.cons_pager);
+        cons_pager.getLayoutParams().height = height;
         List<String> listImage = new ArrayList<>();
         try {
             adapter = new AdapterBanner(this, listImage, arr);

@@ -46,7 +46,7 @@
                         android:layout_marginTop="@dimen/iv_height_5"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:text="Sem Songhy"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>

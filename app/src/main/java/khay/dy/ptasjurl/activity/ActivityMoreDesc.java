@@ -363,10 +363,10 @@ public class ActivityMoreDesc extends ActivityController {
 
     private void findView() {
 
-        param.put(Global.arData[82],"");
-        param.put(Global.arData[84],"");
-        param.put(Global.arData[83],"");
-        param.put(Global.arData[85],"");
+        param.put(Global.arData[82], "");
+        param.put(Global.arData[84], "");
+        param.put(Global.arData[83], "");
+        param.put(Global.arData[85], "");
 
         iv_pick = findViewById(R.id.iv_pick);
         recycler = findViewById(R.id.recycler);
@@ -515,12 +515,8 @@ public class ActivityMoreDesc extends ActivityController {
                             Log.e("Err", response);
                             final int code = Integer.parseInt(response);
                             if (code == 3) {
-                                MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.register_success), new AlertListenner() {
-                                    @Override
-                                    public void onSubmit() {
-                                        finish();
-                                    }
-                                }, 1);
+                                setResult(RESULT_OK);
+                                MyFunction.getInstance().finishActivity(ActivityMoreDesc.this);
                             } else {
                                 MyFunction.getInstance().alertMessage(ActivityMoreDesc.this, getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
                             }

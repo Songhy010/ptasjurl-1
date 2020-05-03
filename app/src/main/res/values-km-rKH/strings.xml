@@ -36,8 +36,8 @@
     <string name="search">ស្វែងរកទីតាំង</string>
     <string name="setup_more">រៀបចំការពិពណ៌នាបន្ថែម</string>
     <string name="side">ចំហៀង (បxទ) *</string>
-    <string name="available">ទំនេរ *</string>
-    <string name="available_dis">ទំនេរ</string>
+    <string name="available">មានបន្ទប់ឬផ្ទះនៅទំនេរ</string>
+    <string name="available_dis">នៅទំនេរ</string>
     <string name="Floor">ជាន់</string>
     <string name="amount_people">ចំនួនមនុស្ស</string>
     <string name="trash">សំរាម</string>
@@ -97,7 +97,7 @@
     <string name="secu_cam">កាមេរ៉ាសុវត្ថិភាព</string>
     <string name="secu_man">សន្តិសុខ</string>
     <string name="floor">ជាន់</string>
-    <string name="busy">រវល់</string>
+    <string name="busy">គ្មានបន្ទប់ឬផ្ទះទំនេរទេ</string>
     <string name="title">ពិពណ៌នា</string>
     <string name="server_error">មិនអាចភ្ជាប់ទៅ Server​បាន</string>
     <string name="room_rent">បន្ទប់ជួល</string>

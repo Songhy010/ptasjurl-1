@@ -796,6 +796,26 @@ public class MyFunction {
         }
     }
 
+    public void alertMessage(Context ct, String message,String cancel, final AlertListenner alertListenner, int fontType) {
+        try {
+            new CustomAlertDialog(ct, ct.getString(R.string.information),message, ct.getString(R.string.ok), cancel, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    alertListenner.onSubmit();
+                }
+            }, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            },fontType).show();
+        } catch (Exception e) {
+            Log.e("Err: ", e.getMessage() + "");
+        }
+    }
+
 
 
     public StringRequest requestString(final int method, final String url, final HashMap<String, String> params, final VolleyCallback callback) {

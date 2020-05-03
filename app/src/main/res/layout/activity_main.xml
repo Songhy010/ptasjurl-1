@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ActivityMain">
     <LinearLayout
+        android:visibility="gone"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_weight="1"
@@ -35,10 +36,11 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
+           android:scaleType="centerCrop"
             android:id="@+id/iv_img"
-            android:layout_width="@dimen/iv_height_250"
-            android:layout_height="@dimen/iv_height_250"
-            android:src="@drawable/img_splash" />
+            android:layout_width="@dimen/iv_height_300"
+            android:layout_height="@dimen/iv_height_300"
+            android:src="@drawable/img_slash" />
     </LinearLayout>
 </LinearLayout>

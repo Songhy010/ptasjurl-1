@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -87,26 +88,29 @@ public class ActivityProfileEdit extends ActivityController {
             final EditText edt_lname = findViewById(R.id.edt_lname);
             final EditText edt_email = findViewById(R.id.edt_email);
             final EditText edt_address = findViewById(R.id.edt_address);
+            final TextView tv_name = findViewById(R.id.tv_name);
             final ImageView iv_profile = findViewById(R.id.iv_profile);
 
             final String email_dis = object.getString(Global.arData[24]).equals("null") ? "" : object.getString(Global.arData[24]);
             final String address_dis = object.getString(Global.arData[49]).equals("null") ? "" : object.getString(Global.arData[49]);
-            final String lname_dis = object.getString(Global.arData[31]).equals("null") ? "":object.getString(Global.arData[31]);
-            final String fname_dis = object.getString(Global.arData[30]).equals("null") ? "":object.getString(Global.arData[30]);
+            final String lname_dis = object.getString(Global.arData[31]).equals("null") ? "" : object.getString(Global.arData[31]);
+            final String fname_dis = object.getString(Global.arData[30]).equals("null") ? "" : object.getString(Global.arData[30]);
 
             edt_fname.setText(fname_dis);
             edt_lname.setText(lname_dis);
-            edt_email.setText(address_dis);
-            edt_address.setText(email_dis);
+            edt_email.setText(email_dis);
+            edt_address.setText(address_dis);
+            tv_name.setText(String.format("%s %s",fname_dis,lname_dis));
 
             MyImageLoader.getInstance().setImage(iv_profile, object.getString(Global.arData[87]), null, 0, 0, -1, R.drawable.img_loading, R.drawable.img_loading);
-            final String fname = edt_fname.getText().toString();
-            final String lname = edt_lname.getText().toString();
-            final String email = edt_email.getText().toString();
-            final String address = edt_address.getText().toString();
+
             findViewById(R.id.tv_save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final String fname = edt_fname.getText().toString();
+                    final String lname = edt_lname.getText().toString();
+                    final String email = edt_email.getText().toString();
+                    final String address = edt_address.getText().toString();
                     initSave(fname, lname, email, address);
                 }
             });
@@ -133,7 +137,7 @@ public class ActivityProfileEdit extends ActivityController {
                     try {
                         if (MyFunction.getInstance().isValidJSON(response)) {
                             MyFunction.getInstance().saveText(ActivityProfileEdit.this, Global.INFO_FILE, response);
-                            MyFunction.getInstance().alertMessage(ActivityProfileEdit.this, getString(R.string.information), getString(R.string.ok), getString(R.string.register_success), 1);
+                            finish();
                         } else {
                             MyFunction.getInstance().alertMessage(ActivityProfileEdit.this, getString(R.string.information), getString(R.string.ok), "Server Error", 1);
                         }
@@ -239,7 +243,12 @@ public class ActivityProfileEdit extends ActivityController {
                                 @Override
                                 public void onSubmit() {
                                     MyFunction.getInstance().saveText(ActivityProfileEdit.this, Global.INFO_FILE, response);
-                                    MyFunction.getInstance().alertMessage(ActivityProfileEdit.this, getString(R.string.information), getString(R.string.ok), getString(R.string.register_success), 1);
+                                    MyFunction.getInstance().alertMessage(ActivityProfileEdit.this, getString(R.string.register_success), "", new AlertListenner() {
+                                        @Override
+                                        public void onSubmit() {
+                                            finish();
+                                        }
+                                    }, 1);
                                 }
                             }, 1);
                         } else {

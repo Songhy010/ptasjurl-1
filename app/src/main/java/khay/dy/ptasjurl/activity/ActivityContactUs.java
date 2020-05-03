@@ -85,13 +85,15 @@ public class ActivityContactUs extends ActivityController {
                         MyFunction.getInstance().displayHtmlInText(tv_desc, object.getString(Global.arData[9]));
                         final TextView tv_email = findViewById(R.id.tv_email);
                         final TextView tv_fb = findViewById(R.id.tv_facebook);
-                        tv_fb.setText(object.getString(Global.arData[25]));
-                        tv_fb.setOnClickListener(new View.OnClickListener() {
+                        final LinearLayout linear_web = findViewById(R.id.linear_web);
+                        linear_web.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                initLink("1118241991550593");
+                                initLink("http://chekromlek.com/");
                             }
                         });
+                        tv_fb.setText(object.getString(Global.arData[25]));
+
                         tv_email.setText(object.getString(Global.arData[24]));
                         tv_email.setOnClickListener(new View.OnClickListener() {
                             @Override

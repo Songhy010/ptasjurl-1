@@ -1,11 +1,9 @@
 package khay.dy.ptasjurl.activity;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,15 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
 import com.android.volley.my.MyImageLoader;
 
 import org.json.JSONObject;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.adapter.AdapterProfile;
-import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
 import khay.dy.ptasjurl.util.MyFunction;
 import khay.dy.ptasjurl.util.Tools;
@@ -58,7 +53,7 @@ public class ActivityProfile extends ActivityController {
         initProfile();
         initFB();
         initIG();
-        initYT();
+        initTG();
     }
 
     private void initProfile(){
@@ -95,25 +90,25 @@ public class ActivityProfile extends ActivityController {
         findViewById(R.id.iv_fb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLink("1118241991550593","fb");
+                initLink("100471144891773","fb");
             }
         });
     }
 
-    private void initYT(){
+    private void initTG(){
         findViewById(R.id.iv_tg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLink("tg://resolve?domain=radyphen","tg");
+                initLink("tg://resolve?domain=rentail_house_or_room","tg");
             }
         });
     }
 
     private void initIG(){
-        findViewById(R.id.iv_ig).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_web).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initLink("https://instagram.com/deejaysoda?igshid=uka6kgzpcxo7","ig");
+                initLink("http://chekromlek.com/","ig");
             }
         });
     }
@@ -134,5 +129,11 @@ public class ActivityProfile extends ActivityController {
         } catch(Exception e) {
             Log.e(TAG,e.getMessage());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initProfile();
     }
 }

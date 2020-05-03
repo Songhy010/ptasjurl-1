@@ -65,7 +65,7 @@ public class FragmentAdd extends Fragment {
     private byte[] pathThum;
     private UploadImage asyncUpload;
     private SwipeRefreshLayout swipe;
-    private LinearLayout btn_upload ;
+    private LinearLayout btn_upload;
     private String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE/*, Manifest.permission.ACCESS_COARSE_LOCATION*/};
 
 
@@ -127,11 +127,10 @@ public class FragmentAdd extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-                if(b) {
+                if (b) {
                     btn_upload.setEnabled(true);
                     btn_upload.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                }
-                else {
+                } else {
                     btn_upload.setEnabled(false);
                     btn_upload.setBackgroundColor(getResources().getColor(R.color.grey));
                 }
@@ -159,7 +158,7 @@ public class FragmentAdd extends Fragment {
         tv_address = root_view.findViewById(R.id.tv_address);
         swipe = root_view.findViewById(R.id.swipe);
         swipe.setEnabled(false);
-        if(MyFunction.getInstance().isHistory(root_view.getContext())){
+        if (MyFunction.getInstance().isHistory(root_view.getContext())) {
             swipe.setVisibility(View.VISIBLE);
         }
     }
@@ -179,9 +178,12 @@ public class FragmentAdd extends Fragment {
         root_view.findViewById(R.id.btn_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_sample);
-                pathThum = pathThum == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathThum;
-                uploadFileServer();
+                /*Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_sample);
+                pathThum = pathThum == null ? MyFunction.getInstance().getBytesFromBitmap(bitmap) : pathThum;*/
+                if (pathThum != null)
+                    uploadFileServer();
+                else
+                    MyFunction.getInstance().alertMessage(root_view.getContext(),getString(R.string.information),getString(R.string.ok),getString(R.string.required_field),1);
             }
         });
     }
@@ -239,7 +241,7 @@ public class FragmentAdd extends Fragment {
 
     // Upload to server
     private void uploadFileServer() {
-        ((ActivityController)root_view.getContext()).showDialog();
+        ((ActivityController) root_view.getContext()).showDialog();
         new Thread(new Runnable() {
             public void run() {
                 if (asyncUpload != null) {
@@ -265,8 +267,8 @@ public class FragmentAdd extends Fragment {
                     final String ownerPhone1 = edt_owner_phone1.getText().toString().trim();
                     final String ownerPhone2 = edt_owner_phone2.getText().toString().trim();
                     final String price = edt_price.getText().toString().trim();
-                    if(!price.isEmpty()){
-                        if(!ownerPhone1.isEmpty()) {
+                    if (!price.isEmpty()) {
+                        if (!ownerPhone1.isEmpty()) {
                             MultipartBody.Builder multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
                             multipartBody.addFormDataPart(Global.arData[11], "img.png",
@@ -288,21 +290,21 @@ public class FragmentAdd extends Fragment {
 
                             asyncUpload = new UploadImage(url, multipartBody);
                             asyncUpload.execute();
-                        }else {
+                        } else {
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.required_field), 1);
-                                    ((ActivityController)root_view.getContext()).hideDialog();
+                                    ((ActivityController) root_view.getContext()).hideDialog();
                                 }
                             });
                         }
-                    }else {
+                    } else {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.required_field), 1);
-                                ((ActivityController)root_view.getContext()).hideDialog();
+                                ((ActivityController) root_view.getContext()).hideDialog();
                             }
                         });
                     }
@@ -331,14 +333,14 @@ public class FragmentAdd extends Fragment {
                     public void onSuccess(String response) {
                         if (MyFunction.getInstance().isValidJSON(response)) {
                             Log.e("Response", response);
-                            final HashMap<String,String> map = new HashMap<>();
-                            map.put("data",response);
+                            final HashMap<String, String> map = new HashMap<>();
+                            map.put("data", response);
                             MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.upload_more_desc), new AlertListenner() {
                                 @Override
                                 public void onSubmit() {
-                                    MyFunction.getInstance().openActivityForResult(root_view.getContext(),ActivityMoreDesc.class,map, ConstantStatus.ActivityMoreDesc);
+                                    MyFunction.getInstance().openActivityForResult(root_view.getContext(), ActivityMoreDesc.class, map, ConstantStatus.ActivityMoreDesc);
                                 }
-                            },1);
+                            }, 1);
                         } else {
                             MyFunction.getInstance().alertMessage(root_view.getContext(), getString(R.string.information), getString(R.string.ok), getString(R.string.server_error), 1);
                         }

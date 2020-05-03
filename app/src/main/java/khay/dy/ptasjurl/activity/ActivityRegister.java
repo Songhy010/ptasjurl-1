@@ -83,7 +83,7 @@ public class ActivityRegister extends ActivityController {
             param.put(Global.arData[28],edt_username.getText().toString());
             param.put(Global.arData[26],edt_phone.getText().toString());
             param.put(Global.arData[29], edt_password.getText().toString());
-            if(param.get(Global.arData[30]).isEmpty()||param.get(Global.arData[31]).isEmpty()||param.get(Global.arData[28]).isEmpty()||param.get(Global.arData[26]).isEmpty()||param.get(Global.arData[29]).isEmpty()){
+            if(param.get(Global.arData[26]).length() < 8 || param.get(Global.arData[30]).isEmpty()||param.get(Global.arData[31]).isEmpty()||param.get(Global.arData[28]).isEmpty()||param.get(Global.arData[26]).isEmpty()||param.get(Global.arData[29]).isEmpty()){
                 MyFunction.getInstance().alertMessage(ActivityRegister.this,getString(R.string.information),getString(R.string.ok),getString(R.string.required_field),1);
             }else {
                 showDialog();
