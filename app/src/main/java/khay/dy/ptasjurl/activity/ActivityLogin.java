@@ -39,6 +39,17 @@ public class ActivityLogin extends ActivityController {
         initLogin();
         initCreate();
         initHidePassword();
+        initForgetPass();
+    }
+
+    private void initForgetPass() {
+        final TextView tv_for_got = findViewById(R.id.tv_for_got);
+        tv_for_got.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFunction.getInstance().openActivity(ActivityLogin.this,ActivityForgotPassword.class);
+            }
+        });
     }
 
     private void initHidePassword() {

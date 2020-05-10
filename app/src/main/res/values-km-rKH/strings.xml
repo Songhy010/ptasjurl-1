@@ -88,7 +88,7 @@
     <string name="edit">កែប្រែ</string>
     <string name="save">រក្សាទុក</string>
     <string name="email">អ៊ីមែល</string>
-
+    <string name="incorrect_phone">មិនមានលេខទូរស័ព្ទទេ</string>
     <string name="type">ប្រភេទ</string>
     <string name="other_price">តម្លៃផ្សេងទៀត</string>
     <string name="specification">ការបញ្ជាក់</string>
@@ -113,6 +113,8 @@
     <string name="detail">លំអិត</string>
     <string name="owner">ម្ចាស់ផ្ទះ</string>
     <string name="member">នាក់</string>
+    <string name="code">លេខកូដ</string>
+    <string name="wrong_code">លេខកូដមិនត្រឹមត្រូវ</string>
     <string name="upload_more_desc">តើអ្នកចង់ផ្ទុកឡើងការពិពណ៌នាបន្ថែមទេ?</string>
     <string name="login_required">អ្នកត្រូវចូលទៅគណនីរបស់អ្នកមុនពេលប្រើមុខងារនេះ</string>
     <string name="your_approved">ប្រកាសដែលបានអនុម័តរបស់អ្នក</string>

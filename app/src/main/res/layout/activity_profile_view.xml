@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:paddingRight="@dimen/iv_height_10"
                 android:paddingLeft="@dimen/iv_height_10"
                 android:paddingTop="@dimen/iv_height_5"

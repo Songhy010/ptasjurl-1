@@ -72,7 +72,7 @@ public class ActivityChangePassword extends ActivityController {
                 final String oldPass = old_password.getText().toString();
                 final String newPass = new_password.getText().toString();
                 final String conPass = con_password.getText().toString();
-                if (!oldPass.isEmpty() || !newPass.isEmpty() || !conPass.isEmpty()) {
+                if (!oldPass.isEmpty() && !newPass.isEmpty() && !conPass.isEmpty()) {
                     if (newPass.length() > 5) {
                         if (newPass.equals(conPass)) {
                             try {

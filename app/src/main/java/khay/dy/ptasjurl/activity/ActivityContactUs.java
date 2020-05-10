@@ -19,6 +19,8 @@ import com.google.android.flexbox.FlexboxLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
@@ -71,11 +73,15 @@ public class ActivityContactUs extends ActivityController {
         }
     }
 
+
     private void loadContact() {
         try {
             showDialog();
+            final String lang = MyFunction.getInstance().getText(this, Global.LANGUAGE).equals("")? "kh":MyFunction.getInstance().getText(this, Global.LANGUAGE);
             final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[23], Global.arData[5]);
-            MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            final HashMap<String,String> param = new HashMap<>();
+            param.put(Global.arData[93],lang);
+            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
                 @Override
                 public void onResponse(String response) {
                     try {

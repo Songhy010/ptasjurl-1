@@ -80,6 +80,8 @@ public class ActivityMain extends ActivityController {
 
     }
 
+
+
     private void loadHome() {
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
         MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
@@ -102,6 +104,8 @@ public class ActivityMain extends ActivityController {
             }
         });
     }
+
+
 
     private void loadAddress() {
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[49], Global.arData[5]);

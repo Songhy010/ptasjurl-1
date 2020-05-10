@@ -58,8 +58,6 @@ public class AdapterBanner extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-
-
         try{
             LayoutInflater inflater = LayoutInflater.from(mContext);
             view = (ViewGroup) inflater.inflate(R.layout.item_banner, container, false);

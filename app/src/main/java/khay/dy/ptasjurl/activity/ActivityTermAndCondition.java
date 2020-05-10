@@ -14,6 +14,8 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.listener.VolleyCallback;
 import khay.dy.ptasjurl.util.Global;
@@ -55,8 +57,11 @@ public class ActivityTermAndCondition extends ActivityController {
     private void loadTerm() {
         try {
             showDialog();
+            final String lang = MyFunction.getInstance().getText(this, Global.LANGUAGE).equals("")? "km":MyFunction.getInstance().getText(this, Global.LANGUAGE);
+            final HashMap<String,String> param = new HashMap<>();
+            param.put(Global.arData[93],lang);
             final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[16], Global.arData[5]);
-            MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
                 @Override
                 public void onResponse(String response) {
                     try {

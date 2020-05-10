@@ -23,8 +23,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import khay.dy.ptasjurl.R;
 import khay.dy.ptasjurl.activity.ActivityFilterLocation;
@@ -51,11 +53,13 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
     private Handler handler = new Handler();
     private ViewPager viewPager;
     private SwipeRefreshLayout swipe;
+    private ArrayList<Integer> arrRan = new ArrayList<>();
 
     private AdapterItem mAdapter;
     private ArrayList<ModelItem> modelItemList;
 
-    private int index = 5;
+    private int index = 0;
+    private int answer;
 
     @Nullable
     @Override
@@ -87,6 +91,7 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
             initHome();
             onClick();
             initSwipe();
+            loadTotal(true);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage() + "");
         }
@@ -202,8 +207,8 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
         });
     }
 
-    private List<ModelItem> Data(JSONArray array){
-        try{
+    private List<ModelItem> Data(JSONArray array) {
+        try {
             modelItemList.clear();
             for (int i = 0; i < array.length(); i++) {
                 final JSONObject obj = array.getJSONObject(i);
@@ -212,13 +217,16 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
                 else
                     modelItemList.add(new ModelItem(obj.getString(Global.arData[11]), obj.getString(Global.arData[44]), obj.getString(Global.arData[7]), "", ""));
             }
+            Collections.shuffle(modelItemList);
+            Collections.shuffle(modelItemList);
+            Collections.shuffle(modelItemList);
+
             return modelItemList;
-        }catch (Exception e){
-            Log.e("Err",e.getMessage()+"");
+        } catch (Exception e) {
+            Log.e("Err", e.getMessage() + "");
         }
         return null;
     }
-
 
     @Override
     public void onLoadMore() {
@@ -234,14 +242,15 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
             @Override
             public void onResponse(String response) {
                 try {
-                    index = index + 5;
+
                     mAdapter.dismissLoading();
                     final JSONObject object = new JSONObject(response);
                     final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
                     mAdapter.addItemMore(Data(arrHome));
                     mAdapter.setMore(true);
+                    loadTotal(false);
                 } catch (Exception e) {
-                    Log.e(TAG, e.getMessage()+"");
+                    Log.e(TAG, e.getMessage() + "");
                 }
             }
 
@@ -255,15 +264,18 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
 
     private void loadHome() {
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
-        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+        final HashMap<String, String> param = new HashMap<>();
+        param.put(Global.arData[88], index + "");
+        MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
             @Override
             public void onResponse(String response) {
                 try {
-                    index = 5;
+
                     final JSONObject object = new JSONObject(response);
                     ModelHome.getInstance().setObjHome(object);
                     initHome();
                     swipe.setRefreshing(false);
+                    loadTotal(true);
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -273,6 +285,54 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
             public void onErrorResponse(VolleyError e) {
                 Log.e(TAG, e.getMessage() + "");
                 loadHome();
+            }
+        });
+    }
+
+    private void loadTotal(final boolean isRefresh) {
+        final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[94]);
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    arrRan = new ArrayList<>();
+                    int data = 0;
+                    arrRan.add(data);
+                    int result = 11/*Integer.parseInt(response)*/;
+                    for (int i = 0; i < result; i++) {
+                        result = result - 5;
+                        if (result < 5) {
+                            data = data + 5;
+                            arrRan.add(data);
+                            break;
+                        }
+                        data = data + 5;
+                        arrRan.add(data);
+                    }
+                    if (isRefresh) {
+                        arrRan.remove(arrRan.size()-1);
+                        int oldIndex = 0;
+                        oldIndex = index;
+                        do{
+                            index = arrRan.get(new Random().nextInt(arrRan.size()));
+                        }while (oldIndex == index);
+                    }
+                    else {
+                        int oldIndex = 0;
+                        oldIndex = index;
+                        do{
+                            index = arrRan.get(new Random().nextInt(arrRan.size()));
+                        }while (oldIndex == index);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError e) {
+                Log.e(TAG, e.getMessage() + "");
+                loadTotal(isRefresh);
             }
         });
     }

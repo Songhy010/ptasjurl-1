@@ -121,6 +121,12 @@ public class AppController extends com.android.volley.my.AppController {
         Global.arData[86] = "owner_info";
         Global.arData[87] = "profile";
         Global.arData[88] = "startpoint";
+        Global.arData[89] = "request_code";
+        Global.arData[90] = "token";
+        Global.arData[91] = "code";
+        Global.arData[92] = "forgot_password";
+        Global.arData[93] = "language";
+        Global.arData[94] = "total_record";
 
 
 

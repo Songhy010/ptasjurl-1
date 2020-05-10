@@ -61,9 +61,11 @@
     <string name="km" translatable="false">ខ្មែរ</string>
     <string name="en" translatable="false">English</string>
     <string name="logout">Logout</string>
+    <string name="incorrect_phone">Phone number not existed</string>
     <string name="incorrect_pass">Incorrect Username or Password</string>
     <string name="incorrect_password">Incorrect​Password</string>
     <string name="setting">Setting</string>
+    <string name="wrong_code">Wrong code</string>
     <string name="contact">Contact Us</string>
     <string name="donating">Donation</string>
     <string name="no_content">No Content</string>
@@ -89,6 +91,7 @@
     <string name="pass_not_match">Password not match</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="code">Code</string>
     <string name="email">Email</string>
     <string name="required_field">Please input all required field</string>
     <string name="room_rent">Room for rent</string>
