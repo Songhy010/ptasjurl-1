@@ -105,7 +105,7 @@ public class FragmentDetail extends Fragment {
             tv_water.setText(water);
             final String park = data.getString(Global.arData[57]).equals("null") ? "N/A" : String.format("%s%s",data.getString(Global.arData[57]), "៛");
             tv_park.setText(park);
-            final String other = data.getString(Global.arData[58]).equals("null") ? "N/A" : String.format("%s%s",data.getString(Global.arData[58]), "$");
+            final String other = data.getString(Global.arData[58]).equals("null") ? "N/A" : String.format("%s%s",data.getString(Global.arData[58]), "៛");
             tv_other.setText(other);
             final int available = Integer.parseInt(data.getString(Global.arData[61]));
             if (available == 1)

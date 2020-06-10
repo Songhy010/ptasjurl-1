@@ -30,6 +30,8 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -223,7 +225,8 @@ public class FragmentAdd extends Fragment {
             final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
             final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
             final Bitmap newBitmap = MyFunction.getInstance().createScaledBit(selectedImage);
-            iv.setImageBitmap(newBitmap);
+            //iv.setImageBitmap(newBitmap);
+            Picasso.get().load("file:" + realPath).into(iv);
             return MyFunction.getInstance().getBytesFromBitmap(newBitmap);
         } catch (Exception e) {
             iv.setImageDrawable(getResources().getDrawable(R.drawable.img_sample));

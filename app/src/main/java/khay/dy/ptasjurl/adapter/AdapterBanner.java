@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.android.volley.my.MyImageLoader;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -64,8 +65,8 @@ public class AdapterBanner extends PagerAdapter {
             MyFont.getInstance().setFont(mContext,view,4);
             final ImageView iv_book = view.findViewById(R.id.iv_banner);
             final JSONObject object= array.getJSONObject(position);
-            MyImageLoader.getInstance().setImage(iv_book, object.getString(Global.arData[13]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
-
+            //MyImageLoader.getInstance().setImage(iv_book, object.getString(Global.arData[13]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
+            Picasso.get().load(object.getString(Global.arData[13])).into(iv_book);
             //iv_book.setImageDrawable(mContext.getResources().getDrawable(R.drawable.img_sample));
             container.addView(view);
         }catch (Exception e){

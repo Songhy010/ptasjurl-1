@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.my.MyImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,8 +150,8 @@ public class AdapterItem extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ((StudentViewHolder) holder).layout.setVisibility(View.GONE);
                     ((StudentViewHolder) holder).layout1.setVisibility(View.GONE);
                 }
-                MyImageLoader.getInstance().setImage(((StudentViewHolder) holder).iv_thum, singleModelItem.getThumbnail(), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
-
+                //MyImageLoader.getInstance().setImage(((StudentViewHolder) holder).iv_thum, singleModelItem.getThumbnail(), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
+                Picasso.get().load(singleModelItem.getThumbnail()).into(((StudentViewHolder) holder).iv_thum);
 
             } catch (Exception e) {
                 Log.e("Err", e.getMessage());

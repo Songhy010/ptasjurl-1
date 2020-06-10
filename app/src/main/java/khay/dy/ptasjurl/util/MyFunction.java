@@ -331,7 +331,7 @@ public class MyFunction {
     }
     public byte[] getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 60, stream);
         return stream.toByteArray();
     }
     public boolean isValidJSON(String data) {
@@ -1126,11 +1126,11 @@ public class MyFunction {
             Bitmap newBitmap;
             final int avgDimen = (oldBitmap.getHeight() + oldBitmap.getWidth()) / 2;
             if (avgDimen > 4000) // 4k scaled 70%
-                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.3), (int) (oldBitmap.getHeight() * 0.3), true);
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.1), (int) (oldBitmap.getHeight() * 0.1), true);
             else if (avgDimen > 1920 && avgDimen < 4000) // 2k scaled 50%
-                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.5), (int) (oldBitmap.getHeight() * 0.5), true);
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.3), (int) (oldBitmap.getHeight() * 0.3), true);
             else // FHD scaled 20%
-                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.8), (int) (oldBitmap.getHeight() * 0.8), true);
+                newBitmap = Bitmap.createScaledBitmap(oldBitmap, (int) (oldBitmap.getWidth() * 0.5), (int) (oldBitmap.getHeight() * 0.5), true);
             return newBitmap;
         }catch (Exception e){
             Log.e("Err",e.getMessage());

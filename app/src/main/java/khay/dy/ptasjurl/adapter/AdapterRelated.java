@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.my.MyImageLoader;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -91,8 +92,8 @@ public class AdapterRelated extends RecyclerView.Adapter<AdapterRelated.ItemHold
                 holder.layout.setVisibility(View.GONE);
                 holder.layout1.setVisibility(View.GONE);
             }
-            MyImageLoader.getInstance().setImage(holder.iv_thum, object.getString(Global.arData[11]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
-
+           // MyImageLoader.getInstance().setImage(holder.iv_thum, object.getString(Global.arData[11]), null, 0, 0, position, R.drawable.img_loading, R.drawable.img_loading);
+            Picasso.get().load(object.getString(Global.arData[11])).into(holder.iv_thum);
 
         } catch (Exception e) {
             Log.e("Err", e.getMessage());

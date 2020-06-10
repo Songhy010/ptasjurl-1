@@ -156,7 +156,7 @@
                     android:background="@drawable/drawable_round"
                     android:hint="@string/price"
                     android:padding="@dimen/iv_height_8"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textColor="@color/grey"
                     android:textSize="@dimen/text_size_normal" />
 

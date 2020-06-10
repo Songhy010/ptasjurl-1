@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-           android:scaleType="centerCrop"
+            android:padding="@dimen/iv_height_30"
             android:id="@+id/iv_img"
             android:layout_width="@dimen/iv_height_300"
             android:layout_height="@dimen/iv_height_300"

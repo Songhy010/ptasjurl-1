@@ -88,10 +88,14 @@ public class ActivityMain extends ActivityController {
             @Override
             public void onResponse(String response) {
                 try {
-                    final JSONObject object = new JSONObject(response);
-                    ModelHome.getInstance().setObjHome(object);
-                    MyFunction.getInstance().openActivity(ActivityMain.this, ActivityHome.class);
-                    MyFunction.getInstance().finishActivity(ActivityMain.this);
+                    if(MyFunction.getInstance().isValidJSON(response)) {
+                        final JSONObject object = new JSONObject(response);
+                        ModelHome.getInstance().setObjHome(object);
+                        MyFunction.getInstance().openActivity(ActivityMain.this, ActivityHome.class);
+                        MyFunction.getInstance().finishActivity(ActivityMain.this);
+                    }else{
+                        MyFunction.getInstance().alertMessage(ActivityMain.this,getString(R.string.information),getString(R.string.ok),getString(R.string.server_error),1);
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }

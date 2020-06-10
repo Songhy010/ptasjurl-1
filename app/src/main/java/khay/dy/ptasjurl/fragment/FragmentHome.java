@@ -58,7 +58,7 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
     private AdapterItem mAdapter;
     private ArrayList<ModelItem> modelItemList;
 
-    private int index = 0;
+    private int index = 5;
     private int answer;
 
     @Nullable
@@ -91,7 +91,7 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
             initHome();
             onClick();
             initSwipe();
-            loadTotal(true);
+            //loadTotal(true);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage() + "");
         }
@@ -242,13 +242,13 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
             @Override
             public void onResponse(String response) {
                 try {
-
+                    index = index + 5;
                     mAdapter.dismissLoading();
                     final JSONObject object = new JSONObject(response);
                     final JSONArray arrHome = object.getJSONArray(Global.arData[6]);
                     mAdapter.addItemMore(Data(arrHome));
                     mAdapter.setMore(true);
-                    loadTotal(false);
+                    //loadTotal(false);
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage() + "");
                 }
@@ -264,18 +264,18 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
 
     private void loadHome() {
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[5]);
-        final HashMap<String, String> param = new HashMap<>();
-        param.put(Global.arData[88], index + "");
-        MyFunction.getInstance().requestString(Request.Method.POST, url, param, new VolleyCallback() {
+        //final HashMap<String, String> param = new HashMap<>();
+        //param.put(Global.arData[88], index + "");
+        MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
             @Override
             public void onResponse(String response) {
                 try {
-
+                    index = 5;
                     final JSONObject object = new JSONObject(response);
                     ModelHome.getInstance().setObjHome(object);
                     initHome();
                     swipe.setRefreshing(false);
-                    loadTotal(true);
+                    //loadTotal(true);
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -289,7 +289,7 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
         });
     }
 
-    private void loadTotal(final boolean isRefresh) {
+    /*private void loadTotal(final boolean isRefresh) {
         final String url = Global.arData[0] + Global.arData[1] + String.format(Global.arData[2], Global.arData[3], Global.arData[94]);
         MyFunction.getInstance().requestString(Request.Method.POST, url, null, new VolleyCallback() {
             @Override
@@ -298,7 +298,7 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
                     arrRan = new ArrayList<>();
                     int data = 0;
                     arrRan.add(data);
-                    int result = 11/*Integer.parseInt(response)*/;
+                    int result = 6/*Integer.parseInt(response);
                     for (int i = 0; i < result; i++) {
                         result = result - 5;
                         if (result < 5) {
@@ -335,5 +335,5 @@ public class FragmentHome extends Fragment implements AdapterItem.OnLoadMoreList
                 loadTotal(isRefresh);
             }
         });
-    }
+    }*/
 }
